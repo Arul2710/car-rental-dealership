@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Road Not Found | Onroadz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* Car Flying & Shaking Animation */
+        @keyframes carFly {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+            20% { transform: translate(-10px, -20px) rotate(-10deg); }
+            50% { transform: translate(100px, -150px) rotate(25deg); opacity: 0.8; }
+            100% { transform: translate(500px, -500px) rotate(45deg); opacity: 0; }
+        }
+
+        @keyframes smoke {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: scale(2) translateY(-50px); opacity: 0; }
+        }
+
+        .animate-car-fly {
+            animation: carFly 4s ease-in-out infinite;
+        }
+
+        .smoke-particle {
+            animation: smoke 2s infinite;
+        }
+
+        .bg-grid {
+            background-image: radial-gradient(#EA580C 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="bg-black text-white h-screen flex items-center justify-center overflow-hidden bg-grid">
+
+    <div class="container mx-auto px-6 text-center relative z-10">
+        
+        <div class="relative h-64 flex justify-center items-center mb-10">
+            <h1 class="absolute text-[150px] md:text-[250px] font-black opacity-10 select-none tracking-tighter">404</h1>
+            
+            <div class="relative z-20">
+                <div class="absolute -top-10 left-10">
+                    <div class="smoke-particle w-8 h-8 bg-gray-500 rounded-full blur-xl mb-2"></div>
+                    <div class="smoke-particle w-6 h-6 bg-gray-400 rounded-full blur-lg delay-100"></div>
+                </div>
+
+                <div class="animate-car-fly text-[#EA580C] text-7xl md:text-9xl drop-shadow-[0_0_30px_rgba(234,88,12,0.5)]">
+                    <i class="fas fa-car-crash"></i>
+                </div>
+            </div>
+
+            <div class="absolute bottom-0 w-64 h-2 bg-gray-800 rounded-full overflow-hidden">
+                <div class="w-full h-full bg-gradient-to-r from-transparent via-[#EA580C] to-transparent animate-pulse"></div>
+            </div>
+        </div>
+
+        <div class="max-w-xl mx-auto">
+            <h2 class="text-3xl md:text-5xl font-black uppercase mb-4 tracking-tight">
+                Whoops! Car <span class="text-[#EA580C]">Out of Route</span>
+            </h2>
+            <p class="text-gray-400 text-sm md:text-base mb-10 leading-relaxed font-medium">
+                Looks like this car took a wrong turn and flew off the road. 
+                Don't worry, our rescue team is on the way, but this page isn't!
+            </p>
+
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4">
+                <a href="/" class="bg-[#EA580C] text-white font-black py-4 px-10 rounded-2xl hover:scale-105 transition-all shadow-xl uppercase tracking-widest text-sm flex items-center gap-3">
+                    <i class="fas fa-home"></i> Back to Home
+                </button>
+                <a href="/fleet" class="border-2 border-gray-700 text-gray-400 font-black py-4 px-10 rounded-2xl hover:border-white hover:text-white transition-all uppercase tracking-widest text-sm">
+                    View Other Cars
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="absolute top-0 left-0 w-full h-full pointer-events-none">
+        <div class="absolute top-10 left-10 w-32 h-32 bg-[#EA580C]/10 rounded-full blur-[100px]"></div>
+        <div class="absolute bottom-10 right-10 w-64 h-64 bg-[#EA580C]/5 rounded-full blur-[120px]"></div>
+    </div>
+
+</body>
+</html>

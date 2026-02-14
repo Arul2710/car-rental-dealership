@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en" id="htmlTag" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>GrowwCar Admin Pro | US Fleet Management</title>
+    <link rel="icon" type="imags/jpg" href="imags/growwpark_logo.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { 
+                extend: { 
+                    colors: { primary: '#EA580C' },
+                    screens: {
+                        'xs': '475px',
+                        'sm': '640px',
+                        'md': '768px',
+                        'lg': '1024px',
+                        'xl': '1280px',
+                    }
+                } 
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden;
+            width: 100%;
+        }
+        
+        .sidebar-active { 
+            background: rgba(234, 88, 12, 0.1); 
+            border-left: 4px solid #EA580C; 
+            color: #EA580C !important; 
+            font-weight: 700; 
+        }
+        
+        [dir="rtl"] .sidebar-active { 
+            border-left: 0; 
+            border-right: 4px solid #EA580C; 
+        }
+        
+        .custom-shadow { 
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); 
+        }
+        
+        .dark .custom-shadow { 
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3); 
+        }
+        
+        .page-node { 
+            display: none; 
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        
+        .page-node.active { 
+            display: block; 
+            animation: fadeInUp 0.4s ease forwards;
+        }
+        
+        @keyframes fadeInUp { 
+            from { 
+                opacity: 0; 
+                transform: translateY(15px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        
+        @media (max-width: 1023px) {
+            #sidebar {
+                width: 280px;
+                box-shadow: 0 0 30px rgba(0,0,0,0.15);
+            }
+            
+            .dark #sidebar {
+                box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            }
+        }
+        
+        button, a {
+            min-height: 44px;
+            min-width: 44px;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 640px) {
+            table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .card-grid {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+
+        .notification-item:hover {
+            background-color: rgba(234, 88, 12, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-[#F8F9FD] dark:bg-[#0F172A] text-gray-900 dark:text-gray-100 antialiased">
+
+    <!-- Mobile Overlay -->
+    <div id="sidebarOverlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden transition-opacity duration-300"></div>
+
+    <div class="flex min-h-screen relative w-full overflow-x-hidden">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-[280px] bg-white dark:bg-[#1E293B] text-gray-500 dark:text-gray-400 transition-all duration-300 ease-in-out lg:translate-x-0 -translate-x-full border-r border-gray-100 dark:border-gray-700 overflow-y-auto">
+            <div class="p-5 h-full flex flex-col">
+                
+                <!-- Logo -->
+                <div class="flex items-center justify-between mb-8">
+    <a href="index.html" class="text-xl sm:text-2xl md:text-3xl font-black tracking-tighter flex items-center gap-2 text-primary">
+        <i data-lucide="car-front" class="w-6 h-6 md:w-7 md:h-7"></i>
+        Groww<span class="text-black dark:text-white">Car</span>
+    </a>
+    
+    <button onclick="toggleSidebar()" class="lg:hidden p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
+        <i data-lucide="x" class="w-5 h-5"></i>
+    </button>
+</div>
+
+                <!-- Navigation -->
+                <nav class="flex-1 space-y-1 overflow-y-auto">
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-3 ml-2">
+                        <i data-lucide="layout-grid" class="w-3 h-3 inline mr-1"></i>
+                        MAIN MENU
+                    </p>
+                    
+                    <a href="javascript:void(0)" onclick="showPage('stats')" id="btn-stats" class="nav-btn flex items-center gap-3 p-3.5 rounded-xl sidebar-active transition-all hover:bg-gray-50 dark:hover:bg-white/5 group">
+                        <i data-lucide="layout-dashboard" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                        <span class="font-medium">Dashboard</span>
+                    </a>
+                    
+                    <a href="javascript:void(0)" onclick="showPage('content')" id="btn-content" class="nav-btn flex items-center gap-3 p-3.5 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all group">
+                        <i data-lucide="file-text" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                        <span class="font-medium">Content</span>
+                    </a>
+                    
+                    <a href="javascript:void(0)" onclick="showPage('bookings')" id="btn-bookings" class="nav-btn flex items-center gap-3 p-3.5 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all group">
+                        <i data-lucide="calendar-check" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                        <span class="font-medium">Bookings</span>
+                    </a>
+
+                    <!-- SETTINGS SECTION WITH NOTIFICATIONS & SECURITY -->
+                    <div class="mt-6 pt-6 border-t border-gray-100 dark:border-gray-700">
+                        <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-3 ml-2">
+                            <i data-lucide="settings" class="w-3 h-3 inline mr-1"></i>
+                            SETTINGS
+                        </p>
+                        
+                        <a href="javascript:void(0)" onclick="showPage('notifications')" id="btn-notifications" class="nav-btn flex items-center gap-3 p-3.5 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all group">
+                            <i data-lucide="bell" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                            <span class="font-medium">Notifications</span>
+                            <span class="ml-auto bg-red-500 text-white text-[8px] font-black px-2 py-1 rounded-full">3</span>
+                        </a>
+                        
+                        <a href="javascript:void(0)" onclick="showPage('security')" id="btn-security" class="nav-btn flex items-center gap-3 p-3.5 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all group">
+                            <i data-lucide="shield" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                            <span class="font-medium">Security</span>
+                        </a>
+                    </div>
+                </nav>
+
+                <!-- Bottom Controls -->
+                <div class="pt-6 mt-6 border-t border-gray-100 dark:border-gray-700">
+                    <div class="flex items-center justify-between bg-gray-50 dark:bg-gray-800/50 p-2 rounded-2xl">
+                        <button onclick="toggleDirection()" class="p-2.5 hover:bg-white dark:hover:bg-gray-700 rounded-xl shadow-sm transition-all text-gray-400 hover:text-primary flex items-center gap-1">
+                            <i data-lucide="languages" class="w-4 h-4"></i>
+                            <span id="dirText" class="text-[10px] font-black">LTR</span>
+                        </button>
+                        
+                        <button onclick="toggleDarkMode()" class="p-2.5 bg-white dark:bg-gray-700 rounded-xl text-primary shadow-sm hover:scale-110 transition-all">
+                            <i id="themeIcon" data-lucide="moon" class="w-4 h-4"></i>
+                        </button>
+                        
+                        <a href="login.html">
+                        <button onclick="logout()" class="p-2.5 bg-red-50 dark:bg-red-500/10 rounded-xl text-red-500 hover:scale-110 transition-all">
+                            <i data-lucide="log-out" class="w-4 h-4"></i>
+                        </button>
+                        </a>
+                    </div>
+                    
+                    <!-- Admin Profile - US -->
+                    <div class="mt-4 p-3 bg-gradient-to-r from-primary/5 to-transparent rounded-xl">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-black">
+                                MJ
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm">Michael Johnson</p>
+                                <p class="text-[9px] text-gray-400 uppercase font-black tracking-widest">Administrator</p>
+                                <p class="text-[7px] text-gray-400">michael.j@growwcar.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 lg:ml-[280px] p-4 sm:p-5 md:p-6 lg:p-8 transition-all duration-300 w-full max-w-full overflow-x-hidden">
+            
+            <!-- Header -->
+            <header class="flex items-center justify-between mb-6 sm:mb-8">
+                <div class="flex-1">
+                    <div class="flex items-center gap-3">
+                        <button onclick="toggleSidebar()" class="lg:hidden p-2.5 bg-white dark:bg-[#1E293B] rounded-xl custom-shadow border border-gray-50 dark:border-gray-700">
+                            <i id="menuIcon" data-lucide="menu" class="w-5 h-5 sm:w-6 sm:h-6 text-gray-600 dark:text-white"></i>
+                        </button>
+                        <div>
+                            <h1 id="pageTitle" class="text-xl sm:text-2xl font-black tracking-tight uppercase">DASHBOARD</h1>
+                            <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-medium mt-0.5">
+                                <span class="text-primary font-bold">GrowwCar US</span> · Fleet Management System
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="flex items-center gap-2">
+                    <div class="hidden sm:flex items-center gap-2 bg-white dark:bg-[#1E293B] px-4 py-2 rounded-xl custom-shadow">
+                        <i data-lucide="clock" class="w-4 h-4 text-primary"></i>
+                        <span class="text-xs font-medium" id="liveTime">10:30 AM</span>
+                    </div>
+                    <div class="relative">
+                        <button onclick="showPage('notifications')" class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center relative">
+                            <i data-lucide="bell" class="w-5 h-5 text-primary"></i>
+                            <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[8px] font-black px-1.5 py-0.5 rounded-full">3</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- PAGES - ALL US CONTENT -->
+            <div id="mainDisplay" class="space-y-6">
+                
+                <!-- === DASHBOARD PAGE - US FORMAT === -->
+                <div id="page-stats" class="page-node active">
+                    <!-- Stats Cards - US Dollar -->
+                    <div class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
+                        <div class="bg-white dark:bg-[#1E293B] p-4 sm:p-6 rounded-2xl sm:rounded-[2rem] custom-shadow border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-shadow">
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="text-[9px] sm:text-[10px] font-black text-gray-400 uppercase tracking-widest">TOTAL EARNINGS</p>
+                                <span class="bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-[8px] sm:text-[9px] font-black px-2 py-1 rounded-full">+12%</span>
+                            </div>
+                            <h3 class="text-xl sm:text-2xl font-black text-gray-900 dark:text-white">$45,368</h3>
+                            <div class="mt-2 flex items-center gap-1">
+                                <i data-lucide="trending-up" class="w-3 h-3 text-green-500"></i>
+                                <p class="text-green-500 text-[9px] sm:text-[10px] font-bold">vs last month</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white dark:bg-[#1E293B] p-4 sm:p-6 rounded-2xl sm:rounded-[2rem] custom-shadow border border-gray-100 dark:border-gray-700">
+                            <p class="text-[9px] sm:text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">ACTIVE FLEET</p>
+                            <h3 class="text-xl sm:text-2xl font-black text-gray-900 dark:text-white">142</h3>
+                            <div class="mt-2 flex items-center gap-1">
+                                <i data-lucide="car" class="w-3 h-3 text-primary"></i>
+                                <p class="text-[9px] sm:text-[10px] text-gray-500">12 new this month</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white dark:bg-[#1E293B] p-4 sm:p-6 rounded-2xl sm:rounded-[2rem] custom-shadow border border-gray-100 dark:border-gray-700">
+                            <p class="text-[9px] sm:text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">VERIFIED USERS</p>
+                            <h3 class="text-xl sm:text-2xl font-black text-gray-900 dark:text-white">2,500+</h3>
+                            <div class="mt-2 flex items-center gap-1">
+                                <i data-lucide="user-check" class="w-3 h-3 text-blue-500"></i>
+                                <p class="text-[9px] sm:text-[10px] text-gray-500">48 new today</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white dark:bg-[#1E293B] p-4 sm:p-6 rounded-2xl sm:rounded-[2rem] custom-shadow border border-gray-100 dark:border-gray-700">
+                            <p class="text-[9px] sm:text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">FLEET HEALTH</p>
+                            <h3 class="text-xl sm:text-2xl font-black text-gray-900 dark:text-white">98.4%</h3>
+                            <div class="mt-2 flex items-center gap-1">
+                                <i data-lucide="activity" class="w-3 h-3 text-green-500"></i>
+                                <p class="text-[9px] sm:text-[10px] text-gray-500">Optimal</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                        <div class="lg:col-span-2 bg-white dark:bg-[#1E293B] p-4 sm:p-6 rounded-2xl sm:rounded-[2.5rem] custom-shadow border border-gray-100 dark:border-gray-700">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="text-xs sm:text-sm font-black uppercase tracking-wider">REVENUE TREND</h4>
+                                <div class="flex gap-2">
+                                    <span class="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded-lg text-[8px] sm:text-[9px] font-black">2024</span>
+                                </div>
+                            </div>
+                            <div class="h-[200px] sm:h-[250px]">
+                                <canvas id="revenueChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white dark:bg-[#1E293B] p-4 sm:p-6 rounded-2xl sm:rounded-[2.5rem] custom-shadow border border-gray-100 dark:border-gray-700">
+                            <h4 class="text-xs sm:text-sm font-black uppercase tracking-wider mb-4">TRAFFIC SOURCE</h4>
+                            <div class="h-[200px] sm:h-[250px] flex items-center justify-center">
+                                <canvas id="trafficChart"></canvas>
+                            </div>
+                            <div class="mt-4 flex justify-center gap-4">
+                                <div class="flex items-center gap-1">
+                                    <span class="w-2 h-2 bg-primary rounded-full"></span>
+                                    <span class="text-[9px] sm:text-[10px] font-medium">Direct (65%)</span>
+                                </div>
+                                <div class="flex items-center gap-1">
+                                    <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                                    <span class="text-[9px] sm:text-[10px] font-medium">Social (35%)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity - US Names -->
+                    <div class="bg-white dark:bg-[#1E293B] p-4 sm:p-6 rounded-2xl sm:rounded-[2.5rem] custom-shadow border border-gray-100 dark:border-gray-700">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="text-xs sm:text-sm font-black uppercase tracking-wider">RECENT ACTIVITY</h4>
+                            <button class="text-primary text-[9px] sm:text-[10px] font-black uppercase hover:underline">
+                                View All
+                            </button>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                                        <i data-lucide="check-circle" class="w-4 h-4 text-green-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs sm:text-sm font-bold">New booking confirmed</p>
+                                        <p class="text-[8px] sm:text-[9px] text-gray-400">5 minutes ago</p>
+                                    </div>
+                                </div>
+                                <span class="text-[9px] sm:text-[10px] font-black text-primary">#G-9023</span>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                                        <i data-lucide="user-plus" class="w-4 h-4 text-blue-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs sm:text-sm font-bold">New user registered</p>
+                                        <p class="text-[8px] sm:text-[9px] text-gray-400">15 minutes ago</p>
+                                    </div>
+                                </div>
+                                <span class="text-[9px] sm:text-[10px] font-black">Jessica Williams</span>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center">
+                                        <i data-lucide="car" class="w-4 h-4 text-yellow-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs sm:text-sm font-bold">Vehicle maintenance completed</p>
+                                        <p class="text-[8px] sm:text-[9px] text-gray-400">1 hour ago</p>
+                                    </div>
+                                </div>
+                                <span class="text-[9px] sm:text-[10px] font-black">Toyota Camry</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- === CONTENT PAGE - US FORMAT === -->
+                <div id="page-content" class="page-node">
+                    <div class="bg-white dark:bg-[#1E293B] p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-[2.5rem] custom-shadow border border-gray-100 dark:border-gray-700">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 sm:mb-8">
+                            <div>
+                                <h3 class="text-lg sm:text-xl font-black uppercase">CONTENT MANAGER</h3>
+                                <p class="text-[9px] sm:text-[10px] text-gray-400 mt-1">Manage fleet content & campaigns</p>
+                            </div>
+                            <button class="w-full sm:w-auto bg-primary text-white text-[10px] sm:text-[11px] font-black px-6 py-3 rounded-xl hover:bg-primary/90 transition-colors flex items-center justify-center gap-2">
+                                <i data-lucide="plus" class="w-4 h-4"></i>
+                                New Content
+                            </button>
+                        </div>
+                        
+                        <!-- Content Categories -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                            <div class="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 p-6 sm:p-8 rounded-2xl sm:rounded-[2rem] text-center border border-gray-100 dark:border-gray-700 hover:scale-[1.02] transition-transform">
+                                <div class="w-14 h-14 mx-auto bg-primary/10 rounded-2xl flex items-center justify-center mb-4">
+                                    <i data-lucide="image" class="text-primary w-7 h-7"></i>
+                                </div>
+                                <p class="text-sm sm:text-base font-black uppercase">CAR GALLERY</p>
+                                <p class="text-[10px] sm:text-[11px] text-gray-400 mt-2 uppercase font-bold">26 Active Models</p>
+                                <button class="mt-4 text-[9px] sm:text-[10px] text-primary font-black uppercase hover:underline">
+                                    Manage →
+                                </button>
+                            </div>
+                            
+                            <div class="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 p-6 sm:p-8 rounded-2xl sm:rounded-[2rem] text-center border border-gray-100 dark:border-gray-700 hover:scale-[1.02] transition-transform">
+                                <div class="w-14 h-14 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center mb-4">
+                                    <i data-lucide="tag" class="text-blue-500 w-7 h-7"></i>
+                                </div>
+                                <p class="text-sm sm:text-base font-black uppercase">OFFERS</p>
+                                <p class="text-[10px] sm:text-[11px] text-gray-400 mt-2 uppercase font-bold">4 Live Campaigns</p>
+                                <button class="mt-4 text-[9px] sm:text-[10px] text-blue-500 font-black uppercase hover:underline">
+                                    Manage →
+                                </button>
+                            </div>
+                            
+                            <div class="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 p-6 sm:p-8 rounded-2xl sm:rounded-[2rem] text-center border border-gray-100 dark:border-gray-700 hover:scale-[1.02] transition-transform">
+                                <div class="w-14 h-14 mx-auto bg-green-500/10 rounded-2xl flex items-center justify-center mb-4">
+                                    <i data-lucide="map-pin" class="text-green-500 w-7 h-7"></i>
+                                </div>
+                                <p class="text-sm sm:text-base font-black uppercase">LOCATIONS</p>
+                                <p class="text-[10px] sm:text-[11px] text-gray-400 mt-2 uppercase font-bold">12 Cities</p>
+                                <button class="mt-4 text-[9px] sm:text-[10px] text-green-500 font-black uppercase hover:underline">
+                                    Manage →
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Stats -->
+                        <div class="mt-8 grid grid-cols-2 gap-4">
+                            <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-xl">
+                                <p class="text-[9px] font-black text-gray-400 uppercase">TODAY'S VIEWS</p>
+                                <p class="text-lg font-black mt-1">1,245</p>
+                                <span class="text-[8px] text-green-500">+12.5%</span>
+                            </div>
+                            <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-xl">
+                                <p class="text-[9px] font-black text-gray-400 uppercase">DOWNLOADS</p>
+                                <p class="text-lg font-black mt-1">89</p>
+                                <span class="text-[8px] text-green-500">+5.2%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- === BOOKINGS PAGE - US FORMAT === -->
+                <div id="page-bookings" class="page-node">
+                    <div class="bg-white dark:bg-[#1E293B] p-4 sm:p-6 md:p-10 rounded-2xl sm:rounded-[2.5rem] custom-shadow border border-gray-100 dark:border-gray-700">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 sm:mb-8">
+                            <div>
+                                <h3 class="text-lg sm:text-xl font-black uppercase">LIVE BOOKINGS</h3>
+                                <p class="text-[9px] sm:text-[10px] text-gray-400 mt-1">Today's bookings · 23 total</p>
+                            </div>
+                            <div class="flex gap-2 w-full sm:w-auto">
+                                <button class="flex-1 sm:flex-none bg-primary/10 text-primary text-[9px] sm:text-[10px] font-black px-4 py-2.5 rounded-xl">
+                                    <i data-lucide="filter" class="w-3 h-3 inline mr-1"></i>
+                                    Filter
+                                </button>
+                                <button class="flex-1 sm:flex-none bg-primary text-white text-[9px] sm:text-[10px] font-black px-4 py-2.5 rounded-xl">
+                                    <i data-lucide="download" class="w-3 h-3 inline mr-1"></i>
+                                    Export
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Bookings Table - US Data -->
+                        <div class="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
+                            <table class="w-full min-w-[600px] sm:min-w-full text-left">
+                                <thead class="border-b border-gray-200 dark:border-gray-700 text-[9px] sm:text-[10px] uppercase font-black text-gray-400">
+                                    <tr>
+                                        <th class="pb-3 sm:pb-4">BOOKING ID</th>
+                                        <th class="pb-3 sm:pb-4">CUSTOMER</th>
+                                        <th class="pb-3 sm:pb-4">VEHICLE</th>
+                                        <th class="pb-3 sm:pb-4 text-center">STATUS</th>
+                                        <th class="pb-3 sm:pb-4 text-right">ACTIONS</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-xs sm:text-sm font-medium">
+                                    <tr class="border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                                        <td class="py-3 sm:py-4 font-black uppercase text-primary">#G-9021</td>
+                                        <td class="py-3 sm:py-4">
+                                            <div>
+                                                <p class="font-bold">Michael Johnson</p>
+                                                <p class="text-[8px] text-gray-400">+1 (415) 555-1234</p>
+                                            </div>
+                                        </td>
+                                        <td class="py-3 sm:py-4">
+                                            <span class="text-[9px] sm:text-[10px]">Toyota Camry</span>
+                                        </td>
+                                        <td class="py-3 sm:py-4 text-center">
+                                            <span class="bg-primary/10 text-primary px-2 sm:px-3 py-1.5 rounded-full text-[8px] sm:text-[9px] font-black uppercase whitespace-nowrap">
+                                                EN ROUTE
+                                            </span>
+                                        </td>
+                                        <td class="py-3 sm:py-4 text-right">
+                                            <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg">
+                                                <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                                        <td class="py-3 sm:py-4 font-black uppercase text-primary">#G-9022</td>
+                                        <td class="py-3 sm:py-4">
+                                            <div>
+                                                <p class="font-bold">Jessica Williams</p>
+                                                <p class="text-[8px] text-gray-400">+1 (310) 555-5678</p>
+                                            </div>
+                                        </td>
+                                        <td class="py-3 sm:py-4">
+                                            <span class="text-[9px] sm:text-[10px]">Honda Civic</span>
+                                        </td>
+                                        <td class="py-3 sm:py-4 text-center">
+                                            <span class="bg-green-100 text-green-600 px-2 sm:px-3 py-1.5 rounded-full text-[8px] sm:text-[9px] font-black uppercase whitespace-nowrap">
+                                                CONFIRMED
+                                            </span>
+                                        </td>
+                                        <td class="py-3 sm:py-4 text-right">
+                                            <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg">
+                                                <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                                        <td class="py-3 sm:py-4 font-black uppercase text-primary">#G-9023</td>
+                                        <td class="py-3 sm:py-4">
+                                            <div>
+                                                <p class="font-bold">David Brown</p>
+                                                <p class="text-[8px] text-gray-400">+1 (212) 555-9012</p>
+                                            </div>
+                                        </td>
+                                        <td class="py-3 sm:py-4">
+                                            <span class="text-[9px] sm:text-[10px]">Tesla Model 3</span>
+                                        </td>
+                                        <td class="py-3 sm:py-4 text-center">
+                                            <span class="bg-yellow-100 text-yellow-600 px-2 sm:px-3 py-1.5 rounded-full text-[8px] sm:text-[9px] font-black uppercase whitespace-nowrap">
+                                                PENDING
+                                            </span>
+                                        </td>
+                                        <td class="py-3 sm:py-4 text-right">
+                                            <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg">
+                                                <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                                        <td class="py-3 sm:py-4 font-black uppercase text-primary">#G-9024</td>
+                                        <td class="py-3 sm:py-4">
+                                            <div>
+                                                <p class="font-bold">Sarah Chen</p>
+                                                <p class="text-[8px] text-gray-400">+1 (408) 555-3456</p>
+                                            </div>
+                                        </td>
+                                        <td class="py-3 sm:py-4">
+                                            <span class="text-[9px] sm:text-[10px]">Ford Mustang</span>
+                                        </td>
+                                        <td class="py-3 sm:py-4 text-center">
+                                            <span class="bg-blue-100 text-blue-600 px-2 sm:px-3 py-1.5 rounded-full text-[8px] sm:text-[9px] font-black uppercase whitespace-nowrap">
+                                                COMPLETED
+                                            </span>
+                                        </td>
+                                        <td class="py-3 sm:py-4 text-right">
+                                            <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg">
+                                                <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Booking Summary -->
+                        <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            <div class="p-3 bg-gray-50 dark:bg-gray-800 rounded-xl text-center">
+                                <p class="text-[9px] font-black text-gray-400">TOTAL</p>
+                                <p class="text-base font-black mt-1">23</p>
+                            </div>
+                            <div class="p-3 bg-gray-50 dark:bg-gray-800 rounded-xl text-center">
+                                <p class="text-[9px] font-black text-gray-400">ACTIVE</p>
+                                <p class="text-base font-black mt-1 text-primary">12</p>
+                            </div>
+                            <div class="p-3 bg-gray-50 dark:bg-gray-800 rounded-xl text-center">
+                                <p class="text-[9px] font-black text-gray-400">COMPLETED</p>
+                                <p class="text-base font-black mt-1 text-green-600">8</p>
+                            </div>
+                            <div class="p-3 bg-gray-50 dark:bg-gray-800 rounded-xl text-center">
+                                <p class="text-[9px] font-black text-gray-400">CANCELLED</p>
+                                <p class="text-base font-black mt-1 text-red-600">3</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- === NOTIFICATIONS PAGE - NEW === -->
+                <div id="page-notifications" class="page-node">
+                    <div class="bg-white dark:bg-[#1E293B] p-4 sm:p-6 rounded-2xl custom-shadow border border-gray-100 dark:border-gray-700">
+                        <div class="flex items-center justify-between mb-6">
+                            <div>
+                                <h3 class="text-lg sm:text-xl font-black uppercase flex items-center gap-2">
+                                    <i data-lucide="bell" class="w-5 h-5 text-primary"></i>
+                                    NOTIFICATIONS
+                                </h3>
+                                <p class="text-[9px] sm:text-[10px] text-gray-400 mt-1">Stay updated with latest activities</p>
+                            </div>
+                            <button class="bg-primary/10 text-primary text-[9px] font-black px-4 py-2 rounded-xl hover:bg-primary/20 transition-colors">
+                                <i data-lucide="check-check" class="w-3 h-3 inline mr-1"></i>
+                                Mark All Read
+                            </button>
+                        </div>
+
+                        <!-- Notification Filters -->
+                        <div class="flex gap-2 mb-6 overflow-x-auto pb-2">
+                            <button class="bg-primary text-white text-[8px] sm:text-[9px] font-black px-4 py-2 rounded-full whitespace-nowrap">All</button>
+                            <button class="bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-[8px] sm:text-[9px] font-black px-4 py-2 rounded-full whitespace-nowrap hover:bg-gray-200 dark:hover:bg-gray-700">Unread</button>
+                            <button class="bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-[8px] sm:text-[9px] font-black px-4 py-2 rounded-full whitespace-nowrap hover:bg-gray-200 dark:hover:bg-gray-700">Bookings</button>
+                            <button class="bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-[8px] sm:text-[9px] font-black px-4 py-2 rounded-full whitespace-nowrap hover:bg-gray-200 dark:hover:bg-gray-700">System</button>
+                        </div>
+
+                        <!-- Notifications List -->
+                        <div class="space-y-3">
+                            <!-- New Notification -->
+                            <div class="p-4 bg-primary/5 rounded-2xl border border-primary/20 notification-item">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <i data-lucide="calendar-check" class="w-5 h-5 text-primary"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center justify-between">
+                                            <p class="text-xs sm:text-sm font-black text-gray-900 dark:text-white">New Booking Received</p>
+                                            <span class="text-[8px] text-gray-400">5 min ago</span>
+                                        </div>
+                                        <p class="text-[9px] sm:text-[10px] text-gray-600 dark:text-gray-400 mt-0.5">Michael Johnson booked Toyota Camry for 5 days. Total: $325</p>
+                                        <div class="flex items-center gap-2 mt-2">
+                                            <span class="bg-red-500 text-white text-[6px] font-black px-2 py-0.5 rounded-full">NEW</span>
+                                            <span class="text-[8px] text-primary font-bold">Booking #G-9021</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- New User Notification -->
+                            <div class="p-4 bg-gray-50 dark:bg-gray-800/50 rounded-2xl notification-item">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-10 h-10 bg-blue-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <i data-lucide="user-plus" class="w-5 h-5 text-blue-500"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center justify-between">
+                                            <p class="text-xs sm:text-sm font-black text-gray-900 dark:text-white">New User Registration</p>
+                                            <span class="text-[8px] text-gray-400">15 min ago</span>
+                                        </div>
+                                        <p class="text-[9px] sm:text-[10px] text-gray-600 dark:text-gray-400 mt-0.5">Emma Wilson registered as new driver. License pending verification.</p>
+                                        <div class="flex items-center gap-2 mt-2">
+                                            <span class="bg-red-500 text-white text-[6px] font-black px-2 py-0.5 rounded-full">NEW</span>
+                                            <span class="text-[8px] text-blue-500 font-bold">Action Required</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- System Notification -->
+                            <div class="p-4 bg-gray-50 dark:bg-gray-800/50 rounded-2xl notification-item">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <i data-lucide="settings" class="w-5 h-5 text-yellow-500"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center justify-between">
+                                            <p class="text-xs sm:text-sm font-black text-gray-900 dark:text-white">System Update</p>
+                                            <span class="text-[8px] text-gray-400">1 hour ago</span>
+                                        </div>
+                                        <p class="text-[9px] sm:text-[10px] text-gray-600 dark:text-gray-400 mt-0.5">Fleet management system v2.1.0 scheduled for tonight at 2 AM PST.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Maintenance Alert -->
+                            <div class="p-4 bg-gray-50 dark:bg-gray-800/50 rounded-2xl notification-item">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-10 h-10 bg-red-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <i data-lucide="alert-triangle" class="w-5 h-5 text-red-500"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center justify-between">
+                                            <p class="text-xs sm:text-sm font-black text-gray-900 dark:text-white">Maintenance Alert</p>
+                                            <span class="text-[8px] text-gray-400">3 hours ago</span>
+                                        </div>
+                                        <p class="text-[9px] sm:text-[10px] text-gray-600 dark:text-gray-400 mt-0.5">3 vehicles due for service this week. Schedule maintenance.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Load More -->
+                        <div class="mt-6 text-center">
+                            <button class="text-primary text-[9px] font-black uppercase hover:underline">
+                                Load More Notifications
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- === SECURITY PAGE - NEW === -->
+                <div id="page-security" class="page-node">
+                    <div class="bg-white dark:bg-[#1E293B] p-4 sm:p-6 rounded-2xl custom-shadow border border-gray-100 dark:border-gray-700">
+                        <div class="flex items-center gap-2 mb-6">
+                            <i data-lucide="shield" class="w-6 h-6 text-primary"></i>
+                            <h3 class="text-lg sm:text-xl font-black uppercase">Security Settings</h3>
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                            <!-- Security Menu -->
+                            <div class="lg:col-span-1">
+                                <div class="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-2 space-y-1">
+                                    <button class="w-full flex items-center gap-3 p-3 rounded-lg bg-primary/10 text-primary">
+                                        <i data-lucide="lock" class="w-4 h-4"></i>
+                                        <span class="text-xs font-bold">Password & Auth</span>
+                                    </button>
+                                    <button class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-white dark:hover:bg-gray-700 transition-colors">
+                                        <i data-lucide="smartphone" class="w-4 h-4"></i>
+                                        <span class="text-xs font-medium">Two-Factor Auth</span>
+                                    </button>
+                                    <button class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-white dark:hover:bg-gray-700 transition-colors">
+                                        <i data-lucide="history" class="w-4 h-4"></i>
+                                        <span class="text-xs font-medium">Login History</span>
+                                    </button>
+                                    <button class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-white dark:hover:bg-gray-700 transition-colors">
+                                        <i data-lucide="fingerprint" class="w-4 h-4"></i>
+                                        <span class="text-xs font-medium">Biometrics</span>
+                                    </button>
+                                </div>
+
+                                <!-- Security Score -->
+                                <div class="mt-4 p-4 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl">
+                                    <div class="flex items-center justify-between">
+                                        <p class="text-[9px] font-black text-gray-400 uppercase">Security Score</p>
+                                        <span class="text-green-600 text-xs font-black">85%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-2">
+                                        <div class="bg-green-500 h-2 rounded-full" style="width: 85%"></div>
+                                    </div>
+                                    <p class="text-[8px] text-gray-500 mt-2">✓ Strong - Last reviewed 2 days ago</p>
+                                </div>
+                            </div>
+
+                            <!-- Security Content -->
+                            <div class="lg:col-span-2">
+                                <div class="space-y-6">
+                                    <!-- Password Section -->
+                                    <div>
+                                        <h4 class="text-xs font-black uppercase mb-4 flex items-center gap-2">
+                                            <i data-lucide="key" class="w-4 h-4 text-primary"></i>
+                                            Password & Authentication
+                                        </h4>
+                                        <div class="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 space-y-4">
+                                            <div class="flex items-center justify-between">
+                                                <div>
+                                                    <p class="text-xs font-bold">Current Password</p>
+                                                    <p class="text-[8px] text-gray-400 mt-0.5">Last changed 30 days ago</p>
+                                                </div>
+                                                <button class="text-[9px] font-black text-primary hover:underline">Change</button>
+                                            </div>
+                                            <div class="flex items-center justify-between">
+                                                <div>
+                                                    <p class="text-xs font-bold">Password Strength</p>
+                                                    <div class="flex items-center gap-1 mt-1">
+                                                        <span class="w-1 h-4 bg-green-500 rounded-full"></span>
+                                                        <span class="w-1 h-4 bg-green-500 rounded-full"></span>
+                                                        <span class="w-1 h-4 bg-green-500 rounded-full"></span>
+                                                        <span class="w-1 h-4 bg-gray-300 dark:bg-gray-600 rounded-full"></span>
+                                                        <span class="w-1 h-4 bg-gray-300 dark:bg-gray-600 rounded-full"></span>
+                                                        <span class="text-[8px] font-bold text-green-600 ml-1">Strong</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Two-Factor Authentication -->
+                                    <div>
+                                        <h4 class="text-xs font-black uppercase mb-4 flex items-center gap-2">
+                                            <i data-lucide="smartphone" class="w-4 h-4 text-primary"></i>
+                                            Two-Factor Authentication (2FA)
+                                        </h4>
+                                        <div class="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4">
+                                            <div class="flex items-center justify-between">
+                                                <div>
+                                                    <p class="text-xs font-bold">Authenticator App</p>
+                                                    <p class="text-[8px] text-gray-400 mt-0.5">Google Authenticator, Authy, or similar</p>
+                                                </div>
+                                                <label class="relative inline-flex items-center cursor-pointer">
+                                                    <input type="checkbox" class="sr-only peer" checked>
+                                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                                </label>
+                                            </div>
+                                            <p class="text-[8px] text-green-600 mt-2 flex items-center gap-1">
+                                                <i data-lucide="check-circle" class="w-3 h-3"></i>
+                                                2FA is enabled for your account
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Login History -->
+                                    <div>
+                                        <h4 class="text-xs font-black uppercase mb-4 flex items-center gap-2">
+                                            <i data-lucide="history" class="w-4 h-4 text-primary"></i>
+                                            Recent Login Activity
+                                        </h4>
+                                        <div class="space-y-3">
+                                            <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl">
+                                                <div class="flex items-center gap-3">
+                                                    <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
+                                                        <i data-lucide="smartphone" class="w-4 h-4 text-green-600"></i>
+                                                    </div>
+                                                    <div>
+                                                        <p class="text-xs font-bold">San Francisco, CA</p>
+                                                        <p class="text-[8px] text-gray-400">iPhone 15 Pro · 2 hours ago</p>
+                                                    </div>
+                                                </div>
+                                                <span class="text-[8px] font-black text-green-600">Current</span>
+                                            </div>
+                                            <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl">
+                                                <div class="flex items-center gap-3">
+                                                    <div class="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
+                                                        <i data-lucide="laptop" class="w-4 h-4 text-gray-600"></i>
+                                                    </div>
+                                                    <div>
+                                                        <p class="text-xs font-bold">San Jose, CA</p>
+                                                        <p class="text-[8px] text-gray-400">MacBook Pro · Yesterday</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="mt-3 text-[9px] text-primary font-black hover:underline">
+                                            View full login history →
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <footer class="mt-8 text-center text-[8px] sm:text-[9px] text-gray-400 uppercase tracking-wider">
+                <p>© 2024 GrowwCar US · All rights reserved</p>
+                <p class="mt-1">Fleet Management System v2.1.0</p>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Sidebar Toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            const menuIcon = document.getElementById('menuIcon');
+            
+            sidebar.classList.toggle('-translate-x-full');
+            
+            if (window.innerWidth < 1024) {
+                if (overlay) {
+                    overlay.classList.toggle('hidden');
+                }
+            }
+            
+            if (menuIcon) {
+                const isHidden = sidebar.classList.contains('-translate-x-full');
+                menuIcon.setAttribute('data-lucide', isHidden ? 'menu' : 'x');
+                lucide.createIcons();
+            }
+        }
+
+        // Window resize handler
+        window.addEventListener('resize', function() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            if (window.innerWidth >= 1024) {
+                sidebar.classList.remove('-translate-x-full');
+                if (overlay) overlay.classList.add('hidden');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                if (overlay) overlay.classList.add('hidden');
+            }
+        });
+
+        // Dark Mode
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            html.classList.toggle('dark');
+            
+            const icon = document.getElementById('themeIcon');
+            const isDark = html.classList.contains('dark');
+            
+            icon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
+            lucide.createIcons();
+            
+            localStorage.setItem('darkMode', isDark ? 'dark' : 'light');
+        }
+
+        // Check saved dark mode
+        if (localStorage.getItem('darkMode') === 'dark') {
+            document.documentElement.classList.add('dark');
+            document.getElementById('themeIcon')?.setAttribute('data-lucide', 'sun');
+            lucide.createIcons();
+        }
+
+        // Direction Toggle
+        function toggleDirection() {
+            const html = document.getElementById('htmlTag');
+            const dirText = document.getElementById('dirText');
+            
+            html.dir = html.dir === 'rtl' ? 'ltr' : 'rtl';
+            dirText.innerText = html.dir.toUpperCase();
+            
+            if (window.revenueChart) {
+                window.revenueChart.update();
+            }
+            
+            lucide.createIcons();
+        }
+
+        // Page Switching
+        function showPage(pageId) {
+            document.querySelectorAll('.page-node').forEach(p => p.classList.remove('active'));
+            
+            const targetNode = document.getElementById('page-' + pageId);
+            if (targetNode) {
+                targetNode.classList.add('active');
+            }
+            
+            const pageTitles = {
+                'stats': 'DASHBOARD',
+                'content': 'CONTENT MANAGER',
+                'bookings': 'BOOKINGS',
+                'notifications': 'NOTIFICATIONS',
+                'security': 'SECURITY'
+            };
+            
+            const titleElement = document.getElementById('pageTitle');
+            if (titleElement) {
+                titleElement.innerText = pageTitles[pageId] || pageId.toUpperCase();
+            }
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('sidebar-active');
+            });
+            
+            const activeBtn = document.getElementById('btn-' + pageId);
+            if (activeBtn) {
+                activeBtn.classList.add('sidebar-active');
+            }
+
+            if (window.innerWidth < 1024) {
+                toggleSidebar();
+            }
+            
+            if (pageId === 'stats' && window.revenueChart) {
+                setTimeout(() => {
+                    window.revenueChart.update();
+                    window.trafficChart?.update();
+                }, 100);
+            }
+        }
+
+        // Logout
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                window.location.href = '/login';
+            }
+        }
+
+        // Live Time
+        function updateLiveTime() {
+            const timeElement = document.getElementById('liveTime');
+            if (timeElement) {
+                const now = new Date();
+                const hours = now.getHours();
+                const minutes = now.getMinutes();
+                const ampm = hours >= 12 ? 'PM' : 'AM';
+                const formattedHours = hours % 12 || 12;
+                const formattedMinutes = minutes.toString().padStart(2, '0');
+                timeElement.innerText = `${formattedHours}:${formattedMinutes} ${ampm} PST`;
+            }
+        }
+        
+        setInterval(updateLiveTime, 1000);
+        updateLiveTime();
+
+        // Charts - USD Currency
+        const ctxRevenue = document.getElementById('revenueChart')?.getContext('2d');
+        if (ctxRevenue) {
+            window.revenueChart = new Chart(ctxRevenue, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [
+                        {
+                            label: 'Revenue',
+                            data: [42000, 48000, 45000, 52000, 58000, 63000],
+                            borderColor: '#EA580C',
+                            backgroundColor: 'rgba(234, 88, 12, 0.1)',
+                            borderWidth: 2,
+                            pointRadius: 3,
+                            pointHoverRadius: 6,
+                            tension: 0.4,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: document.documentElement.classList.contains('dark') ? '#1E293B' : '#FFFFFF',
+                            titleColor: document.documentElement.classList.contains('dark') ? '#FFFFFF' : '#111827',
+                            bodyColor: document.documentElement.classList.contains('dark') ? '#E5E7EB' : '#4B5563',
+                            borderColor: document.documentElement.classList.contains('dark') ? '#374151' : '#E5E7EB',
+                            borderWidth: 1
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: document.documentElement.classList.contains('dark') ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        const ctxTraffic = document.getElementById('trafficChart')?.getContext('2d');
+        if (ctxTraffic) {
+            window.trafficChart = new Chart(ctxTraffic, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Direct', 'Social'],
+                    datasets: [
+                        {
+                            data: [65, 35],
+                            backgroundColor: ['#EA580C', '#3B82F6'],
+                            borderWidth: 0,
+                            hoverOffset: 4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '75%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: document.documentElement.classList.contains('dark') ? '#1E293B' : '#FFFFFF',
+                            titleColor: document.documentElement.classList.contains('dark') ? '#FFFFFF' : '#111827',
+                            bodyColor: document.documentElement.classList.contains('dark') ? '#E5E7EB' : '#4B5563'
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            const overlay = document.createElement('div');
+            overlay.id = 'sidebarOverlay';
+            overlay.className = 'fixed inset-0 bg-black/50 z-40 hidden lg:hidden transition-opacity duration-300';
+            overlay.onclick = toggleSidebar;
+            document.body.appendChild(overlay);
+            
+            showPage('stats');
+            lucide.createIcons();
+        });
+
+        // Prevent double-tap zoom
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
+</body>
+</html>

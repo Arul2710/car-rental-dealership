@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>GrowwCar |Rental Realerships Home 2</title>
+    <link rel="icon" type="imags/jpg" href="imags/growwpark_logo.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+
+
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            width: 100%;
+            min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Dropdown Logic */
+        .dropdown-content {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            z-index: 1000;
+        }
+        
+        .dropdown-content.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Mobile Menu */
+        #mobileMenu {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+            z-index: 1100;
+            transform: translateX(100%);
+        }
+        
+        #mobileMenu.open {
+            transform: translateX(0);
+        }
+        
+        .dark #mobileMenu {
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        }
+        
+        /* Navigation Link Style */
+        .nav-link {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: black;
+            white-space: nowrap;
+        }
+        
+        .dark .nav-link { 
+            color: #cbd5e1; 
+        }
+
+        .nav-link:hover {
+            background-color: #EA580C;
+            color: white !important;
+        }
+        
+        .nav-link:hover i {
+            transform: scale(1.1);
+        }
+        
+        /* Active Link Style */
+        .nav-link.active {
+            background-color: #EA580C;
+            color: white !important;
+        }
+        
+        .nav-link.active i {
+            color: white;
+        }
+        
+        /* ============ FIXED MOBILE NAV LINK STYLES ============ */
+        /* Base style for mobile nav links - buttons and anchor tags */
+        .mobile-nav-link {
+            font-size: 14px;
+            font-weight: 600;
+            padding: 12px 16px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #1e293b;
+            background: transparent;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Dark mode base color */
+        .dark .mobile-nav-link {
+            color: #e2e8f0;
+        }
+
+        /* HOVER EFFECT - Full Orange Background + White Text */
+        .mobile-nav-link:hover {
+            background-color: #EA580C !important;  /* Orange 600 */
+            color: white !important;               /* White Text */
+            border-radius: 12px;
+        }
+
+        /* Icon inside mobile nav link - turns white on hover */
+        .mobile-nav-link:hover i {
+            color: white !important;
+            transform: scale(1.1);
+        }
+
+        /* ACTIVE STATE - Current active page */
+        .mobile-nav-link.active {
+            background-color: #EA580C !important;
+            color: white !important;
+        }
+
+        .mobile-nav-link.active i {
+            color: white !important;
+        }
+
+        /* Special style for Home button when active */
+        #mobileHomeBtn.mobile-nav-link.active {
+            background-color: #EA580C !important;
+            color: white !important;
+        }
+
+        #mobileHomeBtn.mobile-nav-link.active i {
+            color: white !important;
+        }
+        
+        /* ============ FIXED MOBILE SUBMENU STYLES ============ */
+        .mobile-submenu {
+            display: none;
+            flex-direction: column;
+            padding-left: 1rem;
+            margin-left: 0.5rem;
+            border-left: 2px solid rgba(234, 88, 12, 0.3);
+        }
+
+        .mobile-submenu.open {
+            display: flex;
+        }
+
+        .mobile-submenu a {
+            padding: 12px 16px;
+            margin: 2px 0;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            color: #1e293b;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .dark .mobile-submenu a {
+            color: #e2e8f0;
+        }
+
+        /* ACTIVE LINK IN SUBMENU - Always Orange */
+        .mobile-submenu .active-link {
+            background-color: #EA580C !important;
+            color: white !important;
+        }
+
+        /* HOVER EFFECT FOR SUBMENU LINKS - Full Orange + White Text */
+        .mobile-submenu a:hover {
+            background-color: #EA580C !important;
+            color: white !important;
+        }
+
+        .mobile-submenu a:hover i {
+            color: white !important;
+        }
+        
+        /* Touch-friendly */
+        button, a {
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        @media (max-width: 640px) {
+            button, a {
+                min-height: 44px;
+            }
+        }
+
+        /* ALL TABLET & iPAD PRO SIZES - Force hamburger menu */
+        @media (max-width: 1279px) {
+            .lg\:flex {
+                display: none !important;
+            }
+            
+            .xl\:flex {
+                display: none !important;
+            }
+            
+            .xl\:block {
+                display: none !important;
+            }
+            
+            .xl\:hidden {
+                display: block !important;
+            }
+        }
+        
+        /* Desktop - 1280px and above */
+        @media (min-width: 1280px) {
+            .xl\:flex {
+                display: flex !important;
+            }
+            
+            .xl\:block {
+                display: block !important;
+            }
+            
+            .xl\:hidden {
+                display: none !important;
+            }
+        }
+        
+        /* Demo Content */
+        .demo-content {
+            padding-top: 120px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { 
+                extend: { 
+                    colors: { 
+                        primary: '#EA580C',
+                        darkBg: '#0f172a'
+                    } 
+                } 
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 dark:bg-darkBg text-slate-900 dark:text-white overflow-x-hidden transition-colors duration-300">
+
+    <!-- ===== RESPONSIVE NAVIGATION BAR - Menu Button Always Visible Below 1280px ===== -->
+    <nav class="fixed w-full z-[100] px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4">
+        <div class="max-w-[1400px] mx-auto flex items-center justify-between bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl px-4 sm:px-5 py-2 sm:py-3 rounded-xl sm:rounded-2xl border border-white/20 shadow-lg transition-all duration-300">
+            
+            <!-- Logo -->
+            <div class="flex items-center gap-1 sm:gap-2">
+                <span class="text-xl sm:text-2xl md:text-3xl font-black tracking-tighter flex items-center gap-1 sm:gap-2 text-primary">
+                    <i data-lucide="car-front" class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8"></i>
+                    Groww<span class="text-black dark:text-white">Car</span>
+                </span>
+            </div>
+
+            <!-- Desktop Navigation - Hidden below 1280px -->
+            <div class="hidden lg:flex items-center gap-1 xl:gap-2">
+                <!-- Home Dropdown -->
+                <div class="relative">
+                    <button onclick="toggleDropdown('homeMenu', event)" 
+                        class="nav-link" id="homeDropdownBtn">
+                        Home <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+                    </button>
+
+                    <div id="homeMenu" 
+                        class="dropdown-content absolute top-full mt-2 w-40 bg-white dark:bg-slate-800 shadow-xl rounded-lg border border-slate-100 dark:border-slate-700 overflow-hidden">
+                        
+                        <!-- ACTIVE LINK -->
+                        <a href="index.html" 
+                           class="block px-4 py-2.5 text-xs font-bold hover:bg-orange-600 hover:text-white transition">
+                           Home 1
+                        </a>
+
+                        <a href="home2.html" 
+                           class="     block px-4 py-2.5 text-xs font-bold bg-orange-600 dark:bg-orange-600 text-white dark:text-white">
+                           Home 2
+                        </a>
+
+                    </div>
+                </div>
+
+                <a href="about.html" class="nav-link">About</a>
+                <a href="book.html" class="nav-link">Book Now</a>
+                <a href="Services.html" class="nav-link">Services</a>
+                <a href="Gallery.html" class="nav-link">Gallery</a>
+                <a href="" class="nav-link">Contact</a>
+                
+                <!-- Dashboard Dropdown -->
+                <div class="relative">
+                    <button onclick="toggleDropdown('dashMenu', event)" class="nav-link" id="dashDropdownBtn">
+                        Dashboard <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <div id="dashMenu" class="dropdown-content absolute top-full mt-2 w-44 bg-white dark:bg-slate-800 shadow-xl rounded-lg border border-slate-100 dark:border-slate-700 overflow-hidden">
+                        <a href="admin.html" class="flex items-center gap-2 px-4 py-2.5 text-xs font-bold hover:bg-orange-600 hover:text-white dark:hover:bg-slate-700 transition">
+                            <i data-lucide="user-cog" class="w-3.5 h-3.5"></i> Admin Dashboard
+                        </a>
+                        <a href="user.html" class="flex items-center gap-2 px-4 py-2.5 text-xs font-bold hover:bg-orange-600 hover:text-white dark:hover:bg-slate-700 transition">
+                            <i data-lucide="user" class="w-3.5 h-3.5"></i> User Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Controls - Icons visible only on desktop (1280px+), hidden on mobile & tablet -->
+            <div class="flex items-center gap-1 sm:gap-2 md:gap-3">
+                <!-- Theme & Direction - Desktop Only (1280px+) -->
+                <div class="hidden xl:flex items-center gap-2">
+                    <button onclick="toggleDirection()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition text-xs font-bold">
+                        <i data-lucide="languages" class="w-4 h-4"></i>
+                        <span id="dirText">LTR</span>
+                    </button>
+
+                    <button onclick="toggleTheme()" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+                        <i data-lucide="moon" class="w-4 h-4 dark:hidden"></i>
+                        <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-yellow-400"></i>
+                    </button>
+                </div>
+
+                <!-- User Menu - Desktop Only (1280px+) -->
+                <div class="relative hidden xl:block">
+                    <button onclick="toggleDropdown('userMenu', event)" class="p-2 sm:p-2.5 rounded-full bg-primary text-white hover:scale-105 transition shadow-md shadow-primary/30">
+                        <i data-lucide="user" class="w-4 h-4 sm:w-4.5 sm:h-4.5"></i>
+                    </button>
+                    <div id="userMenu" class="dropdown-content absolute right-0 top-full mt-2 w-36 bg-white dark:bg-slate-800 shadow-xl rounded-lg border border-slate-100 dark:border-slate-700 overflow-hidden">
+                        <a href="login -singup.html" class="block px-4 py-2.5 text-xs font-bold hover:bg-orange-600 hover:text-white dark:hover:bg-slate-700 transition">LOGIN</a>
+                        <a href="login -singup.html" class="block px-4 py-2.5 text-xs font-bold hover:bg-orange-600 hover:text-white dark:hover:bg-slate-700 transition">SIGNUP</a>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Toggle - Visible on ALL screens below 1280px (Mobile, Tablet, iPad Pro all sizes) -->
+                <button onclick="toggleMobileMenu()" class="xl:hidden p-2 sm:p-2.5 text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+                    <i data-lucide="menu" class="w-5 h-5 sm:w-5.5 sm:h-5.5"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== MOBILE MENU SLIDER - iPad Pro, Tablet, Mobile ===== -->
+    <div id="mobileMenu" class="fixed inset-y-0 right-0 w-[280px] sm:w-80 bg-white dark:bg-slate-900 z-[110] shadow-2xl p-5 sm:p-6 overflow-y-auto">
+        <!-- Mobile Menu Header -->
+        <div class="flex justify-between items-center mb-6 sm:mb-8">
+            
+            <button onclick="toggleMobileMenu()" class="p-2 bg-slate-100 dark:bg-slate-800 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Navigation Links -->
+        <div class="flex flex-col gap-1">
+            <!-- Home with Submenu - Home 1 is active by default -->
+            <button onclick="toggleMobileSubmenu('mobileHomeSub')" class="mobile-nav-link font-black " id="mobileHomeBtn">
+                <span>Home</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-300" id="homeSubIcon"></i>
+            </button>
+            <div id="mobileHomeSub" class="mobile-submenu open">
+                <!-- Active Link - Home 1 (Orange background + White text) -->
+                <a href="index.html" class="block py-3 px-4 text-sm font-medium rounded-lg ">
+                    Home 1
+                </a>
+                <!-- Normal Link - Home 2 (Orange hover) -->
+                <a href="home2.html" class="block py-3 px-4 text-sm font-medium rounded-lg active-link">
+                    Home 2
+                </a>
+            </div>
+
+            <!-- Regular Links -->
+            <a href="about.html" class="mobile-nav-link">About</a>
+            <a href="book.html" class="mobile-nav-link">Book Now</a>
+            <a href="Services.html" class="mobile-nav-link">Services</a>
+            <a href="Gallery.html" class="mobile-nav-link">Gallery</a>
+            <a href="Contact.html" class="mobile-nav-link">Contact</a>
+            
+            <!-- Dashboard with Submenu -->
+            <button onclick="toggleMobileSubmenu('mobileDashSub')" class="mobile-nav-link">
+                <span>Dashboard</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-300" id="dashSubIcon"></i>
+            </button>
+            <div id="mobileDashSub" class="mobile-submenu">
+                <a href="admin.html" class="flex items-center gap-2 py-3 px-4 text-sm font-medium">
+                    <i data-lucide="user-cog" class="w-3.5 h-3.5"></i> Admin Dashboard
+                </a>
+                <a href="user.html" class="flex items-center gap-2 py-3 px-4 text-sm font-medium">
+                    <i data-lucide="user" class="w-3.5 h-3.5"></i> User Dashboard
+                </a>
+            </div>
+
+            <hr class="my-4 border-slate-200 dark:border-slate-800">
+
+            <!-- Mobile Settings -->
+            <div class="space-y-4 px-2">
+                <div class="flex items-center justify-between text-sm font-bold">
+                    <span>Layout Direction</span>
+                    <button onclick="toggleDirection()" class="px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+                        <span id="mobileDirText">LTR</span>
+                    </button>
+                </div>
+                <div class="flex items-center justify-between text-sm font-bold">
+                    <span>Dark Mode</span>
+                    <button onclick="toggleTheme()" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+                        <i data-lucide="moon" class="w-4 h-4 dark:hidden"></i>
+                        <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-yellow-400"></i>
+                    </button>
+                </div>
+            </div>
+
+            <hr class="my-4 border-slate-200 dark:border-slate-800">
+            
+            <!-- Mobile Auth Buttons -->
+            <a href="login -singup.html" class="mobile-nav-link font-black">LOGIN</a>
+            <a href="login -singup.html" class="mobile-nav-link font-black">SIGNUP</a>
+        </div>
+    </div>
+
+    <script>
+        // ========== INITIALIZE LUCIDE ICONS ==========
+        lucide.createIcons();
+
+        // ========== DROPDOWN TOGGLE ==========
+        function toggleDropdown(menuId, event) {
+            if (event) {
+                event.stopPropagation();
+            }
+            
+            const allDropdowns = document.querySelectorAll('.dropdown-content');
+            allDropdowns.forEach(dropdown => {
+                if (dropdown.id !== menuId) {
+                    dropdown.classList.remove('show');
+                }
+            });
+            
+            const currentMenu = document.getElementById(menuId);
+            if (currentMenu) {
+                currentMenu.classList.toggle('show');
+            }
+        }
+
+        // Close dropdowns when clicking outside
+        window.addEventListener('click', function() {
+            const allDropdowns = document.querySelectorAll('.dropdown-content');
+            allDropdowns.forEach(dropdown => {
+                dropdown.classList.remove('show');
+            });
+        });
+
+        // Prevent closing when clicking inside dropdown
+        document.addEventListener('click', function(e) {
+            const dropdowns = document.querySelectorAll('.dropdown-content');
+            dropdowns.forEach(dropdown => {
+                if (dropdown.contains(e.target)) {
+                    e.stopPropagation();
+                }
+            });
+        });
+
+        // ========== MOBILE MENU TOGGLE ==========
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('open');
+            
+            if (mobileMenu.classList.contains('open')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close mobile menu on window resize
+        window.addEventListener('resize', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenu.classList.contains('open')) {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close mobile menu on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const mobileMenu = document.getElementById('mobileMenu');
+                if (mobileMenu.classList.contains('open')) {
+                    mobileMenu.classList.remove('open');
+                    document.body.style.overflow = 'auto';
+                }
+            }
+        });
+
+        // Click outside to close mobile menu
+        document.addEventListener('click', function(e) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuButton = document.querySelector('button[onclick="toggleMobileMenu()"]');
+            
+            if (mobileMenu.classList.contains('open')) {
+                if (!mobileMenu.contains(e.target) && !menuButton.contains(e.target)) {
+                    mobileMenu.classList.remove('open');
+                    document.body.style.overflow = 'auto';
+                }
+            }
+        });
+
+        // ========== MOBILE SUBMENU TOGGLE ==========
+        function toggleMobileSubmenu(submenuId) {
+            const submenu = document.getElementById(submenuId);
+            const button = submenu.previousElementSibling;
+            const icon = button.querySelector('i[data-lucide="chevron-down"]');
+            
+            const allSubmenus = document.querySelectorAll('.mobile-submenu');
+            allSubmenus.forEach(menu => {
+                if (menu.id !== submenuId && menu.classList.contains('open')) {
+                    menu.classList.remove('open');
+                    const btn = menu.previousElementSibling;
+                    const icn = btn.querySelector('i[data-lucide="chevron-down"]');
+                    if (icn) {
+                        icn.style.transform = 'rotate(0deg)';
+                        icn.style.color = '';
+                    }
+                }
+            });
+            
+            submenu.classList.toggle('open');
+            
+            if (icon) {
+                if (submenu.classList.contains('open')) {
+                    icon.style.transform = 'rotate(180deg)';
+                } else {
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            }
+            
+            setTimeout(() => lucide.createIcons(), 10);
+        }
+
+        // ========== THEME TOGGLE ==========
+        function toggleTheme() {
+            const html = document.documentElement;
+            html.classList.toggle('dark');
+            
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+            
+            setTimeout(() => lucide.createIcons(), 10);
+        }
+
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+            setTimeout(() => lucide.createIcons(), 10);
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // ========== DIRECTION TOGGLE ==========
+        function toggleDirection() {
+            const html = document.documentElement;
+            const dirText = document.getElementById('dirText');
+            const mobileDirText = document.getElementById('mobileDirText');
+            
+            if (html.dir === 'rtl') {
+                html.dir = 'ltr';
+                if(dirText) dirText.innerText = 'LTR';
+                if(mobileDirText) mobileDirText.innerText = 'LTR';
+            } else {
+                html.dir = 'rtl';
+                if(dirText) dirText.innerText = 'RTL';
+                if(mobileDirText) mobileDirText.innerText = 'RTL';
+            }
+            
+            setTimeout(() => lucide.createIcons(), 10);
+        }
+
+        // ========== INITIALIZE ON LOAD ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            
+            const dirText = document.getElementById('dirText');
+            const mobileDirText = document.getElementById('mobileDirText');
+            if (dirText) dirText.innerText = 'LTR';
+            if (mobileDirText) mobileDirText.innerText = 'LTR';
+            
+            const mobileLinks = document.querySelectorAll('#mobileMenu a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    const mobileMenu = document.getElementById('mobileMenu');
+                    mobileMenu.classList.remove('open');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+        });
+    </script>
+
+<!-- 
+hero section -->
+
+<section class="relative min-h-screen bg-slate-50 dark:bg-slate-950 overflow-hidden flex flex-col justify-center pt-20 pb-8">
+    <div class="absolute inset-0 opacity-5 pointer-events-none">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-[#EA580C] rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#EA580C] rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="container mx-auto px-4 md:px-12 relative z-10">
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+            
+            <div class="w-full lg:w-1/2 text-left space-y-4">
+                <div class="space-y-1">
+                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-[#EA580C]" id="subHeader">Executive Line</p>
+                    <h1 class="text-4xl md:text-6xl font-black leading-tight tracking-tighter text-slate-900 dark:text-white" id="mainHeader">
+                        Business-Ready <br> Rides
+                    </h1>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm md:text-base max-w-sm font-medium" id="descHeader">
+                        Quiet power. Precision timing. A seamless day, end-to-end.
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-[9px] font-bold uppercase flex items-center gap-1.5 shadow-sm text-slate-700 dark:text-slate-300">
+                        <span class="w-1 h-1 bg-[#EA580C] rounded-full"></span> Instant Confirmation
+                    </span>
+                    <span class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-[9px] font-bold uppercase flex items-center gap-1.5 shadow-sm text-slate-700 dark:text-slate-300">
+                        <span class="w-1 h-1 bg-[#EA580C] rounded-full"></span> Airport Friendly
+                    </span>
+                </div>
+
+                <div class="flex gap-2 pt-2">
+                    <div class="w-6 h-1 bg-[#EA580C] rounded-full transition-all duration-500 indicator"></div>
+                    <div class="w-2 h-1 bg-slate-300 dark:bg-slate-700 rounded-full transition-all duration-500 indicator"></div>
+                    <div class="w-2 h-1 bg-slate-300 dark:bg-slate-700 rounded-full transition-all duration-500 indicator"></div>
+                </div>
+            </div>
+
+            <div class="w-full lg:w-1/2 relative flex justify-center items-center">
+                <div class="relative w-full h-[220px] md:h-[350px] flex items-center justify-center">
+                    <img id="heroCar" src="imags/home 2 -1  img.png" 
+                         class="w-[100%] md:w-[110%] max-w-none object-contain drop-shadow-[0_20px_40px_rgba(234,88,12,0.2)] transition-all duration-700 ease-in-out" alt="Business Car">
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8 bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-2xl p-3 md:p-4 max-w-5xl mx-auto border border-slate-100 dark:border-slate-800 transition-all duration-300">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        
+        <div class="space-y-2.5 p-1">
+            <div class="flex items-center gap-2.5 p-3 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-700">
+                <div class="flex items-center gap-2 pr-2 border-r border-slate-200 dark:border-slate-600">
+                    <img src="https://flagcdn.com/us.svg" class="w-5 h-3.5 object-cover rounded-sm" alt="USA">
+                    <span class="text-[12px] font-black dark:text-white">+1</span>
+                </div>
+                <input type="tel" placeholder="Phone Number" class="bg-transparent text-xs font-bold outline-none w-full dark:text-white placeholder:text-slate-400">
+            </div>
+
+            <div class="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-700">
+                <i data-lucide="map-pin" class="w-4 h-4 text-[#EA580C]"></i>
+                <div class="flex-1">
+                    <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-tighter">City</p>
+                    <select class="bg-transparent text-[11px] font-black outline-none w-full dark:text-white cursor-pointer appearance-none">
+                        <option class="dark:bg-slate-900">New York, NY</option>
+                        <option class="dark:bg-slate-900">Los Angeles, CA</option>
+                        <option class="dark:bg-slate-900">Chicago, IL</option>
+                        <option class="dark:bg-slate-900">Houston, TX</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-2.5 p-1">
+            <div class="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-700">
+                <i data-lucide="calendar" class="w-4 h-4 text-[#EA580C]"></i>
+                <div class="flex-1">
+                    <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-tighter">Pick-Up Date</p>
+                    <input type="date" class="bg-transparent text-[11px] font-black outline-none w-full dark:text-white cursor-pointer">
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-700">
+                <i data-lucide="map-pinned" class="w-4 h-4 text-[#EA580C]"></i>
+                <div class="flex-1">
+                    <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-tighter">Select Hub</p>
+                    <select class="bg-transparent text-[11px] font-black outline-none w-full dark:text-white cursor-pointer appearance-none">
+                        <option class="dark:bg-slate-900">JFK Airport</option>
+                        <option class="dark:bg-slate-900">Downtown Center</option>
+                        <option class="dark:bg-slate-900">Westside Terminal</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-2.5 p-1 flex flex-col">
+            <div class="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-700">
+                <i data-lucide="calendar-check" class="w-4 h-4 text-[#EA580C]"></i>
+                <div class="flex-1">
+                    <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-tighter">Return Date</p>
+                    <input type="date" class="bg-transparent text-[11px] font-black outline-none w-full dark:text-white cursor-pointer">
+                </div>
+            </div>
+
+            <button class="w-full flex-1 bg-[#EA580C] hover:bg-[#c2410c] text-white rounded-2xl font-black text-[11px] uppercase tracking-[0.1em] transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-orange-500/20 active:scale-95 group">
+                <i data-lucide="search" class="w-4 h-4 group-hover:scale-110 transition-transform"></i> 
+                Find Your Car
+            </button>
+        </div>
+
+    </div>
+</div>
+    </div>
+</section>
+
+<script>
+    const slides = [
+        {
+            sub: "Executive Line",
+            main: "Business-Ready <br> Rides",
+            desc: "Quiet power. Precision timing. A seamless day, end-to-end.",
+            car: "imags/home 2 -1  img.png"
+        },
+        {
+            sub: "Luxury Collection",
+            main: "Elite Status <br> Performance",
+            desc: "Unmatched comfort meet raw speed. Elevate your status.",
+            car: "imags/home 2 -1  img.png"
+        },
+        {
+            sub: "Travel Elite",
+            main: "Airport <br> Transfers",
+            desc: "Your premium ride awaits at the gate. Professional & Punctual.",
+            car: "imags/home 2 -1  img.png"
+        }
+    ];
+
+    let current = 0;
+    const carImg = document.getElementById('heroCar');
+    const mainH = document.getElementById('mainHeader');
+    const subH = document.getElementById('subHeader');
+    const descH = document.getElementById('descHeader');
+    const indicators = document.querySelectorAll('.indicator');
+
+    function updateSlider() {
+        carImg.style.opacity = '0';
+        carImg.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            current = (current + 1) % slides.length;
+            const s = slides[current];
+            
+            carImg.src = s.car;
+            subH.innerText = s.sub;
+            mainH.innerHTML = s.main;
+            descH.innerText = s.desc;
+
+            carImg.style.opacity = '1';
+            carImg.style.transform = 'translateY(0)';
+
+            indicators.forEach((dot, i) => {
+                if(i === current) {
+                    dot.classList.replace('w-2', 'w-6');
+                    dot.classList.replace('bg-slate-300', 'bg-[#EA580C]');
+                    dot.classList.replace('dark:bg-slate-700', 'bg-[#EA580C]');
+                } else {
+                    dot.classList.replace('w-6', 'w-2');
+                    dot.classList.replace('bg-[#EA580C]', 'bg-slate-300');
+                    if(document.documentElement.classList.contains('dark')) dot.classList.add('dark:bg-slate-700');
+                }
+            });
+        }, 600);
+    }
+    setInterval(updateSlider, 5000);
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+</script>
+<!-- 
+destination section -->
+
+<section class="py-16 bg-white dark:bg-slate-950 font-sans">
+    <div class="container mx-auto px-4 md:px-8 max-w-[1300px]">
+        
+        <div class="flex justify-between items-end mb-8">
+            <h2 class="text-2xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                Smart deals for any destination
+            </h2>
+            <a href="Gallery.html" class="text-[#EA580C] font-bold text-sm hover:underline hidden sm:block">
+                See all Collection 
+            </a>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            
+            <div class="group bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-slate-100 dark:border-slate-800">
+                <div class="h-32 md:h-48 overflow-hidden">
+                    <img src="imags/home 2 -2 img.png" alt="Deal" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="p-4 md:p-6">
+                    <h3 class="text-sm md:text-lg font-bold text-slate-900 dark:text-white mb-3 leading-tight">
+                        AAA members save up to 30% on their next rental
+                    </h3>
+                    <a href="Gallery.html" class="inline-flex items-center gap-2 text-[#EA580C] text-[10px] md:text-sm font-black uppercase tracking-wider group/link">
+                        View Collection 
+                        <i data-lucide="arrow-right" class="w-3 h-3 md:w-4 md:h-4 group-hover/link:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="group bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-slate-100 dark:border-slate-800">
+                <div class="h-32 md:h-48 overflow-hidden">
+                    <img src="imags/home 2 -3 img.png" alt="Deal" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="p-4 md:p-6">
+                    <h3 class="text-sm md:text-lg font-bold text-slate-900 dark:text-white mb-3 leading-tight">
+                        Enjoy a FREE upgrade* on your luxury drive
+                    </h3>
+                    <a href="Gallery.html" class="inline-flex items-center gap-2 text-[#EA580C] text-[10px] md:text-sm font-black uppercase tracking-wider group/link">
+                        View Collection 
+                        <i data-lucide="arrow-right" class="w-3 h-3 md:w-4 md:h-4 group-hover/link:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+
+            
+
+            <div class="group bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-slate-100 dark:border-slate-800">
+                <div class="h-32 md:h-48 overflow-hidden">
+                    <img src="imags/home 2 -4 img.png" alt="Snow Deal" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="p-4 md:p-6">
+                    <h3 class="text-sm md:text-lg font-bold text-slate-900 dark:text-white mb-3 leading-tight">
+                        Save up to 20% when you pay now.*
+                    </h3>
+                    <a href="Gallery.html" class="inline-flex items-center gap-2 text-[#EA580C] text-[10px] md:text-sm font-black uppercase tracking-wider group/link">
+                        View Collection 
+                        <i data-lucide="arrow-right" class="w-3 h-3 md:w-4 md:h-4 group-hover/link:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+
+
+
+            <div class="group bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-slate-100 dark:border-slate-800">
+                <div class="h-32 md:h-48 overflow-hidden">
+                    <img src="imags/home 2 -5 img.png" alt="Snow Deal" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="p-4 md:p-6">
+                    <h3 class="text-sm md:text-lg font-bold text-slate-900 dark:text-white mb-3 leading-tight">
+                        Get 1 free day when you rent 7+ days.*
+                    </h3>
+                    <a href="Gallery.html" class="inline-flex items-center gap-2 text-[#EA580C] text-[10px] md:text-sm font-black uppercase tracking-wider group/link">
+                        View Collection 
+                        <i data-lucide="arrow-right" class="w-3 h-3 md:w-4 md:h-4 group-hover/link:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+
+            
+
+        </div>
+
+        <div class="mt-8 text-center sm:hidden">
+            <a href="#" class="inline-block px-6 py-3 bg-[#EA580C] text-white rounded-full font-bold text-xs uppercase tracking-widest shadow-lg shadow-[#EA580C]/20">
+                See all offers
+            </a>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Initialize Lucide Icons
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+</script>
+
+
+
+<!-- Corporate section -->
+
+
+<section class="py-20 bg-white dark:bg-slate-950 font-sans overflow-hidden">
+    <div class="container mx-auto px-4 md:px-8 max-w-[1200px]">
+        
+        <div class="flex flex-col lg:flex-row items-center gap-12 mb-24">
+            <div class="w-full lg:w-1/2 relative">
+                <div class="rounded-[3rem] overflow-hidden shadow-2xl border-8 border-slate-50 dark:border-slate-900">
+                    <img src="imags/home 2 -6 img.png" 
+                         alt="Corporate Car Rental" class="w-full h-[400px] object-cover hover:scale-105 transition-transform duration-700">
+                </div>
+                
+            </div>
+
+            <div class="w-full lg:w-1/2 space-y-6">
+                <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tighter">
+                    Corporate <span class="text-[#EA580C]">Solutions</span>
+                </h2>
+                <h3 class="text-xl font-bold text-slate-700 dark:text-slate-300">
+                    A ride you can count on for every business needs.
+                </h3>
+                <p class="text-slate-500 dark:text-slate-400 leading-relaxed">
+                    GrowwCar provides a smooth riding option for business travel with premium customer services. Experience the most comfortable rides for your professional use with flexible billing and priority support.
+                </p>
+                <button class="bg-[#EA580C] text-white px-10 py-4 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-[#c2410c] hover:-translate-y-1 transition-all shadow-lg shadow-[#EA580C]/20">
+                    Explore Corporate
+                </button>
+            </div>
+        </div>
+
+        <div class="w-full bg-white dark:bg-slate-950 py-16">
+    <div class="text-center">
+        <h2 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white mb-12 tracking-tight">
+            Brands <span class="text-[#EA580C]">who trust Us</span>
+        </h2>
+        
+        <div class="relative flex justify-center items-center bg-white dark:bg-slate-900 py-12 border-y border-gray-100 dark:border-white/5 overflow-hidden">
+    
+    <div class="container mx-auto px-4">
+        <div class="flex flex-wrap justify-center items-center gap-10 md:gap-16 lg:gap-24">
+            
+            <div class="flex items-center justify-center transform transition-all duration-300 hover:scale-110">
+                <img src="imags/home 2 -7 img.png" 
+                     class="h-10 md:h-14 w-auto object-contain cursor-pointer" 
+                     alt="BMW">
+            </div>
+
+            <div class="flex items-center justify-center transform transition-all duration-300 hover:scale-110">
+                <img src="imags/home 2 -8 img.png" 
+                     class="h-10 md:h-14 w-auto object-contain cursor-pointer" 
+                     alt="Benz">
+            </div>
+
+            <div class="flex items-center justify-center transform transition-all duration-300 hover:scale-110">
+                <img src="imags/home 2 -9 img.png" 
+                     class="h-10 md:h-14 w-auto object-contain cursor-pointer" 
+                     alt="VW">
+            </div>
+
+            <div class="flex items-center justify-center transform transition-all duration-300 hover:scale-110">
+                <img src="imags/home 2 -10 img.png" 
+                     class="h-6 md:h-9 w-auto object-contain cursor-pointer" 
+                     alt="Audi">
+            </div>
+
+            <div class="flex items-center justify-center transform transition-all duration-300 hover:scale-110">
+                <img src="imags/home 2 -11 img.png" 
+                     class="h-8 md:h-12 w-auto object-contain cursor-pointer" 
+                     alt="Toyota">
+            </div>
+
+            <div class="flex items-center justify-center transform transition-all duration-300 hover:scale-110">
+                <img src="imags/home 2 -12 img.png" 
+                     class="h-6 md:h-9 w-auto object-contain cursor-pointer" 
+                     alt="Hyundai">
+            </div>
+
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+    </div>
+
+    
+</section>
+
+
+
+
+
+
+
+
+<section class="py-16 bg-slate-50 dark:bg-slate-950 font-sans">
+    <div class="container mx-auto px-4 md:px-8 max-w-[1300px]">
+        
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-4 tracking-tighter">
+                Rental Types <span class="text-[#EA580C]">for Every Journey</span>
+            </h2>
+            <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto font-medium">
+                Whether you need a classic sedan for business or a spacious SUV for family trips, we have the perfect ride for you.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            
+            <div class="group relative bg-white dark:bg-slate-900 rounded-[2rem] p-6 md:p-8 border border-slate-100 dark:border-slate-800 transition-all duration-500 hover:bg-[#EA580C] shadow-lg hover:shadow-2xl overflow-hidden">
+                <div class="relative z-10 transition-colors duration-500">
+                    <h3 class="text-xl md:text-2xl font-black text-slate-900 dark:text-white group-hover:text-white mb-2">Luxury</h3>
+                    <p class="text-xs md:text-sm text-slate-500 dark:text-slate-400 group-hover:text-white/90 leading-relaxed mb-8">
+                        Experience the peak of comfort and style.
+                    </p>
+                    <div class="flex items-center gap-2 group-hover:translate-x-2 transition-transform duration-300">
+                        <div class="w-8 h-[2px] bg-[#EA580C] group-hover:bg-white"></div>
+                        <i data-lucide="arrow-right" class="w-4 h-4 text-[#EA580C] group-hover:text-white"></i>
+                    </div>
+                </div>
+                <div class="mt-8 flex justify-center">
+                    <img src="imags/home 2 -1  img.png" 
+                         alt="Luxury" class="w-full object-contain drop-shadow-xl group-hover:scale-110 transition-transform duration-500">
+                </div>
+            </div>
+
+            <div class="group relative bg-white dark:bg-slate-900 rounded-[2rem] p-6 md:p-8 border border-slate-100 dark:border-slate-800 transition-all duration-500 hover:bg-[#EA580C] shadow-lg hover:shadow-2xl overflow-hidden">
+                <div class="relative z-10 transition-colors duration-500">
+                    <h3 class="text-xl md:text-2xl font-black text-slate-900 dark:text-white group-hover:text-white mb-2">Business</h3>
+                    <p class="text-xs md:text-sm text-slate-500 dark:text-slate-400 group-hover:text-white/90 leading-relaxed mb-8">
+                        The perfect choice for professional travel.
+                    </p>
+                    <div class="flex items-center gap-2 group-hover:translate-x-2 transition-transform duration-300">
+                        <div class="w-8 h-[2px] bg-[#EA580C] group-hover:bg-white"></div>
+                        <i data-lucide="arrow-right" class="w-4 h-4 text-[#EA580C] group-hover:text-white"></i>
+                    </div>
+                </div>
+                <div class="mt-8 flex justify-center">
+                    <img src="imags/home 2 -13 img.png" 
+                         alt="Business" class="w-full object-contain drop-shadow-xl group-hover:scale-110 transition-transform duration-500">
+                </div>
+            </div>
+
+            <div class="group relative bg-white dark:bg-slate-900 rounded-[2rem] p-6 md:p-8 border border-slate-100 dark:border-slate-800 transition-all duration-500 hover:bg-[#EA580C] shadow-lg hover:shadow-2xl overflow-hidden">
+                <div class="relative z-10 transition-colors duration-500">
+                    <h3 class="text-xl md:text-2xl font-black text-slate-900 dark:text-white group-hover:text-white mb-2">Economy</h3>
+                    <p class="text-xs md:text-sm text-slate-500 dark:text-slate-400 group-hover:text-white/90 leading-relaxed mb-8">
+                        Reliable and budget-friendly for daily use.
+                    </p>
+                    <div class="flex items-center gap-2 group-hover:translate-x-2 transition-transform duration-300">
+                        <div class="w-8 h-[2px] bg-[#EA580C] group-hover:bg-white"></div>
+                        <i data-lucide="arrow-right" class="w-4 h-4 text-[#EA580C] group-hover:text-white"></i>
+                    </div>
+                </div>
+                <div class="mt-8 flex justify-center">
+                    <img src="imags/home 2 -14 img.png" 
+                         alt="Economy" class="w-full object-contain drop-shadow-xl group-hover:scale-110 transition-transform duration-500">
+                </div>
+            </div>
+
+            <div class="group relative bg-white dark:bg-slate-900 rounded-[2rem] p-6 md:p-8 border border-slate-100 dark:border-slate-800 transition-all duration-500 hover:bg-[#EA580C] shadow-lg hover:shadow-2xl overflow-hidden">
+                <div class="relative z-10 transition-colors duration-500">
+                    <h3 class="text-xl md:text-2xl font-black text-slate-900 dark:text-white group-hover:text-white mb-2">Family Ride</h3>
+                    <p class="text-xs md:text-sm text-slate-500 dark:text-slate-400 group-hover:text-white/90 leading-relaxed mb-8">
+                        Take your joint family and enjoy long, blissful trips together.
+                    </p>
+                    <div class="flex items-center gap-2 group-hover:translate-x-2 transition-transform duration-300">
+                        <div class="w-8 h-[2px] bg-[#EA580C] group-hover:bg-white"></div>
+                        <i data-lucide="arrow-right" class="w-4 h-4 text-[#EA580C] group-hover:text-white"></i>
+                    </div>
+                </div>
+                <div class="mt-8 flex justify-center">
+                    <img src="imags/home 1 -2 img.png" 
+                         alt="Economy" class="w-full object-contain drop-shadow-xl group-hover:scale-110 transition-transform duration-500">
+                </div>
+            </div>
+
+            
+
+        </div>
+    </div>
+</section>
+
+<script>
+    // Initialize icons if lucide is loaded
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+</script>
+
+
+
+<!-- footer section -->
+
+<footer class="bg-[#FDBA74] text-white pt-16 pb-8 font-sans overflow-hidden">
+    <div class="container mx-auto px-4 md:px-8 max-w-[1300px]">
+        
+        
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+            
+            <div class="space-y-6">
+                <div class="flex items-center gap-2">
+    <span class="text-2xl md:text-3xl font-black tracking-tighter flex items-center gap-2 text-primary">
+        <i data-lucide="car-front" class="w-7 h-7 md:w-8 md:h-8"></i>
+        Groww<span class="text-black dark:text-white">Car</span>
+    </span>
+</div>
+                <p class="text-white/80 text-sm leading-relaxed">
+                    Premium self-drive car rental services across major cities in the USA. We provide elite cars for those who demand excellence in performance.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-black transition-all"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-black transition-all"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-black transition-all"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <h4 class="text-lg font-black uppercase tracking-widest text-black">Company</h4>
+                <ul class="space-y-3 text-white/80 text-sm font-bold">
+                    <li><a href="index.html" class="hover:text-black transition-colors">Home</a></li>
+                    <li><a href="about.html" class="hover:text-black transition-colors">Aboutt</a></li>
+                    <li><a href="Services.html" class="hover:text-black transition-colors">Services</a></li>
+                    <li><a href="Gallery.html" class="hover:text-black transition-colors">Gallery</a></li>
+                    <li><a href="Contact.html" class="hover:text-black transition-colors">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="space-y-6">
+                <h4 class="text-lg font-black uppercase tracking-widest text-black">Locations</h4>
+                <ul class="space-y-3 text-white/80 text-sm font-bold">
+                    <li><a href="#" class="hover:text-black transition-colors">New York City</a></li>
+                    <li><a href="#" class="hover:text-black transition-colors">Los Angeles</a></li>
+                    <li><a href="#" class="hover:text-black transition-colors">Chicago, IL</a></li>
+                    <li><a href="#" class="hover:text-black transition-colors">Miami, FL</a></li>
+                    <li><a href="#" class="hover:text-black transition-colors">San Francisco</a></li>
+                </ul>
+            </div>
+
+            <div class="space-y-6">
+                <h4 class="text-lg font-black uppercase tracking-widest text-black">Get in Touch</h4>
+                <ul class="space-y-4 text-white text-sm">
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="map-pin" class="w-5 h-5 text-black"></i>
+                        <span class="font-bold">123 Luxury Drive, <br>Manhattan, NY 10001</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i data-lucide="phone" class="w-5 h-5 text-black"></i>
+                        <span class="font-bold">+1 (555) 96552 14888</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i data-lucide="mail" class="w-5 h-5 text-black"></i>
+                        <span class="font-bold">support@growwcar.com</span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="pt-8 border-t border-white/20 flex flex-col md:flex-row justify-between items-center gap-4 text-[12px] font-bold text-white/60">
+            <p>© 2026 GrowwCar Premium Rentals. All Rights Reserved.</p>
+            <div class="flex gap-6 uppercase tracking-widest">
+                <a href="#" class="hover:text-black">Sitemap</a>
+                <a href="#" class="hover:text-black">Refund Policy</a>
+            </div>
+        </div>
+
+    </div>
+</footer>
+
+<script>
+    // Initialize icons if lucide is loaded
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+</script>
+</body>
+</html>

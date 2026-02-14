@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, viewport-fit=cover">
+    <title>GrowwCar · Login & Sign Up</title>
+    <link rel="icon" type="image/jpeg" href="assets/growwpark_logo.jpg">
+    <!-- Tailwind + custom config -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-orange': '#EA580C',
+                        'secondary-orange': '#f97316',
+                        'primary-brown': '#8D6E63',
+                        'car-orange': '#EA580C',
+                        'background-cream': '#FAF5EF',
+                        'neutral-dark': '#5D4037',
+                        'neutral-light': '#EFEBE9',
+                        'dark-bg': '#1a1a1a',
+                        'dark-card': '#2d2d2d'
+                    },
+                    
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-out',
+                        'slide-up': 'slideUp 0.4s ease-out',
+                        'float': 'float 6s ease-in-out infinite'
+                    },
+                    keyframes: {
+                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+                        slideUp: { '0%': { transform: 'translateY(20px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+                        float: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts + Icons -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ----- FIXED SINGLE PAGE SETUP - NO SCROLLING ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            position: fixed;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f0eb 0%, #e8dfd8 100%);
+            font-family: 'Space Grotesk', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .dark body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        }
+        
+        /* Main container - exactly fits screen */
+        .page-container {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem;
+            overflow: hidden;
+        }
+        
+        /* Content wrapper - exact fit */
+        .content-wrapper {
+            width: 100%;
+            max-width: 460px;
+            height: 100%;
+            max-height: 680px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: auto;
+        }
+        
+        /* toggle buttons */
+        .toggle-btn {
+            width: 40px; 
+            height: 40px; 
+            border-radius: 12px;
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center;
+            background: #F3F4F6; 
+            color: #6B7280;
+            transition: all 0.2s ease; 
+            border: none; 
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .dark .toggle-btn { 
+            background: #374151; 
+            color: #9CA3AF; 
+        }
+        .toggle-btn:hover { 
+            background: #E5E7EB; 
+            color: #374151; 
+            transform: translateY(-2px);
+        }
+        .dark .toggle-btn:hover { 
+            background: #4B5563; 
+            color: #E5E7EB; 
+        }
+        .toggle-btn.active { 
+            background: #EA580C; 
+            color: white; 
+        }
+        .dark .toggle-btn.active {
+            background: #EA580C;
+            color: white;
+        }
+
+        /* LOGIN CARD - compact fixed size */
+        .login-card {
+            background: white;
+            border-radius: 32px;
+            padding: 1.25rem 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(234, 88, 12, 0.25);
+            border: 1px solid rgba(234, 88, 12, 0.1);
+            width: 100%;
+            height: auto;
+            max-height: 600px;
+            transition: all 0.3s ease;
+        }
+        .dark .login-card {
+            background: #2d2d2d;
+            border-color: #404040;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+        }
+
+        /* input fields */
+        .login-input {
+            width: 100%;
+            padding: 0.85rem 1rem 0.85rem 2.8rem;
+            border-radius: 14px;
+            border: 2px solid #EFEBE9;
+            background: white;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            color: #5D4037;
+        }
+        .dark .login-input {
+            background: #3a3a3a;
+            border-color: #4b4b4b;
+            color: #f0f0f0;
+        }
+        .login-input:focus {
+            outline: none;
+            border-color: #EA580C;
+            box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15);
+        }
+
+        /* car button */
+        .car-btn {
+            background: linear-gradient(135deg, #EA580C 0%, #f97316 100%);
+            color: white; 
+            font-weight: 600; 
+            padding: 0.85rem 1.5rem;
+            border-radius: 40px; 
+            transition: all 0.3s ease;
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center;
+            width: 100%; 
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            gap: 0.5rem;
+        }
+        .car-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px -8px rgba(234, 88, 12, 0.5);
+        }
+
+        /* social buttons */
+        .social-btn {
+            flex: 1;
+            padding: 0.7rem 0.25rem;
+            border-radius: 14px;
+            border: 2px solid #EFEBE9;
+            background: white;
+            color: #5D4037;
+            font-weight: 500;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+            gap: 0.35rem;
+            cursor: pointer;
+        }
+        .dark .social-btn {
+            background: #3a3a3a;
+            border-color: #4b4b4b;
+            color: #e5e5e5;
+        }
+        .social-btn:hover {
+            background: #F9FAFB;
+            border-color: #EA580C;
+            transform: translateY(-2px);
+        }
+
+        /* tab switching */
+        .tab-btn {
+            flex: 1;
+            padding: 0.7rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: #9CA3AF;
+        }
+        .tab-btn.active {
+            background: #EA580C;
+            color: white;
+        }
+
+        /* input icon */
+        .input-icon {
+            position: absolute;
+            left: 0.9rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #EA580C;
+            font-size: 0.9rem;
+        }
+
+        /* hidden utility */
+        .hidden-form { display: none; }
+        
+        /* RTL adjustments */
+        [dir="rtl"] .login-input { padding: 0.85rem 2.8rem 0.85rem 1rem; }
+        [dir="rtl"] .input-icon { left: auto; right: 0.9rem; }
+
+        /* features grid - compact */
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.4rem 0.8rem;
+            background: rgba(234, 88, 12, 0.05);
+            border-radius: 40px;
+            font-size: 0.7rem;
+        }
+        .dark .feature-item {
+            background: rgba(234, 88, 12, 0.15);
+        }
+
+        /* logo */
+        .logo-icon {
+            transition: transform 0.3s ease;
+        }
+        .logo-link:hover .logo-icon {
+            transform: rotate(8deg) scale(1.05);
+        }
+
+        /* no scroll on any element */
+        .no-scroll {
+            overflow: hidden;
+        }
+        
+        /* compact spacing */
+        .compact-space {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* exactly one page */
+        .one-page {
+            height: 100%;
+            max-height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== SINGLE PAGE - NO SCROLL ===== -->
+    <div class="page-container">
+        <div class="content-wrapper">
+            
+            <!-- LOGIN CARD - COMPACT SIZE -->
+            <div class="login-card one-page">
+                
+                <!-- ===== LOGO - COMPACT ===== -->
+                <div class="flex items-center gap-1 sm:gap-2">
+                <span class="text-xl sm:text-2xl md:text-3xl font-black tracking-tighter flex items-center gap-1 sm:gap-2 text-primary">
+                    <a href="index.html">
+                    <i data-lucide="car-front" class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8"></i>
+                     <span class="text-orange-600 ">Groww </span><span class="text-black dark:text-white">Car</span>
+                     </a>
+                </span>
+            </div>
+
+                
+
+                <!-- ===== LOGIN / SIGNUP TABS ===== -->
+                <div class="flex gap-1.5 bg-gray-100 dark:bg-gray-800 p-1 rounded-xl mb-3">
+                    <button id="tab-login" class="tab-btn active" onclick="switchTab('login')">
+                        <i class="fas fa-sign-in-alt mr-1"></i>Log In
+                    </button>
+                    <button id="tab-signup" class="tab-btn" onclick="switchTab('signup')">
+                        <i class="fas fa-user-plus mr-1"></i>Sign Up
+                    </button>
+                </div>
+
+                <!-- ===== LOGIN FORM ===== -->
+                <form id="login-form" class="space-y-3" action="#" method="GET">
+                    <!-- email -->
+                    <div class="relative">
+                        <span class="input-icon">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        <input type="email" name="email" placeholder="Email address" required
+                               class="login-input">
+                    </div>
+
+                    <!-- password -->
+                    <div class="relative">
+                        <span class="input-icon">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                        <input type="password" name="password" placeholder="Password" required
+                               class="login-input">
+                    </div>
+
+                    <!-- remember + forgot -->
+                    <div class="flex items-center justify-between text-xs">
+                        <label class="flex items-center gap-1.5 cursor-pointer text-neutral-dark dark:text-gray-300">
+                            <input type="checkbox" class="rounded border-neutral-light text-primary-orange focus:ring-primary-orange/30" checked>
+                            <span>Remember me</span>
+                        </label>
+                        <a href="#" class="text-primary-orange hover:text-secondary-orange font-medium hover:underline" onclick="forgotPassword(event)">
+                            Forgot?
+                        </a>
+                    </div>
+
+                    <!-- login button -->
+                    <button type="submit" class="car-btn">
+                        <i class="fas fa-arrow-right-to-bracket"></i>
+                        Login to Drive
+                    </button>
+                </form>
+
+                <!-- ===== SIGNUP FORM (hidden by default) ===== -->
+                <form id="signup-form" class="hidden-form space-y-2.5" action="#" method="GET">
+                    <!-- name fields -->
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="relative">
+                            <span class="input-icon">
+                                <i class="fas fa-user"></i>
+                            </span>
+                            <input type="text" name="firstname" placeholder="First" required
+                                   class="login-input">
+                        </div>
+                        <div class="relative">
+                            <span class="input-icon">
+                                <i class="fas fa-user"></i>
+                            </span>
+                            <input type="text" name="lastname" placeholder="Last" required
+                                   class="login-input">
+                        </div>
+                    </div>
+
+                    <!-- email -->
+                    <div class="relative">
+                        <span class="input-icon">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        <input type="email" name="email" placeholder="Email address" required
+                               class="login-input">
+                    </div>
+
+                    <!-- phone -->
+                    <div class="relative">
+                        <span class="input-icon">
+                            <i class="fas fa-phone"></i>
+                        </span>
+                        <input type="tel" name="phone" placeholder="Phone number" required
+                               class="login-input">
+                    </div>
+
+                    <!-- password -->
+                    <div class="relative">
+                        <span class="input-icon">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                        <input type="password" name="password" placeholder="Password" required
+                               class="login-input">
+                    </div>
+
+                    <!-- terms -->
+                    <div class="flex items-center gap-1.5 text-xs text-neutral-dark dark:text-gray-300">
+                        <input type="checkbox" id="terms" class="rounded border-neutral-light text-primary-orange" required>
+                        <label for="terms">I agree to <a href="#" class="text-primary-orange hover:underline">Terms</a></label>
+                    </div>
+
+                    <!-- signup button -->
+                    <button type="submit" class="car-btn">
+                        <i class="fas fa-user-plus"></i>
+                        Create Account
+                    </button>
+                </form>
+
+                <!-- ===== SOCIAL LOGIN ===== -->
+                <div class="mt-3">
+                    <div class="relative mb-2">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-neutral-light dark:border-gray-700"></div>
+                        </div>
+                        <div class="relative flex justify-center text-[0.6rem]">
+                            <span class="bg-white dark:bg-dark-card px-3 py-0.5 text-neutral-dark/50 dark:text-gray-400 rounded-full">
+                                or continue with
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- social buttons row -->
+                    <div class="flex gap-2">
+                        <button class="social-btn" onclick="handleSocialLogin('google')">
+                            <i class="fab fa-google text-primary-orange"></i>
+                            <span class="hidden sm:inline">Google</span>
+                        </button>
+                        <button class="social-btn" onclick="handleSocialLogin('apple')">
+                            <i class="fab fa-apple text-primary-orange"></i>
+                            <span class="hidden sm:inline">Apple</span>
+                        </button>
+                        <button class="social-btn" onclick="handleSocialLogin('facebook')">
+                            <i class="fab fa-facebook-f text-primary-orange"></i>
+                            <span class="hidden sm:inline">FB</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ===== DARK/LIGHT & RTL TOGGLES ===== -->
+                <div class="mt-3 flex items-center justify-center gap-2 pt-2 border-t border-neutral-light/60 dark:border-gray-800/60">
+                    <button id="theme-toggle" class="toggle-btn" title="Dark / Light">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun hidden"></i>
+                    </button>
+                    <button id="rtl-toggle" class="toggle-btn" title="RTL / LTR">
+                        <i class="fas fa-exchange-alt"></i>
+                    </button>
+                    
+                </div>
+
+                <!-- app download -->
+                <div class="mt-2 text-center text-[0.6rem] text-neutral-dark/50 dark:text-gray-500">
+                    <i class="fas fa-mobile-alt text-primary-orange mr-1"></i>
+                    Download the GrowwCar App
+                </div>
+            </div>
+
+            <!-- trust badges -->
+            <div class="flex justify-center gap-3 mt-1 text-[0.6rem] text-neutral-dark/50 dark:text-gray-500">
+                <span><i class="fas fa-shield-alt text-primary-orange mr-1"></i> Secure</span>
+                <span><i class="fas fa-headset text-primary-orange mr-1"></i> 24/7 Support</span>
+                <span><i class="fas fa-car text-primary-orange mr-1"></i> 300+ Cars</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer - part of same page -->
+    <div class="fixed bottom-0 left-0 right-0 text-center text-[0.55rem] text-neutral-dark/30 dark:text-gray-600 py-0.5 bg-transparent pointer-events-none">
+        © 2026 GrowwCar · All rights reserved
+    </div>
+
+    <script>
+        (function() {
+            // ===== TAB SWITCHING =====
+            window.switchTab = function(tab) {
+                const loginForm = document.getElementById('login-form');
+                const signupForm = document.getElementById('signup-form');
+                const tabLogin = document.getElementById('tab-login');
+                const tabSignup = document.getElementById('tab-signup');
+
+                if (tab === 'login') {
+                    loginForm.classList.remove('hidden-form');
+                    signupForm.classList.add('hidden-form');
+                    tabLogin.classList.add('active');
+                    tabSignup.classList.remove('active');
+                } else {
+                    loginForm.classList.add('hidden-form');
+                    signupForm.classList.remove('hidden-form');
+                    tabSignup.classList.add('active');
+                    tabLogin.classList.remove('active');
+                }
+            };
+
+            // ===== FORGOT PASSWORD =====
+            window.forgotPassword = function(e) {
+                e.preventDefault();
+                alert('🔐 Password reset link will be sent to your email');
+            };
+
+            // ===== SOCIAL LOGIN =====
+            window.handleSocialLogin = function(provider) {
+                alert(`✅ Continue with ${provider} (Demo)`);
+            };
+
+            // ===== HOME =====
+            window.goHome = function(e) {
+                e.preventDefault();
+                alert('🏠 Home page (Demo)');
+            };
+
+            // ===== DARK MODE TOGGLE =====
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIconMoon = themeToggle?.querySelector('.fa-moon');
+            const themeIconSun = themeToggle?.querySelector('.fa-sun');
+
+            function setTheme(isDark) {
+                if (isDark) {
+                    document.documentElement.classList.add('dark');
+                    if (themeIconMoon) themeIconMoon.classList.add('hidden');
+                    if (themeIconSun) themeIconSun.classList.remove('hidden');
+                    themeToggle?.classList.add('active');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    if (themeIconMoon) themeIconMoon.classList.remove('hidden');
+                    if (themeIconSun) themeIconSun.classList.add('hidden');
+                    themeToggle?.classList.remove('active');
+                    localStorage.setItem('theme', 'light');
+                }
+            }
+
+            // Load saved theme
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                setTheme(true);
+            } else {
+                setTheme(false);
+            }
+
+            // Theme toggle click
+            if (themeToggle) {
+                themeToggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    setTheme(!document.documentElement.classList.contains('dark'));
+                });
+            }
+
+            // ===== RTL TOGGLE =====
+            const rtlBtn = document.getElementById('rtl-toggle');
+            
+            function setRTL(isRTL) {
+                if (isRTL) {
+                    document.documentElement.dir = 'rtl';
+                    document.documentElement.lang = 'ar';
+                    rtlBtn?.classList.add('active');
+                    localStorage.setItem('dir', 'rtl');
+                } else {
+                    document.documentElement.dir = 'ltr';
+                    document.documentElement.lang = 'en';
+                    rtlBtn?.classList.remove('active');
+                    localStorage.setItem('dir', 'ltr');
+                }
+            }
+
+            // Load saved RTL
+            const savedDir = localStorage.getItem('dir');
+            if (savedDir === 'rtl') {
+                setRTL(true);
+            } else {
+                setRTL(false);
+            }
+
+            // RTL toggle click
+            if (rtlBtn) {
+                rtlBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    setRTL(document.documentElement.dir !== 'rtl');
+                });
+            }
+
+            // ===== FORM HANDLING - PREVENT PAGE CHANGE =====
+            document.getElementById('login-form')?.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = this.querySelector('input[type="email"]').value;
+                const password = this.querySelector('input[type="password"]').value;
+                
+                if (!email || !password) {
+                    alert('Please fill in all fields');
+                } else {
+                    alert('✅ Login successful! (Demo)');
+                }
+            });
+
+            document.getElementById('signup-form')?.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const firstName = this.querySelector('input[name="firstname"]').value;
+                const lastName = this.querySelector('input[name="lastname"]').value;
+                const email = this.querySelector('input[type="email"]').value;
+                const phone = this.querySelector('input[type="tel"]').value;
+                const password = this.querySelector('input[type="password"]').value;
+                const terms = document.getElementById('terms')?.checked;
+                
+                if (!firstName || !lastName || !email || !phone || !password || !terms) {
+                    alert('Please fill all fields and accept terms');
+                } else {
+                    alert('✅ Account created! (Demo)');
+                }
+            });
+
+            // ===== TERMS LINKS =====
+            document.querySelectorAll('a[href="#"]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (link.textContent.includes('Terms')) {
+                        alert('📋 Terms & Privacy policy - Demo version');
+                    }
+                });
+            });
+
+            // ===== PREVENT ANY DEFAULT LINK BEHAVIOR =====
+            document.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (link.getAttribute('href') === '#') {
+                        e.preventDefault();
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

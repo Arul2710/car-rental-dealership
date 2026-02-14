@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>GrowwCar | Rental Realerships Service</title>
+    <link rel="icon" type="imags/jpg" href="imags/growwpark_logo.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            width: 100%;
+            min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Dropdown Logic */
+        .dropdown-content {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            z-index: 1000;
+        }
+        
+        .dropdown-content.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Mobile Menu */
+        #mobileMenu {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+            z-index: 1100;
+            transform: translateX(100%);
+        }
+        
+        #mobileMenu.open {
+            transform: translateX(0);
+        }
+        
+        .dark #mobileMenu {
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        }
+        
+        /* Navigation Link Style */
+        .nav-link {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: black;
+            white-space: nowrap;
+        }
+        
+        .dark .nav-link { 
+            color: #cbd5e1; 
+        }
+
+        .nav-link:hover {
+            background-color: #EA580C;
+            color: white !important;
+        }
+        
+        .nav-link:hover i {
+            transform: scale(1.1);
+        }
+        
+        /* Active Link Style */
+        .nav-link.active {
+            background-color: #EA580C;
+            color: white !important;
+        }
+        
+        .nav-link.active i {
+            color: white;
+        }
+        
+        /* Mobile nav link styles */
+        .mobile-nav-link {
+            font-size: 14px;
+            font-weight: 600;
+            padding: 12px 16px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #1e293b;
+            background: transparent;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dark .mobile-nav-link {
+            color: #e2e8f0;
+        }
+
+        .mobile-nav-link:hover {
+            background-color: #EA580C !important;
+            color: white !important;
+        }
+
+        .mobile-nav-link:hover i {
+            color: white !important;
+            transform: scale(1.1);
+        }
+
+        .mobile-nav-link.active {
+            background-color: #EA580C !important;
+            color: white !important;
+        }
+
+        .mobile-nav-link.active i {
+            color: white !important;
+        }
+
+        #mobileHomeBtn.mobile-nav-link.active {
+            background-color: #EA580C !important;
+            color: white !important;
+        }
+
+        #mobileHomeBtn.mobile-nav-link.active i {
+            color: white !important;
+        }
+        
+        .mobile-submenu {
+            display: none;
+            flex-direction: column;
+            padding-left: 1rem;
+            margin-left: 0.5rem;
+            border-left: 2px solid rgba(234, 88, 12, 0.3);
+        }
+
+        .mobile-submenu.open {
+            display: flex;
+        }
+
+        .mobile-submenu a {
+            padding: 12px 16px;
+            margin: 2px 0;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            color: #1e293b;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .dark .mobile-submenu a {
+            color: #e2e8f0;
+        }
+
+        .mobile-submenu .active-link {
+            background-color: #EA580C !important;
+            color: white !important;
+        }
+
+        .mobile-submenu a:hover {
+            background-color: #EA580C !important;
+            color: white !important;
+        }
+
+        .mobile-submenu a:hover i {
+            color: white !important;
+        }
+        
+        button, a {
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        @media (max-width: 640px) {
+            button, a {
+                min-height: 44px;
+            }
+        }
+
+        @media (max-width: 1279px) {
+            .lg\:flex {
+                display: none !important;
+            }
+            
+            .xl\:flex {
+                display: none !important;
+            }
+            
+            .xl\:block {
+                display: none !important;
+            }
+            
+            .xl\:hidden {
+                display: block !important;
+            }
+        }
+        
+        @media (min-width: 1280px) {
+            .xl\:flex {
+                display: flex !important;
+            }
+            
+            .xl\:block {
+                display: block !important;
+            }
+            
+            .xl\:hidden {
+                display: none !important;
+            }
+        }
+        
+        /* Dark mode transitions */
+        section, footer, div, nav, button, a, p, h1, h2, h3, h4, span, input, select {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { 
+                extend: { 
+                    colors: { 
+                        primary: '#EA580C',
+                        darkBg: '#0f172a'
+                    } 
+                } 
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 dark:bg-darkBg text-slate-900 dark:text-white overflow-x-hidden transition-colors duration-300">
+
+    <!-- Navigation Bar - Updated with dark mode -->
+    <nav class="fixed w-full z-[100] px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4">
+        <div class="max-w-[1400px] mx-auto flex items-center justify-between bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl px-4 sm:px-5 py-2 sm:py-3 rounded-xl sm:rounded-2xl border border-white/20 shadow-lg transition-all duration-300">
+            
+            <div class="flex items-center gap-1 sm:gap-2">
+                <span class="text-xl sm:text-2xl md:text-3xl font-black tracking-tighter flex items-center gap-1 sm:gap-2 text-primary">
+                    <i data-lucide="car-front" class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8"></i>
+                    Groww<span class="text-black dark:text-white">Car</span>
+                </span>
+            </div>
+
+            <div class="hidden lg:flex items-center gap-1 xl:gap-2">
+                <div class="relative">
+                    <button onclick="toggleDropdown('homeMenu', event)" 
+                        class="nav-link" id="homeDropdownBtn">
+                        Home <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <div id="homeMenu" class="dropdown-content absolute top-full mt-2 w-40 bg-white dark:bg-slate-800 shadow-xl rounded-lg border border-slate-100 dark:border-slate-700 overflow-hidden">
+                        <a href="index.html" class="block px-4 py-2.5 text-xs font-bold hover:bg-orange-600 hover:text-white transition dark:text-white dark:hover:bg-orange-600">
+                           Home 1
+                        </a>
+                        <a href="home2.html" class="block px-4 py-2.5 text-xs font-bold hover:bg-orange-600 hover:text-white transition dark:text-white dark:hover:bg-orange-600">
+                           Home 2
+                        </a>
+                    </div>
+                </div>
+
+                <a href="about.html" class="nav-link">About</a>
+                <a href="book.html" class="nav-link">Book Now</a>
+                <a href="Services.html" class="nav-link active">Services</a>
+                <a href="Gallery.html" class="nav-link">Gallery</a>
+                <a href="Contact.html" class="nav-link">Contact</a>
+                
+                <div class="relative">
+                    <button onclick="toggleDropdown('dashMenu', event)" class="nav-link" id="dashDropdownBtn">
+                        Dashboard <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <div id="dashMenu" class="dropdown-content absolute top-full mt-2 w-44 bg-white dark:bg-slate-800 shadow-xl rounded-lg border border-slate-100 dark:border-slate-700 overflow-hidden">
+                        <a href="admin.html" class="flex items-center gap-2 px-4 py-2.5 text-xs font-bold hover:bg-orange-600 hover:text-white dark:hover:bg-orange-600 transition dark:text-white">
+                            <i data-lucide="user-cog" class="w-3.5 h-3.5"></i> Admin Dashboard
+                        </a>
+                        <a href="user.html" class="flex items-center gap-2 px-4 py-2.5 text-xs font-bold hover:bg-orange-600 hover:text-white dark:hover:bg-orange-600 transition dark:text-white">
+                            <i data-lucide="user" class="w-3.5 h-3.5"></i> User Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-1 sm:gap-2 md:gap-3">
+                <div class="hidden xl:flex items-center gap-2">
+                    <button onclick="toggleDirection()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition text-xs font-bold dark:text-white">
+                        <i data-lucide="languages" class="w-4 h-4"></i>
+                        <span id="dirText">LTR</span>
+                    </button>
+
+                    <button onclick="toggleTheme()" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+                        <i data-lucide="moon" class="w-4 h-4 dark:hidden"></i>
+                        <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-yellow-400"></i>
+                    </button>
+                </div>
+
+                <div class="relative hidden xl:block">
+                    <button onclick="toggleDropdown('userMenu', event)" class="p-2 sm:p-2.5 rounded-full bg-primary text-white hover:scale-105 transition shadow-md shadow-primary/30">
+                        <i data-lucide="user" class="w-4 h-4 sm:w-4.5 sm:h-4.5"></i>
+                    </button>
+                    <div id="userMenu" class="dropdown-content absolute right-0 top-full mt-2 w-36 bg-white dark:bg-slate-800 shadow-xl rounded-lg border border-slate-100 dark:border-slate-700 overflow-hidden">
+                        <a href="login.html" class="block px-4 py-2.5 text-xs font-bold hover:bg-orange-600 hover:text-white dark:hover:bg-orange-600 transition dark:text-white">LOGIN</a>
+                        <a href="signup.html" class="block px-4 py-2.5 text-xs font-bold hover:bg-orange-600 hover:text-white dark:hover:bg-orange-600 transition dark:text-white">SIGNUP</a>
+                    </div>
+                </div>
+
+                <button onclick="toggleMobileMenu()" class="xl:hidden p-2 sm:p-2.5 text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+                    <i data-lucide="menu" class="w-5 h-5 sm:w-5.5 sm:h-5.5"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu - Updated with dark mode -->
+    <div id="mobileMenu" class="fixed inset-y-0 right-0 w-[280px] sm:w-80 bg-white dark:bg-slate-900 z-[110] shadow-2xl p-5 sm:p-6 overflow-y-auto">
+        <div class="flex justify-between items-center mb-6 sm:mb-8">
+            <button onclick="toggleMobileMenu()" class="p-2 bg-slate-100 dark:bg-slate-800 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+        
+        <div class="flex flex-col gap-1">
+            <button onclick="toggleMobileSubmenu('mobileHomeSub')" class="mobile-nav-link font-black" id="mobileHomeBtn">
+                <span>Home</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-300" id="homeSubIcon"></i>
+            </button>
+            <div id="mobileHomeSub" class="mobile-submenu open">
+                <a href="index.html" class="block py-3 px-4 text-sm font-medium rounded-lg dark:text-white dark:hover:bg-orange-600 dark:hover:text-white">
+                    Home 1
+                </a>
+                <a href="home2.html" class="block py-3 px-4 text-sm font-medium rounded-lg dark:text-white dark:hover:bg-orange-600 dark:hover:text-white">
+                    Home 2
+                </a>
+            </div>
+
+            <a href="about.html" class="mobile-nav-link">About</a>
+            <a href="book.html" class="mobile-nav-link">Book Now</a>
+            <a href="Services.html" class="mobile-nav-link active">Services</a>
+            <a href="Gallery.html" class="mobile-nav-link">Gallery</a>
+            <a href="Contact.html" class="mobile-nav-link">Contact</a>
+            
+            <button onclick="toggleMobileSubmenu('mobileDashSub')" class="mobile-nav-link">
+                <span>Dashboard</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-300" id="dashSubIcon"></i>
+            </button>
+            <div id="mobileDashSub" class="mobile-submenu">
+                <a href="admin.html" class="flex items-center gap-2 py-3 px-4 text-sm font-medium dark:text-white dark:hover:bg-orange-600 dark:hover:text-white">
+                    <i data-lucide="user-cog" class="w-3.5 h-3.5"></i> Admin Dashboard
+                </a>
+                <a href="user.html" class="flex items-center gap-2 py-3 px-4 text-sm font-medium dark:text-white dark:hover:bg-orange-600 dark:hover:text-white">
+                    <i data-lucide="user" class="w-3.5 h-3.5"></i> User Dashboard
+                </a>
+            </div>
+
+            <hr class="my-4 border-slate-200 dark:border-slate-800">
+
+            <div class="space-y-4 px-2">
+                <div class="flex items-center justify-between text-sm font-bold dark:text-white">
+                    <span>Layout Direction</span>
+                    <button onclick="toggleDirection()" class="px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition dark:text-white">
+                        <span id="mobileDirText">LTR</span>
+                    </button>
+                </div>
+                <div class="flex items-center justify-between text-sm font-bold dark:text-white">
+                    <span>Dark Mode</span>
+                    <button onclick="toggleTheme()" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+                        <i data-lucide="moon" class="w-4 h-4 dark:hidden"></i>
+                        <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-yellow-400"></i>
+                    </button>
+                </div>
+            </div>
+
+            <hr class="my-4 border-slate-200 dark:border-slate-800">
+            
+            <a href="login.html" class="mobile-nav-link font-black dark:text-white">LOGIN</a>
+            <a href="signup.html" class="mobile-nav-link font-black dark:text-white">SIGNUP</a>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        function toggleDropdown(menuId, event) {
+            if (event) {
+                event.stopPropagation();
+            }
+            
+            const allDropdowns = document.querySelectorAll('.dropdown-content');
+            allDropdowns.forEach(dropdown => {
+                if (dropdown.id !== menuId) {
+                    dropdown.classList.remove('show');
+                }
+            });
+            
+            const currentMenu = document.getElementById(menuId);
+            if (currentMenu) {
+                currentMenu.classList.toggle('show');
+            }
+        }
+
+        window.addEventListener('click', function() {
+            const allDropdowns = document.querySelectorAll('.dropdown-content');
+            allDropdowns.forEach(dropdown => {
+                dropdown.classList.remove('show');
+            });
+        });
+
+        document.addEventListener('click', function(e) {
+            const dropdowns = document.querySelectorAll('.dropdown-content');
+            dropdowns.forEach(dropdown => {
+                if (dropdown.contains(e.target)) {
+                    e.stopPropagation();
+                }
+            });
+        });
+
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('open');
+            
+            if (mobileMenu.classList.contains('open')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        window.addEventListener('resize', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenu.classList.contains('open')) {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const mobileMenu = document.getElementById('mobileMenu');
+                if (mobileMenu.classList.contains('open')) {
+                    mobileMenu.classList.remove('open');
+                    document.body.style.overflow = 'auto';
+                }
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuButton = document.querySelector('button[onclick="toggleMobileMenu()"]');
+            
+            if (mobileMenu.classList.contains('open')) {
+                if (!mobileMenu.contains(e.target) && !menuButton.contains(e.target)) {
+                    mobileMenu.classList.remove('open');
+                    document.body.style.overflow = 'auto';
+                }
+            }
+        });
+
+        function toggleMobileSubmenu(submenuId) {
+            const submenu = document.getElementById(submenuId);
+            const button = submenu.previousElementSibling;
+            const icon = button.querySelector('i[data-lucide="chevron-down"]');
+            
+            const allSubmenus = document.querySelectorAll('.mobile-submenu');
+            allSubmenus.forEach(menu => {
+                if (menu.id !== submenuId && menu.classList.contains('open')) {
+                    menu.classList.remove('open');
+                    const btn = menu.previousElementSibling;
+                    const icn = btn.querySelector('i[data-lucide="chevron-down"]');
+                    if (icn) {
+                        icn.style.transform = 'rotate(0deg)';
+                        icn.style.color = '';
+                    }
+                }
+            });
+            
+            submenu.classList.toggle('open');
+            
+            if (icon) {
+                if (submenu.classList.contains('open')) {
+                    icon.style.transform = 'rotate(180deg)';
+                } else {
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            }
+            
+            setTimeout(() => lucide.createIcons(), 10);
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            html.classList.toggle('dark');
+            
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+            
+            setTimeout(() => lucide.createIcons(), 10);
+        }
+
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+            setTimeout(() => lucide.createIcons(), 10);
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        function toggleDirection() {
+            const html = document.documentElement;
+            const dirText = document.getElementById('dirText');
+            const mobileDirText = document.getElementById('mobileDirText');
+            
+            if (html.dir === 'rtl') {
+                html.dir = 'ltr';
+                if(dirText) dirText.innerText = 'LTR';
+                if(mobileDirText) mobileDirText.innerText = 'LTR';
+            } else {
+                html.dir = 'rtl';
+                if(dirText) dirText.innerText = 'RTL';
+                if(mobileDirText) mobileDirText.innerText = 'RTL';
+            }
+            
+            setTimeout(() => lucide.createIcons(), 10);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            
+            const dirText = document.getElementById('dirText');
+            const mobileDirText = document.getElementById('mobileDirText');
+            if (dirText) dirText.innerText = 'LTR';
+            if (mobileDirText) mobileDirText.innerText = 'LTR';
+            
+            const mobileLinks = document.querySelectorAll('#mobileMenu a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    const mobileMenu = document.getElementById('mobileMenu');
+                    mobileMenu.classList.remove('open');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+        });
+    </script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <div class="font-sans antialiased text-gray-900 dark:text-white bg-white dark:bg-darkBg transition-colors duration-300">
+
+        <!-- Hero Section - Updated with dark mode -->
+        <section class="relative min-h-screen flex items-center justify-center px-4 py-16 overflow-hidden bg-[#0a0a0a] dark:bg-black font-sans">
+            
+            <div class="absolute inset-0 z-0">
+                <img src="imags/home 1 -7 img.png" 
+                     class="w-full h-full object-cover opacity-50 scale-105" alt="Car BG">
+                <div class="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent dark:from-black dark:via-black/60 dark:to-transparent"></div>
+            </div>
+
+            <div class="relative z-10 max-w-6xl w-full flex flex-col lg:flex-row items-center gap-12">
+                
+                <div class="w-full lg:w-1/2 text-left space-y-6">
+                    <div class="inline-flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 dark:border-gray-700 px-3 py-1.5 rounded-full">
+                        <span class="h-1.5 w-1.5 rounded-full bg-[#EA580C] animate-pulse"></span>
+                        <span class="text-white text-[9px] font-black uppercase tracking-widest">Premium Fleet</span>
+                    </div>
+
+                    <h1 class="text-4xl md:text-6xl font-black text-white uppercase tracking-tight leading-[0.95]">
+                        Luxury <br>
+                        <span class="text-[#EA580C]">Pricing Plans</span>
+                    </h1>
+
+                    <p class="text-gray-400 dark:text-gray-500 text-xs md:text-sm max-w-md leading-relaxed font-medium">
+                        Choose from our elite collection with transparent rates. No hidden fees, just premium comfort for your every journey.
+                    </p>
+                    
+                    <div class="flex gap-3 pt-2">
+                        <a href="Services.html">
+                            <button class="bg-[#EA580C] text-white font-black py-3 px-8 rounded-xl shadow-lg hover:bg-orange-600 transition-all uppercase tracking-widest text-[10px]">
+                                Book Now
+                            </button>
+                        </a>
+                        <button class="border border-white/20 dark:border-gray-700 text-white font-black py-3 px-8 rounded-xl hover:bg-white/10 transition-all uppercase tracking-widest text-[10px]">
+                            Best
+                        </button>
+                    </div>
+                </div>
+
+                <div class="w-full lg:w-1/2 grid grid-cols-2 gap-4">
+                    
+                    <div class="p-5 rounded-[2rem] bg-white/5 backdrop-blur-xl border border-white/10 dark:border-gray-700 hover:border-[#EA580C]/40 transition-all group">
+                        <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center mb-4 group-hover:bg-[#EA580C] transition-colors">
+                            <i class="fas fa-tag text-xs text-white"></i>
+                        </div>
+                        <p class="text-white font-black text-xl leading-none">₹1,299</p>
+                        <p class="text-gray-200 dark:text-gray-300 font-bold text-[9px] uppercase tracking-widest mt-1">Starting Rate</p>
+                        <p class="text-gray-200 dark:text-gray-300 text-[9px] mt-3 leading-tight hidden sm:block font-medium">Affordable city rides for your daily needs.</p>
+                    </div>
+
+                    <div class="p-5 rounded-[2rem] bg-white/5 backdrop-blur-xl border border-white/10 dark:border-gray-700 hover:border-[#EA580C]/40 transition-all group">
+                        <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center mb-4 group-hover:bg-[#EA580C] transition-colors">
+                            <i class="fas fa-undo text-xs text-white"></i>
+                        </div>
+                        <p class="text-white font-black text-xl leading-none">100%</p>
+                        <p class="text-gray-200 dark:text-gray-300 font-bold text-[9px] uppercase tracking-widest mt-1">Refundable</p>
+                        <p class="text-gray-200 dark:text-gray-300 text-[9px] mt-3 leading-tight hidden sm:block font-medium">Quick security deposit returns guaranteed.</p>
+                    </div>
+
+                    <div class="p-5 rounded-[2rem] bg-white/5 backdrop-blur-xl border border-white/10 dark:border-gray-700 hover:border-[#EA580C]/40 transition-all group">
+                        <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center mb-4 group-hover:bg-[#EA580C] transition-colors">
+                            <i class="fas fa-ban text-xs text-white"></i>
+                        </div>
+                        <p class="text-white font-black text-xl leading-none">ZERO</p>
+                        <p class="text-gray-200 dark:text-gray-300 font-bold text-[9px] uppercase tracking-widest mt-1">Hidden Costs</p>
+                        <p class="text-gray-200 dark:text-gray-300 text-[9px] mt-3 leading-tight hidden sm:block font-medium">Transparent billing on every single trip.</p>
+                    </div>
+
+                    <div class="p-5 rounded-[2rem] bg-white/5 backdrop-blur-xl border border-white/10 dark:border-gray-700 hover:border-[#EA580C]/40 transition-all group">
+                        <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center mb-4 group-hover:bg-[#EA580C] transition-colors">
+                            <i class="fas fa-headset text-xs text-white"></i>
+                        </div>
+                        <p class="text-white font-black text-xl leading-none">24/7</p>
+                        <p class="text-gray-200 dark:text-gray-300 font-bold text-[9px] uppercase tracking-widest mt-1">VIP Support</p>
+                        <p class="text-gray-200 dark:text-gray-300 text-[9px] mt-3 leading-tight hidden sm:block font-medium">On-road assistance whenever you need.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rental Packages Section - Updated with dark mode -->
+        <section class="py-20 bg-white dark:bg-darkBg px-4 md:px-6 font-sans">
+            
+            <div class="text-center mb-16 max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tighter text-gray-900 dark:text-white leading-none">
+                    Rental <span class="text-[#EA580C]">Packages</span>
+                </h2>
+                <div class="w-20 h-1.5 bg-[#EA580C] mx-auto mt-4 rounded-full"></div>
+                <p class="text-gray-500 dark:text-gray-400 mt-6 text-sm md:text-base italic font-medium">
+                    Explore our diverse fleet with transparent daily, weekly, and special rates.
+                </p>
+            </div>
+
+            <div class="container mx-auto max-w-7xl mb-12">
+                <h3 class="text-lg font-black uppercase tracking-widest text-gray-400 dark:text-gray-600 mb-8 flex items-center gap-3">
+                    <span class="w-10 h-[2px] bg-gray-200 dark:bg-gray-700"></span> Standard Fleet
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+                    <div class="bg-gray-50 dark:bg-gray-800 rounded-[1.5rem] md:rounded-[2.5rem] border border-gray-100 dark:border-gray-700 shadow-sm overflow-hidden hover:shadow-xl transition-all group">
+                        <img src="imags/services 1.avif" class="w-full h-32 md:h-44 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="p-4 md:p-8">
+                            <h3 class="text-sm md:text-xl font-black uppercase truncate text-gray-900 dark:text-white">Swift Hatch</h3>
+                            <p class="text-[8px] md:text-[10px] font-bold text-[#EA580C] uppercase tracking-widest mb-4">Urban Daily</p>
+                            <div class="space-y-2 mb-6 text-[10px] md:text-xs text-gray-600 dark:text-gray-400">
+                                <div class="flex justify-between"><span>1 Day</span><span class="font-bold">₹1,299</span></div>
+                                <div class="flex justify-between text-gray-400 dark:text-gray-500"><span>1 Week</span><span class="font-bold">₹7,999</span></div>
+                            </div>
+                            <a href="book.html">
+                            <button class="w-full bg-gray-900 dark:bg-gray-700 text-white py-2.5 md:py-4 rounded-xl font-black text-[8px] md:text-[10px] uppercase tracking-widest hover:bg-[#EA580C] transition-colors">Book Now</button>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 dark:bg-gray-800 rounded-[1.5rem] md:rounded-[2.5rem] border border-gray-100 dark:border-gray-700 shadow-sm overflow-hidden hover:shadow-xl transition-all group">
+                        <img src="imags/services 2.avif" class="w-full h-32 md:h-44 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="p-4 md:p-8">
+                            <h3 class="text-sm md:text-xl font-black uppercase truncate text-gray-900 dark:text-white">Honda City</h3>
+                            <p class="text-[8px] md:text-[10px] font-bold text-[#EA580C] uppercase tracking-widest mb-4">Executive Choice</p>
+                            <div class="space-y-2 mb-6 text-[10px] md:text-xs text-gray-600 dark:text-gray-400">
+                                <div class="flex justify-between"><span>1 Day</span><span class="font-bold">₹1,999</span></div>
+                                <div class="flex justify-between text-gray-400 dark:text-gray-500"><span>1 Week</span><span class="font-bold">₹11,999</span></div>
+                            </div>
+                            <a href="book.html">
+                            <button class="w-full bg-gray-900 dark:bg-gray-700 text-white py-2.5 md:py-4 rounded-xl font-black text-[8px] md:text-[10px] uppercase tracking-widest hover:bg-[#EA580C] transition-colors">Book Now</button>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 dark:bg-gray-800 rounded-[1.5rem] md:rounded-[2.5rem] border border-gray-100 dark:border-gray-700 shadow-sm overflow-hidden hover:shadow-xl transition-all group">
+                        <img src="imags/services 3.avif" class="w-full h-32 md:h-44 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="p-4 md:p-8">
+                            <h3 class="text-sm md:text-xl font-black uppercase truncate text-gray-900 dark:text-white">Hyundai Creta</h3>
+                            <p class="text-[8px] md:text-[10px] font-bold text-[#EA580C] uppercase tracking-widest mb-4">Adventure SUV</p>
+                            <div class="space-y-2 mb-6 text-[10px] md:text-xs text-gray-600 dark:text-gray-400">
+                                <div class="flex justify-between"><span>1 Day</span><span class="font-bold">₹2,499</span></div>
+                                <div class="flex justify-between text-gray-400 dark:text-gray-500"><span>1 Week</span><span class="font-bold">₹14,999</span></div>
+                            </div>
+                            <a href="book.html">
+                            <button class="w-full bg-gray-900 dark:bg-gray-700 text-white py-2.5 md:py-4 rounded-xl font-black text-[8px] md:text-[10px] uppercase tracking-widest hover:bg-[#EA580C] transition-colors">Book Now</button>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 dark:bg-gray-800 rounded-[1.5rem] md:rounded-[2.5rem] border border-gray-100 dark:border-gray-700 shadow-sm overflow-hidden hover:shadow-xl transition-all group">
+                        <img src="imags/services 4.avif" class="w-full h-32 md:h-44 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="p-4 md:p-8">
+                            <h3 class="text-sm md:text-xl font-black uppercase truncate text-gray-900 dark:text-white">Innova Crysta</h3>
+                            <p class="text-[8px] md:text-[10px] font-bold text-[#EA580C] uppercase tracking-widest mb-4">Family MUV</p>
+                            <div class="space-y-2 mb-6 text-[10px] md:text-xs text-gray-600 dark:text-gray-400">
+                                <div class="flex justify-between"><span>1 Day</span><span class="font-bold">₹3,499</span></div>
+                                <div class="flex justify-between text-gray-400 dark:text-gray-500"><span>1 Week</span><span class="font-bold">₹21,000</span></div>
+                            </div>
+                            <a href="book.html">
+                            <button class="w-full bg-gray-900 dark:bg-gray-700 text-white py-2.5 md:py-4 rounded-xl font-black text-[8px] md:text-[10px] uppercase tracking-widest hover:bg-[#EA580C] transition-colors">Book Now</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mx-auto max-w-7xl">
+                <h3 class="text-lg font-black uppercase tracking-widest text-gray-400 dark:text-gray-600 mb-8 flex items-center gap-3">
+                    <span class="w-10 h-[2px] bg-gray-200 dark:bg-gray-700"></span> Elite Luxury
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+                    <div class="bg-[#111] dark:bg-gray-900 text-white rounded-[1.5rem] md:rounded-[2.5rem] shadow-2xl overflow-hidden group">
+                        <img src="imags/services 5.avif" class="w-full h-32 md:h-44 object-cover opacity-80 group-hover:scale-105 transition-transform">
+                        <div class="p-4 md:p-8">
+                            <h3 class="text-sm md:text-xl font-black uppercase italic truncate">Porsche 911</h3>
+                            <p class="text-[8px] md:text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-4">Elite Status</p>
+                            <div class="space-y-2 mb-6 text-[10px] md:text-xs">
+                                <div class="flex justify-between"><span>1 Day</span><span class="font-bold text-[#EA580C]">₹12,999</span></div>
+                            </div>
+                            <a href="book.html">
+                            <button class="w-full bg-[#EA580C] text-white py-2.5 md:py-4 rounded-xl font-black text-[8px] md:text-[10px] uppercase tracking-widest">Inquiry Now</button>
+                           </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#111] dark:bg-gray-900 text-white rounded-[1.5rem] md:rounded-[2.5rem] shadow-2xl overflow-hidden group">
+                        <img src="imags/services 6.avif" class="w-full h-32 md:h-44 object-cover opacity-80 group-hover:scale-105 transition-transform">
+                        <div class="p-4 md:p-8">
+                            <h3 class="text-sm md:text-xl font-black uppercase italic truncate">BMW X7 M</h3>
+                            <p class="text-[8px] md:text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-4">Grand SUV</p>
+                            <div class="space-y-2 mb-6 text-[10px] md:text-xs">
+                                <div class="flex justify-between"><span>1 Day</span><span class="font-bold text-[#EA580C]">₹9,999</span></div>
+                            </div>
+                            <a href="book.html">
+                            <button class="w-full bg-[#EA580C] text-white py-2.5 md:py-4 rounded-xl font-black text-[8px] md:text-[10px] uppercase tracking-widest">Inquiry Now</button>
+                        </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#111] dark:bg-gray-900 text-white rounded-[1.5rem] md:rounded-[2.5rem] shadow-2xl overflow-hidden group">
+                        <img src="imags/services 2.avif" class="w-full h-32 md:h-44 object-cover opacity-80 group-hover:scale-105 transition-transform">
+                        <div class="p-4 md:p-8">
+                            <h3 class="text-sm md:text-xl font-black uppercase italic truncate">Benz S-Class</h3>
+                            <p class="text-[8px] md:text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-4">Ultimate</p>
+                            <div class="space-y-2 mb-6 text-[10px] md:text-xs">
+                                <div class="flex justify-between"><span>1 Day</span><span class="font-bold text-[#EA580C]">₹11,499</span></div>
+                            </div>
+                            <a href="book.html">
+                            <button class="w-full bg-[#EA580C] text-white py-2.5 md:py-4 rounded-xl font-black text-[8px] md:text-[10px] uppercase tracking-widest">Inquiry Now</button>
+                          </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#111] dark:bg-gray-900 text-white rounded-[1.5rem] md:rounded-[2.5rem] shadow-2xl overflow-hidden group">
+                        <img src="imags/services 7.avif" class="w-full h-32 md:h-44 object-cover opacity-80 group-hover:scale-105 transition-transform">
+                        <div class="p-4 md:p-8">
+                            <h3 class="text-sm md:text-xl font-black uppercase italic truncate">Jaguar F-Type</h3>
+                            <p class="text-[8px] md:text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-4">Freedom</p>
+                            <div class="space-y-2 mb-6 text-[10px] md:text-xs">
+                                <div class="flex justify-between"><span>1 Day</span><span class="font-bold text-[#EA580C]">₹15,999</span></div>
+                            </div><a href="book.html">
+                            <button class="w-full bg-[#EA580C] text-white py-2.5 md:py-4 rounded-xl font-black text-[8px] md:text-[10px] uppercase tracking-widest">Inquiry Now</button>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expert Advantage Section - Updated with dark mode -->
+        <section class="py-20 px-6 bg-white dark:bg-darkBg border-b border-gray-100 dark:border-gray-800 font-sans overflow-hidden">
+            <div class="container mx-auto max-w-7xl">
+                
+                <div class="flex flex-col lg:flex-row items-center gap-16">
+                    
+                    <div class="w-full lg:w-1/2 relative group">
+                        <div class="relative z-10 rounded-[3rem] overflow-hidden shadow-2xl h-[450px] md:h-[550px]">
+                            <img src="imags/services 9.avif" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Premium Service">
+                            
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+
+                            <div class="absolute bottom-6 left-6 right-6 md:left-8 md:bottom-8 bg-[#EA580C] p-6 rounded-[2rem] shadow-2xl text-white backdrop-blur-sm bg-opacity-90 transform group-hover:-translate-y-2 transition-transform duration-500">
+                                <div class="flex items-center gap-4">
+                                    <p class="text-4xl font-black">50+</p>
+                                    <p class="text-[10px] font-bold uppercase tracking-widest leading-tight">
+                                        Safety Checks Performed <br> Before Every Single Delivery
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="absolute -top-6 -left-6 w-32 h-32 bg-[#EA580C]/5 rounded-full blur-3xl"></div>
+                    </div>
+
+                    <div class="w-full lg:w-1/2 space-y-8">
+                        <div>
+                            <span class="text-[#EA580C] text-[10px] font-black uppercase tracking-[0.4em] mb-4 block">The Expert Advantage</span>
+                            <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tighter text-gray-900 dark:text-white leading-[0.95]">
+                                Setting the New Standard <br> in <span class="text-[#EA580C]">Car Rentals.</span>
+                            </h2>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10 pt-4">
+                            <div class="space-y-2 border-l-2 border-[#EA580C] pl-5 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors p-2 rounded-r-xl">
+                                <h4 class="text-sm font-black uppercase text-gray-900 dark:text-white">Meticulous Maintenance</h4>
+                                <p class="text-gray-500 dark:text-gray-400 text-[11px] leading-relaxed">
+                                    Every car undergoes a rigorous weekly technical audit of engine health and tire pressure.
+                                </p>
+                            </div>
+
+                            <div class="space-y-2 border-l-2 border-[#EA580C] pl-5 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors p-2 rounded-r-xl">
+                                <h4 class="text-sm font-black uppercase text-gray-900 dark:text-white">Instant Refund Policy</h4>
+                                <p class="text-gray-500 dark:text-gray-400 text-[11px] leading-relaxed">
+                                    Automated refund system ensures security deposit return within 24 hours of vehicle return.
+                                </p>
+                            </div>
+
+                            <div class="space-y-2 border-l-2 border-[#EA580C] pl-5 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors p-2 rounded-r-xl">
+                                <h4 class="text-sm font-black uppercase text-gray-900 dark:text-white">Doorstep Ecosystem</h4>
+                                <p class="text-gray-500 dark:text-gray-400 text-[11px] leading-relaxed">
+                                    Delivery and pick up from your doorstep or airport with our strict on-time guarantee.
+                                </p>
+                            </div>
+
+                            <div class="space-y-2 border-l-2 border-[#EA580C] pl-5 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors p-2 rounded-r-xl">
+                                <h4 class="text-sm font-black uppercase text-gray-900 dark:text-white">No Hidden Fine Print</h4>
+                                <p class="text-gray-500 dark:text-gray-400 text-[11px] leading-relaxed">
+                                    Transparency is our core value. What you see is what you pay. Zero hidden-fee promise.
+                                </p>
+                            </div>
+
+                            <div class="space-y-2 border-l-2 border-[#EA580C] pl-5 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors p-2 rounded-r-xl">
+                                <h4 class="text-sm font-black uppercase text-gray-900 dark:text-white">24/7 Digital Concierge</h4>
+                                <p class="text-gray-500 dark:text-gray-400 text-[11px] leading-relaxed">
+                                    Support anytime via WhatsApp or Call for route assistance or on-road emergencies.
+                                </p>
+                            </div>
+
+                            <div class="space-y-2 border-l-2 border-[#EA580C] pl-5 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors p-2 rounded-r-xl">
+                                <h4 class="text-sm font-black uppercase text-gray-900 dark:text-white">Premium Hygiene</h4>
+                                <p class="text-gray-500 dark:text-gray-400 text-[11px] leading-relaxed">
+                                    Hospital-grade deep sanitization after every booking focusing on all interior touchpoints.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="pt-6 flex items-center gap-4">
+                            <div class="flex -space-x-2">
+                                <img src="imags/services 10.avif" class="w-8 h-8 rounded-full border-2 border-white dark:border-gray-800 shadow-sm">
+                                <img src="imags/services 11.avif" class="w-8 h-8 rounded-full border-2 border-white dark:border-gray-800 shadow-sm">
+                                <img src="imags/services 10.avif" class="w-8 h-8 rounded-full border-2 border-white dark:border-gray-800 shadow-sm">
+                            </div>
+                            <p class="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">Join 31k+ Happy Roadsters</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer - Updated with dark mode -->
+    <footer class="bg-[#FDBA74] dark:bg-gray-900 text-white pt-16 pb-8 font-sans overflow-hidden">
+        <div class="container mx-auto px-4 md:px-8 max-w-[1300px]">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                
+                <div class="space-y-6">
+                    <div class="flex items-center gap-2">
+                        <span class="text-2xl md:text-3xl font-black tracking-tighter flex items-center gap-2 text-primary">
+                            <i data-lucide="car-front" class="w-7 h-7 md:w-8 md:h-8"></i>
+                            Groww<span class="text-black dark:text-white">Car</span>
+                        </span>
+                    </div>
+                    <p class="text-white/80 dark:text-gray-400 text-sm leading-relaxed">
+                        Premium self-drive car rental services across major cities in the USA. We provide elite cars for those who demand excellence in performance.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-black transition-all dark:hover:bg-white dark:hover:text-black"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-black transition-all dark:hover:bg-white dark:hover:text-black"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-black transition-all dark:hover:bg-white dark:hover:text-black"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <h4 class="text-lg font-black uppercase tracking-widest text-black dark:text-white">Company</h4>
+                    <ul class="space-y-3 text-white/80 dark:text-gray-400 text-sm font-bold">
+                        <li><a href="#" class="hover:text-black dark:hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#" class="hover:text-black dark:hover:text-white transition-colors">About</a></li>
+                        <li><a href="#" class="hover:text-black dark:hover:text-white transition-colors">Book Now</a></li>
+                        <li><a href="#" class="hover:text-black dark:hover:text-white transition-colors">Services</a></li>
+                        <li><a href="#" class="hover:text-black dark:hover:text-white transition-colors">Gallery</a></li>
+                        <li><a href="#" class="hover:text-black dark:hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-6">
+                    <h4 class="text-lg font-black uppercase tracking-widest text-black dark:text-white">Locations</h4>
+                    <ul class="space-y-3 text-white/80 dark:text-gray-400 text-sm font-bold">
+                        <li><a href="#" class="hover:text-black dark:hover:text-white transition-colors">New York City</a></li>
+                        <li><a href="#" class="hover:text-black dark:hover:text-white transition-colors">Los Angeles</a></li>
+                        <li><a href="#" class="hover:text-black dark:hover:text-white transition-colors">Chicago, IL</a></li>
+                        <li><a href="#" class="hover:text-black dark:hover:text-white transition-colors">Miami, FL</a></li>
+                        <li><a href="#" class="hover:text-black dark:hover:text-white transition-colors">San Francisco</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-6">
+                    <h4 class="text-lg font-black uppercase tracking-widest text-black dark:text-white">Get in Touch</h4>
+                    <ul class="space-y-4 text-white text-sm">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-black dark:text-white"></i>
+                            <span class="font-bold text-white dark:text-gray-400">123 Luxury Drive, <br>Manhattan, NY 10001</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="phone" class="w-5 h-5 text-black dark:text-white"></i>
+                            <span class="font-bold text-white dark:text-gray-400">+1 (555) 96552 14888</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="mail" class="w-5 h-5 text-black dark:text-white"></i>
+                            <span class="font-bold text-white dark:text-gray-400">support@growwcar.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-white/20 dark:border-gray-700 flex flex-col md:flex-row justify-between items-center gap-4 text-[12px] font-bold text-white/60 dark:text-gray-500">
+                <p>© 2026 GrowwCar Premium Rentals. All Rights Reserved.</p>
+                <div class="flex gap-6 uppercase tracking-widest">
+                    <a href="#" class="hover:text-black dark:hover:text-white">Sitemap</a>
+                    <a href="#" class="hover:text-black dark:hover:text-white">Refund Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    </script>
+</body>
+</html>
