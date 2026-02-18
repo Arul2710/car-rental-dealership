@@ -578,8 +578,9 @@
         }
     </style>
 
-    <!-- Hero Booking Section - Updated with dark mode -->
-    <section class="relative w-full min-h-screen pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 px-4 overflow-hidden bg-black dark:bg-black">
+<!-- Hero Booking Section - Optimized for All iPad Sizes -->
+<!-- Hero Booking Section - Fully Visible on All Screens -->
+<section class="relative w-full min-h-screen py-8 sm:py-12 md:py-16 lg:py-20 px-4 overflow-hidden bg-black dark:bg-black flex items-center">
     <!-- Background Image with Better Overlay -->
     <div class="absolute inset-0 z-0">
         <img src="imags/about 1.avif" 
@@ -588,131 +589,266 @@
         <div class="absolute inset-0 bg-gradient-to-b from-black/90 via-black/70 to-[#EA580C]/30 lg:bg-gradient-to-r lg:from-black/95 lg:via-black/60 lg:to-[#EA580C]/20 dark:from-black/95 dark:via-black/70 dark:to-[#EA580C]/30"></div>
     </div>
 
-    <div class="container mx-auto flex flex-col lg:flex-row items-start lg:items-center gap-8 lg:gap-10 relative z-10 max-w-7xl">
-        
-        <!-- Booking Form - Perfect Colors & Positioning -->
-        <div class="w-full lg:w-[450px] bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-2xl p-5 sm:p-6 md:p-8 order-1 lg:order-1 border border-white/20 dark:border-gray-800">
-            <!-- Tabs - Proper Active State -->
-            <div class="flex border-b border-gray-200 dark:border-gray-800 mb-5 sm:mb-6 gap-2" id="tab-container">
-                <button onclick="switchTab(this)" class="flex-1 pb-2.5 sm:pb-3 font-black text-xs sm:text-sm px-1 transition-all relative text-[#EA580C] border-b-2 border-[#EA580C]">Daily Drives</button>
-                <button onclick="switchTab(this)" class="flex-1 pb-2.5 sm:pb-3 font-black text-xs sm:text-sm px-1 transition-all text-gray-400 dark:text-gray-500 hover:text-[#EA580C] border-b-2 border-transparent">Subscription</button>
-                <button onclick="switchTab(this)" class="flex-1 pb-2.5 sm:pb-3 font-black text-xs sm:text-sm px-1 transition-all text-gray-400 dark:text-gray-500 hover:text-[#EA580C] border-b-2 border-transparent">Weekday Pass</button>
-            </div>
-
-            <h1 class="text-lg sm:text-xl md:text-2xl font-black mb-4 sm:mb-6 leading-tight text-gray-800 dark:text-white">
-                Book Your <span class="text-[#EA580C]">Self-Drive Car</span> <br class="hidden xs:block">In Your Location
-            </h1>
-
-            <div class="space-y-3.5 sm:space-y-4">
-                <!-- Pick-up City Dropdown - Fixed Icon -->
-                <div class="relative group">
-                    <label class="text-[9px] sm:text-[10px] uppercase font-black text-[#EA580C] absolute left-3 sm:left-4 top-1.5 sm:top-2 z-10 tracking-wide">Pick-up City</label>
-                    <select class="w-full pt-5 sm:pt-6 pb-1.5 sm:pb-2 px-3 sm:px-4 bg-gray-50 dark:bg-gray-800/90 border-2 border-gray-200 dark:border-gray-700 rounded-xl sm:rounded-2xl font-bold text-xs sm:text-sm appearance-none outline-none focus:border-[#EA580C] transition-all cursor-pointer dark:text-white">
-                        <option class="dark:bg-gray-800" selected>Chennai, Tamil Nadu</option>
-                        <option class="dark:bg-gray-800">Coimbatore, Tamil Nadu</option>
-                        <option class="dark:bg-gray-800">Bangalore, Karnataka</option>
-                        <option class="dark:bg-gray-800">Hosur, Tamil Nadu</option>
-                        <option class="dark:bg-gray-800">Madurai, Tamil Nadu</option>
-                    </select>
-                    <i class="fas fa-chevron-down absolute right-3 sm:right-4 top-4 sm:top-5 text-[#EA580C] text-xs sm:text-sm pointer-events-none"></i>
+    <!-- Main Container - Always Visible Content -->
+    <div class="container mx-auto relative z-10 max-w-7xl">
+        <!-- Flex Container - Responsive Layout -->
+        <div class="flex flex-col lg:flex-row items-center justify-center gap-6 md:gap-8 lg:gap-10 xl:gap-12">
+            
+            <!-- Booking Form - Always Visible, Perfectly Centered -->
+            <div class="w-full max-w-[90%] sm:max-w-[500px] md:max-w-[550px] lg:max-w-[450px] xl:max-w-[480px] bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-5 md:p-6 lg:p-7 xl:p-8 border border-white/20 dark:border-gray-800 mx-auto">
+                <!-- Tabs - Always Visible -->
+                <div class="flex border-b border-gray-200 dark:border-gray-800 mb-4 sm:mb-5 md:mb-6 gap-1 sm:gap-2" id="tab-container">
+                    <button onclick="switchTab(this)" class="flex-1 pb-2 sm:pb-2.5 md:pb-3 font-black text-[10px] sm:text-xs md:text-sm lg:text-base px-0.5 sm:px-1 transition-all relative text-[#EA580C] border-b-2 border-[#EA580C] whitespace-nowrap">Daily Drives</button>
+                    <button onclick="switchTab(this)" class="flex-1 pb-2 sm:pb-2.5 md:pb-3 font-black text-[10px] sm:text-xs md:text-sm lg:text-base px-0.5 sm:px-1 transition-all text-gray-400 dark:text-gray-500 hover:text-[#EA580C] border-b-2 border-transparent whitespace-nowrap">Subscription</button>
+                    <button onclick="switchTab(this)" class="flex-1 pb-2 sm:pb-2.5 md:pb-3 font-black text-[10px] sm:text-xs md:text-sm lg:text-base px-0.5 sm:px-1 transition-all text-gray-400 dark:text-gray-500 hover:text-[#EA580C] border-b-2 border-transparent whitespace-nowrap">Weekday Pass</button>
                 </div>
 
-                <!-- Date/Time Inputs - Stack on Mobile -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
-                    <div class="bg-gray-50 dark:bg-gray-800/90 p-2 sm:p-2.5 border-2 border-gray-200 dark:border-gray-700 rounded-xl sm:rounded-2xl">
-                        <p class="text-[8px] sm:text-[9px] uppercase font-black text-gray-500 dark:text-gray-400 ml-1 sm:ml-2 tracking-wide">Trip Starts</p>
-                        <input type="datetime-local" value="2024-02-20T10:30" class="bg-transparent text-[10px] sm:text-xs font-bold w-full p-1 outline-none cursor-pointer dark:text-white [color-scheme:dark]">
+                <h1 class="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-black mb-3 sm:mb-4 md:mb-5 lg:mb-6 leading-tight text-gray-800 dark:text-white text-center lg:text-left">
+                    Book Your <span class="text-[#EA580C]">Self-Drive Car</span> <br class="hidden xs:block">In Your Location
+                </h1>
+
+                <div class="space-y-3 sm:space-y-3.5 md:space-y-4 lg:space-y-5">
+                    <!-- Pick-up City Dropdown -->
+                    <div class="relative group">
+                        <label class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs uppercase font-black text-[#EA580C] absolute left-2 sm:left-3 md:left-4 top-1 sm:top-1.5 md:top-2 z-10 tracking-wide">Pick-up City</label>
+                        <select class="w-full pt-4 sm:pt-5 md:pt-6 pb-1 sm:pb-1.5 md:pb-2 px-2 sm:px-3 md:px-4 bg-gray-50 dark:bg-gray-800/90 border-2 border-gray-200 dark:border-gray-700 rounded-xl sm:rounded-2xl font-bold text-[10px] sm:text-xs md:text-sm appearance-none outline-none focus:border-[#EA580C] transition-all cursor-pointer dark:text-white">
+                            <option class="dark:bg-gray-800" selected>Chennai, Tamil Nadu</option>
+                            <option class="dark:bg-gray-800">Coimbatore, Tamil Nadu</option>
+                            <option class="dark:bg-gray-800">Bangalore, Karnataka</option>
+                            <option class="dark:bg-gray-800">Hosur, Tamil Nadu</option>
+                            <option class="dark:bg-gray-800">Madurai, Tamil Nadu</option>
+                        </select>
+                        <i class="fas fa-chevron-down absolute right-2 sm:right-3 md:right-4 top-3 sm:top-3.5 md:top-4 text-[#EA580C] text-[10px] sm:text-xs md:text-sm pointer-events-none"></i>
                     </div>
-                    <div class="bg-gray-50 dark:bg-gray-800/90 p-2 sm:p-2.5 border-2 border-gray-200 dark:border-gray-700 rounded-xl sm:rounded-2xl">
-                        <p class="text-[8px] sm:text-[9px] uppercase font-black text-gray-500 dark:text-gray-400 ml-1 sm:ml-2 tracking-wide">Trip Ends</p>
-                        <input type="datetime-local" value="2024-02-25T10:30" class="bg-transparent text-[10px] sm:text-xs font-bold w-full p-1 outline-none cursor-pointer dark:text-white [color-scheme:dark]">
+
+                    <!-- Date/Time Inputs - Always Side by Side on Tablet+ -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5 md:gap-3 lg:gap-4">
+                        <div class="bg-gray-50 dark:bg-gray-800/90 p-1.5 sm:p-2 md:p-2.5 border-2 border-gray-200 dark:border-gray-700 rounded-xl sm:rounded-2xl">
+                            <p class="text-[7px] sm:text-[8px] md:text-[9px] lg:text-xs uppercase font-black text-gray-500 dark:text-gray-400 ml-1 tracking-wide">Trip Starts</p>
+                            <input type="datetime-local" value="2024-02-20T10:30" class="bg-transparent text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs font-bold w-full p-0.5 outline-none cursor-pointer dark:text-white [color-scheme:dark]">
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-800/90 p-1.5 sm:p-2 md:p-2.5 border-2 border-gray-200 dark:border-gray-700 rounded-xl sm:rounded-2xl">
+                            <p class="text-[7px] sm:text-[8px] md:text-[9px] lg:text-xs uppercase font-black text-gray-500 dark:text-gray-400 ml-1 tracking-wide">Trip Ends</p>
+                            <input type="datetime-local" value="2024-02-25T10:30" class="bg-transparent text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs font-bold w-full p-0.5 outline-none cursor-pointer dark:text-white [color-scheme:dark]">
+                        </div>
+                    </div>
+
+                    <!-- Checkbox -->
+                    <label class="flex items-center gap-2 sm:gap-2.5 md:gap-3 cursor-pointer group py-0.5 sm:py-1">
+                        <input type="checkbox" class="accent-[#EA580C] w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 rounded border-gray-300 dark:border-gray-600" checked>
+                        <span class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs font-bold text-gray-700 dark:text-gray-300 group-hover:text-[#EA580C] transition-colors tracking-wide">Delivery & Pick-up from UKA/Home</span>
+                    </label>
+
+                    <!-- Book Button -->
+                    <button class="w-full bg-[#EA580C] text-white font-black py-2.5 sm:py-3 md:py-3.5 lg:py-4 rounded-xl sm:rounded-2xl hover:bg-[#f97316] transition-all duration-300 uppercase tracking-wider sm:tracking-widest mt-2 sm:mt-3 md:mt-4 lg:mt-5 shadow-lg shadow-[#EA580C]/30 flex justify-center items-center gap-1 sm:gap-2 text-[10px] sm:text-xs md:text-sm lg:text-base border-2 border-[#EA580C]">
+                        <i class="fas fa-key text-xs sm:text-sm md:text-base lg:text-lg"></i> Book Your Car
+                    </button>
+                </div>
+            </div>
+
+            <!-- Features Grid - Always Visible, Responsive -->
+            <div class="w-full lg:flex-1 grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6 text-white mt-6 lg:mt-0">
+                <!-- Feature Card 1 -->
+                <div class="flex gap-2 sm:gap-3 md:gap-4 p-2 sm:p-3 md:p-3.5 lg:p-4 xl:p-5 rounded-xl sm:rounded-2xl bg-black/60 dark:bg-gray-900/70 backdrop-blur-md border border-white/20 dark:border-gray-800 group hover:bg-[#EA580C]/20 hover:border-[#EA580C]/40 transition-all duration-300">
+                    <div class="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-[#EA580C] group-hover:scale-110 transition-transform min-w-[25px] sm:min-w-[30px] md:min-w-[35px] lg:min-w-[45px] xl:min-w-[55px]">
+                        <i class="fas fa-car-side"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-black mb-0.5 sm:mb-1 text-white">31,000+ Cars</h3>
+                        <p class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs xl:text-sm text-gray-300 dark:text-gray-400 leading-relaxed">
+                            Hatchbacks, Sedans & SUVs
+                        </p>
                     </div>
                 </div>
 
-                <!-- Checkbox - Perfect Alignment -->
-                <label class="flex items-center gap-2.5 sm:gap-3 cursor-pointer group py-1">
-                    <input type="checkbox" class="accent-[#EA580C] w-4 h-4 sm:w-5 sm:h-5 rounded border-gray-300 dark:border-gray-600" checked>
-                    <span class="text-[10px] sm:text-xs font-bold text-gray-700 dark:text-gray-300 group-hover:text-[#EA580C] transition-colors tracking-wide">Delivery & Pick-up from UKA/Home</span>
-                </label>
+                <!-- Feature Card 2 -->
+                <div class="flex gap-2 sm:gap-3 md:gap-4 p-2 sm:p-3 md:p-3.5 lg:p-4 xl:p-5 rounded-xl sm:rounded-2xl bg-black/60 dark:bg-gray-900/70 backdrop-blur-md border border-white/20 dark:border-gray-800 group hover:bg-[#EA580C]/20 hover:border-[#EA580C]/40 transition-all duration-300">
+                    <div class="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-[#EA580C] group-hover:scale-110 transition-transform min-w-[25px] sm:min-w-[30px] md:min-w-[35px] lg:min-w-[45px] xl:min-w-[55px]">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-black mb-0.5 sm:mb-1 text-white">Unlimited KMs</h3>
+                        <p class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs xl:text-sm text-gray-300 dark:text-gray-400 leading-relaxed">
+                            No mileage caps
+                        </p>
+                    </div>
+                </div>
 
-                <!-- Book Button - Gradient Orange -->
-                <button class="w-full bg-[#EA580C] text-white font-black py-3.5 sm:py-4 rounded-xl sm:rounded-2xl hover:bg-[#f97316] transition-all duration-300 uppercase tracking-wider sm:tracking-widest mt-3 sm:mt-5 shadow-lg shadow-[#EA580C]/30 flex justify-center items-center gap-2 text-xs sm:text-sm border-2 border-[#EA580C]">
-                    <i class="fas fa-key text-sm sm:text-base"></i> Book Your Car
-                </button>
-            </div>
-        </div>
+                <!-- Feature Card 3 -->
+                <div class="flex gap-2 sm:gap-3 md:gap-4 p-2 sm:p-3 md:p-3.5 lg:p-4 xl:p-5 rounded-xl sm:rounded-2xl bg-black/60 dark:bg-gray-900/70 backdrop-blur-md border border-white/20 dark:border-gray-800 group hover:bg-[#EA580C]/20 hover:border-[#EA580C]/40 transition-all duration-300">
+                    <div class="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-[#EA580C] group-hover:scale-110 transition-transform min-w-[25px] sm:min-w-[30px] md:min-w-[35px] lg:min-w-[45px] xl:min-w-[55px]">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-black mb-0.5 sm:mb-1 text-white">Trip Protection</h3>
+                        <p class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs xl:text-sm text-gray-300 dark:text-gray-400 leading-relaxed">
+                            Insurance coverage
+                        </p>
+                    </div>
+                </div>
 
-        <!-- Features Grid - Perfect Colors -->
-        <div class="w-full lg:flex-1 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-5 text-white order-2 lg:order-2 mt-6 lg:mt-0">
-            <!-- Feature Card 1 -->
-            <div class="flex gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-black/60 dark:bg-gray-900/70 backdrop-blur-md border border-white/20 dark:border-gray-800 group hover:bg-[#EA580C]/20 hover:border-[#EA580C]/40 transition-all duration-300">
-                <div class="text-2xl sm:text-3xl md:text-4xl text-[#EA580C] group-hover:scale-110 transition-transform min-w-[35px] sm:min-w-[45px]">
-                    <i class="fas fa-car-side"></i>
-                </div>
-                <div class="flex-1">
-                    <h3 class="text-sm sm:text-base md:text-xl font-black mb-1 text-white">31,000+ Cars</h3>
-                    <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-300 dark:text-gray-400 leading-relaxed">
-                        Hatchbacks, Sedans & SUVs
-                    </p>
-                </div>
-            </div>
-
-            <!-- Feature Card 2 -->
-            <div class="flex gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-black/60 dark:bg-gray-900/70 backdrop-blur-md border border-white/20 dark:border-gray-800 group hover:bg-[#EA580C]/20 hover:border-[#EA580C]/40 transition-all duration-300">
-                <div class="text-2xl sm:text-3xl md:text-4xl text-[#EA580C] group-hover:scale-110 transition-transform min-w-[35px] sm:min-w-[45px]">
-                    <i class="fas fa-infinity"></i>
-                </div>
-                <div class="flex-1">
-                    <h3 class="text-sm sm:text-base md:text-xl font-black mb-1 text-white">Unlimited KMs</h3>
-                    <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-300 dark:text-gray-400 leading-relaxed">
-                        No mileage caps
-                    </p>
-                </div>
-            </div>
-
-            <!-- Feature Card 3 -->
-            <div class="flex gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-black/60 dark:bg-gray-900/70 backdrop-blur-md border border-white/20 dark:border-gray-800 group hover:bg-[#EA580C]/20 hover:border-[#EA580C]/40 transition-all duration-300">
-                <div class="text-2xl sm:text-3xl md:text-4xl text-[#EA580C] group-hover:scale-110 transition-transform min-w-[35px] sm:min-w-[45px]">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <div class="flex-1">
-                    <h3 class="text-sm sm:text-base md:text-xl font-black mb-1 text-white">Trip Protection</h3>
-                    <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-300 dark:text-gray-400 leading-relaxed">
-                        Insurance coverage
-                    </p>
-                </div>
-            </div>
-
-            <!-- Feature Card 4 -->
-            <div class="flex gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-black/60 dark:bg-gray-900/70 backdrop-blur-md border border-white/20 dark:border-gray-800 group hover:bg-[#EA580C]/20 hover:border-[#EA580C]/40 transition-all duration-300">
-                <div class="text-2xl sm:text-3xl md:text-4xl text-[#EA580C] group-hover:scale-110 transition-transform min-w-[35px] sm:min-w-[45px]">
-                    <i class="fas fa-headset"></i>
-                </div>
-                <div class="flex-1">
-                    <h3 class="text-sm sm:text-base md:text-xl font-black mb-1 text-white">24/7 Support</h3>
-                    <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-300 dark:text-gray-400 leading-relaxed">
-                        Local assistance
-                    </p>
+                <!-- Feature Card 4 -->
+                <div class="flex gap-2 sm:gap-3 md:gap-4 p-2 sm:p-3 md:p-3.5 lg:p-4 xl:p-5 rounded-xl sm:rounded-2xl bg-black/60 dark:bg-gray-900/70 backdrop-blur-md border border-white/20 dark:border-gray-800 group hover:bg-[#EA580C]/20 hover:border-[#EA580C]/40 transition-all duration-300">
+                    <div class="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-[#EA580C] group-hover:scale-110 transition-transform min-w-[25px] sm:min-w-[30px] md:min-w-[35px] lg:min-w-[45px] xl:min-w-[55px]">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-black mb-0.5 sm:mb-1 text-white">24/7 Support</h3>
+                        <p class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs xl:text-sm text-gray-300 dark:text-gray-400 leading-relaxed">
+                            Local assistance
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Extra Spacing for Bottom -->
-    <div class="h-8 sm:h-12"></div>
 </section>
 
-    <script>
-        function switchTab(element) {
-            const buttons = document.querySelectorAll('#tab-container button');
-            buttons.forEach(btn => {
-                btn.classList.remove('active-tab');
-                btn.classList.add('text-gray-400', 'dark:text-gray-500');
-            });
-            element.classList.add('active-tab');
-            element.classList.remove('text-gray-400', 'dark:text-gray-500');
-        }
-    </script>
+<!-- Universal Responsive Styles -->
+<style>
+/* Base styles for all screens */
+* {
+    box-sizing: border-box;
+}
+
+/* Ensure all content is visible */
+.hero-booking-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+/* Container max-width control */
+.container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Responsive font sizes using clamp */
+.responsive-text {
+    font-size: clamp(0.75rem, 2vw, 1rem);
+}
+
+/* Fix for datetime input on all devices */
+input[type="datetime-local"] {
+    min-height: 20px;
+    font-size: clamp(10px, 2vw, 14px);
+    width: 100%;
+}
+
+/* Small phones (320px and up) */
+@media (min-width: 320px) {
+    .container {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+}
+
+/* Large phones (375px and up) */
+@media (min-width: 375px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+/* Tablets (768px and up) */
+@media (min-width: 768px) {
+    .container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+    
+    input[type="datetime-local"] {
+        min-height: 24px;
+    }
+}
+
+/* Laptops (1024px and up) */
+@media (min-width: 1024px) {
+    .container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    
+    input[type="datetime-local"] {
+        min-height: 28px;
+    }
+}
+
+/* Desktops (1280px and up) */
+@media (min-width: 1280px) {
+    .container {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+    }
+    
+    input[type="datetime-local"] {
+        min-height: 32px;
+    }
+}
+
+/* iPad Pro 12.9" Landscape */
+@media (width: 1366px) and (height: 1024px) {
+    .hero-booking-section {
+        min-height: 1024px;
+    }
+    
+    .flex-col.lg\:flex-row {
+        gap: 3rem;
+    }
+}
+
+/* iPad Pro 12.9" Portrait */
+@media (width: 1024px) and (height: 1366px) {
+    .hero-booking-section {
+        min-height: 1366px;
+    }
+    
+    .flex-col.lg\:flex-row {
+        gap: 2rem;
+    }
+}
+
+/* iPad Air Portrait */
+@media (width: 820px) and (height: 1180px) {
+    .hero-booking-section {
+        min-height: 1180px;
+    }
+}
+
+/* iPad Air Landscape */
+@media (width: 1180px) and (height: 820px) {
+    .hero-booking-section {
+        min-height: 820px;
+    }
+}
+
+/* Ensure no content is ever hidden */
+.lg\:flex-1 {
+    display: block !important; /* Always show features grid */
+}
+
+/* Smooth transitions */
+.transform {
+    transition: all 0.3s ease-in-out;
+}
+</style>
+
+<script>
+    function switchTab(element) {
+        const buttons = document.querySelectorAll('#tab-container button');
+        buttons.forEach(btn => {
+            btn.classList.remove('border-[#EA580C]', 'text-[#EA580C]');
+            btn.classList.add('text-gray-400', 'dark:text-gray-500', 'border-transparent');
+        });
+        element.classList.add('border-[#EA580C]', 'text-[#EA580C]');
+        element.classList.remove('text-gray-400', 'dark:text-gray-500', 'border-transparent');
+    }
+</script>
+
 
     <!-- How It Works Section - Updated with dark mode -->
     <section class="py-20 px-6 bg-[#eeeeee] dark:bg-gray-800" style="font-family: sans-serif;">
