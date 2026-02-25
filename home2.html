@@ -613,32 +613,31 @@
 
 <!-- 
 hero section -->
-
-<section class="relative min-h-screen bg-slate-50 dark:bg-slate-950 overflow-hidden flex flex-col justify-center pt-20 pb-8">
+<section class="relative min-h-screen bg-slate-100 dark:bg-slate-950 overflow-hidden flex flex-col justify-center pt-24 sm:pt-20 pb-8">
     <div class="absolute inset-0 opacity-5 pointer-events-none">
         <div class="absolute top-0 right-0 w-96 h-96 bg-[#EA580C] rounded-full blur-3xl"></div>
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#EA580C] rounded-full blur-3xl"></div>
     </div>
 
-    <div class="container mx-auto px-4 md:px-12 relative z-10">
-        <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+    <div class="container mx-auto px-4 sm:px-6 md:px-12 relative z-10">
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-6">
             
-            <div class="w-full lg:w-1/2 text-left space-y-4">
-                <div class="space-y-1">
-                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-[#EA580C]" id="subHeader">Executive Line</p>
-                    <h1 class="text-4xl md:text-6xl font-black leading-tight tracking-tighter text-slate-900 dark:text-white" id="mainHeader">
-                        Business-Ready <br> Rides
+            <div class="w-full lg:w-1/2 text-left space-y-4 lg:space-y-5">
+                <div class="space-y-2">
+                    <p class="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] text-[#EA580C]" id="subHeader">Executive Line</p>
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tighter text-slate-900 dark:text-white" id="mainHeader">
+                        Business-Ready <br class="hidden xs:block"> Rides
                     </h1>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm md:text-base max-w-sm font-medium" id="descHeader">
+                    <p class="text-slate-500 dark:text-slate-400 text-sm sm:text-base max-w-sm font-medium" id="descHeader">
                         Quiet power. Precision timing. A seamless day, end-to-end.
                     </p>
                 </div>
 
                 <div class="flex flex-wrap gap-2">
-                    <span class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-[9px] font-bold uppercase flex items-center gap-1.5 shadow-sm text-slate-700 dark:text-slate-300">
+                    <span class="px-2.5 sm:px-3 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-[8px] sm:text-[9px] font-bold uppercase flex items-center gap-1.5 shadow-sm text-slate-700 dark:text-slate-300">
                         <span class="w-1 h-1 bg-[#EA580C] rounded-full"></span> Instant Confirmation
                     </span>
-                    <span class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-[9px] font-bold uppercase flex items-center gap-1.5 shadow-sm text-slate-700 dark:text-slate-300">
+                    <span class="px-2.5 sm:px-3 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-[8px] sm:text-[9px] font-bold uppercase flex items-center gap-1.5 shadow-sm text-slate-700 dark:text-slate-300">
                         <span class="w-1 h-1 bg-[#EA580C] rounded-full"></span> Airport Friendly
                     </span>
                 </div>
@@ -651,97 +650,106 @@ hero section -->
             </div>
 
             <div class="w-full lg:w-1/2 relative flex justify-center items-center">
-                <div class="relative w-full h-[220px] md:h-[350px] flex items-center justify-center">
+                <div class="relative w-full h-[180px] sm:h-[220px] md:h-[300px] lg:h-[350px] flex items-center justify-center">
                     <img id="heroCar" src="imags/home 2 -1  img.png" 
-                         class="w-[100%] md:w-[110%] max-w-none object-contain drop-shadow-[0_20px_40px_rgba(234,88,12,0.2)] transition-all duration-700 ease-in-out" alt="Business Car">
+                         class="w-[90%] sm:w-[95%] md:w-[100%] lg:w-[110%] max-w-none object-contain drop-shadow-[0_20px_40px_rgba(234,88,12,0.2)] transition-all duration-700 ease-in-out" alt="Business Car">
                 </div>
             </div>
         </div>
 
-        <div class="mt-8 bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-2xl p-3 md:p-4 max-w-5xl mx-auto border border-slate-100 dark:border-slate-800 transition-all duration-300">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        
-        <div class="space-y-2.5 p-1">
-            <div class="flex items-center gap-2.5 p-3 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-700">
-                <div class="flex items-center gap-2 pr-2 border-r border-slate-200 dark:border-slate-600">
-                    <img src="https://flagcdn.com/us.svg" class="w-5 h-3.5 object-cover rounded-sm" alt="USA">
-                    <span class="text-[12px] font-black dark:text-white">+1</span>
-                </div>
-                <input type="tel" placeholder="Phone Number" class="bg-transparent text-xs font-bold outline-none w-full dark:text-white placeholder:text-slate-400">
-            </div>
+        <div class="mt-8 sm:mt-10 bg-white dark:bg-slate-900 rounded-2xl sm:rounded-3xl md:rounded-[2.5rem] shadow-2xl p-3 sm:p-4 md:p-5 max-w-6xl mx-auto border border-slate-100 dark:border-slate-800 transition-all duration-300">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
+                
+                <!-- Column 1 -->
+                <div class="space-y-3">
+                    <!-- Phone Input -->
+                    <div class="flex items-center gap-2 p-2.5 sm:p-3 bg-slate-50 dark:bg-slate-800/50 rounded-xl sm:rounded-2xl border border-slate-100 dark:border-slate-700">
+                        <div class="flex items-center gap-1.5 sm:gap-2 pr-1.5 sm:pr-2 border-r border-slate-200 dark:border-slate-600">
+                            <img src="https://flagcdn.com/us.svg" class="w-4 sm:w-5 h-3 sm:h-3.5 object-cover rounded-sm" alt="USA">
+                            <span class="text-[10px] sm:text-[12px] font-black dark:text-white">+1</span>
+                        </div>
+                        <input type="tel" placeholder="Phone Number" class="bg-transparent text-[10px] sm:text-xs font-bold outline-none w-full dark:text-white placeholder:text-slate-400">
+                    </div>
 
-            <div class="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-700">
-                <i data-lucide="map-pin" class="w-4 h-4 text-[#EA580C]"></i>
-                <div class="flex-1">
-                    <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-tighter">City</p>
-                    <select class="bg-transparent text-[11px] font-black outline-none w-full dark:text-white cursor-pointer appearance-none">
-                        <option class="dark:bg-slate-900">New York, NY</option>
-                        <option class="dark:bg-slate-900">Los Angeles, CA</option>
-                        <option class="dark:bg-slate-900">Chicago, IL</option>
-                        <option class="dark:bg-slate-900">Houston, TX</option>
-                    </select>
+                    <!-- City Select -->
+                    <div class="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-slate-50 dark:bg-slate-800/50 rounded-xl sm:rounded-2xl border border-slate-100 dark:border-slate-700">
+                        <i data-lucide="map-pin" class="w-3.5 sm:w-4 h-3.5 sm:h-4 text-[#EA580C] flex-shrink-0"></i>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-[8px] sm:text-[9px] text-slate-400 font-extrabold uppercase tracking-tighter">City</p>
+                            <select class="bg-transparent text-[10px] sm:text-[11px] font-black outline-none w-full dark:text-white cursor-pointer appearance-none truncate">
+                                <option class="dark:bg-slate-900">New York, NY</option>
+                                <option class="dark:bg-slate-900">Los Angeles, CA</option>
+                                <option class="dark:bg-slate-900">Chicago, IL</option>
+                                <option class="dark:bg-slate-900">Houston, TX</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Column 2 -->
+                <div class="space-y-3">
+                    <!-- Pick-Up Date -->
+                    <div class="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-slate-50 dark:bg-slate-800/50 rounded-xl sm:rounded-2xl border border-slate-100 dark:border-slate-700">
+                        <i data-lucide="calendar" class="w-3.5 sm:w-4 h-3.5 sm:h-4 text-[#EA580C] flex-shrink-0"></i>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-[8px] sm:text-[9px] text-slate-400 font-extrabold uppercase tracking-tighter">Pick-Up Date</p>
+                            <input type="date" class="bg-transparent text-[10px] sm:text-[11px] font-black outline-none w-full dark:text-white cursor-pointer">
+                        </div>
+                    </div>
+
+                    <!-- Select Hub -->
+                    <div class="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-slate-50 dark:bg-slate-800/50 rounded-xl sm:rounded-2xl border border-slate-100 dark:border-slate-700">
+                        <i data-lucide="map-pinned" class="w-3.5 sm:w-4 h-3.5 sm:h-4 text-[#EA580C] flex-shrink-0"></i>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-[8px] sm:text-[9px] text-slate-400 font-extrabold uppercase tracking-tighter">Select Hub</p>
+                            <select class="bg-transparent text-[10px] sm:text-[11px] font-black outline-none w-full dark:text-white cursor-pointer appearance-none truncate">
+                                <option class="dark:bg-slate-900">JFK Airport</option>
+                                <option class="dark:bg-slate-900">Downtown Center</option>
+                                <option class="dark:bg-slate-900">Westside Terminal</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 3 -->
+                <div class="space-y-3">
+                    <!-- Return Date -->
+                    <div class="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-slate-50 dark:bg-slate-800/50 rounded-xl sm:rounded-2xl border border-slate-100 dark:border-slate-700">
+                        <i data-lucide="calendar-check" class="w-3.5 sm:w-4 h-3.5 sm:h-4 text-[#EA580C] flex-shrink-0"></i>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-[8px] sm:text-[9px] text-slate-400 font-extrabold uppercase tracking-tighter">Return Date</p>
+                            <input type="date" class="bg-transparent text-[10px] sm:text-[11px] font-black outline-none w-full dark:text-white cursor-pointer">
+                        </div>
+                    </div>
+
+                    <!-- Search Button -->
+                    <button class="w-full bg-[#EA580C] hover:bg-[#c2410c] text-white rounded-xl sm:rounded-2xl font-black text-base sm:text-lg md:text-xl uppercase tracking-[0.1em] transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-orange-500/20 active:scale-95 group p-3 sm:p-3.5 md:p-4 h-[52px] sm:h-[58px] md:h-[64px]">
+                        <i data-lucide="search" class="w-4 sm:w-5 h-4 sm:h-5 group-hover:scale-110 transition-transform"></i> 
+                        <span class="truncate">Find Your Car</span>
+                    </button>
+                </div>
+
             </div>
         </div>
-
-        <div class="space-y-2.5 p-1">
-            <div class="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-700">
-                <i data-lucide="calendar" class="w-4 h-4 text-[#EA580C]"></i>
-                <div class="flex-1">
-                    <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-tighter">Pick-Up Date</p>
-                    <input type="date" class="bg-transparent text-[11px] font-black outline-none w-full dark:text-white cursor-pointer">
-                </div>
-            </div>
-
-            <div class="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-700">
-                <i data-lucide="map-pinned" class="w-4 h-4 text-[#EA580C]"></i>
-                <div class="flex-1">
-                    <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-tighter">Select Hub</p>
-                    <select class="bg-transparent text-[11px] font-black outline-none w-full dark:text-white cursor-pointer appearance-none">
-                        <option class="dark:bg-slate-900">JFK Airport</option>
-                        <option class="dark:bg-slate-900">Downtown Center</option>
-                        <option class="dark:bg-slate-900">Westside Terminal</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <div class="space-y-2.5 p-1 flex flex-col">
-            <div class="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-700">
-                <i data-lucide="calendar-check" class="w-4 h-4 text-[#EA580C]"></i>
-                <div class="flex-1">
-                    <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-tighter">Return Date</p>
-                    <input type="date" class="bg-transparent text-[11px] font-black outline-none w-full dark:text-white cursor-pointer">
-                </div>
-            </div>
-
-            <button class="w-full flex-1 bg-[#EA580C] hover:bg-[#c2410c] text-white rounded-2xl font-black text-xl uppercase tracking-[0.1em] transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-orange-500/20 active:scale-95 group">
-                <i data-lucide="search" class="w-5 h-5 group-hover:scale-110 transition-transform "></i> 
-                Find Your Car
-            </button>
-        </div>
-
-    </div>
-</div>
     </div>
 </section>
 
 <script>
     const slides = [
         {
-            sub: "Executive Line",
+            
             main: "Business-Ready <br> Rides",
             desc: "Quiet power. Precision timing. A seamless day, end-to-end.",
             car: "imags/home 2 -1  img.png"
         },
         {
-            sub: "Luxury Collection",
+            
             main: "Elite Status <br> Performance",
             desc: "Unmatched comfort meet raw speed. Elevate your status.",
             car: "imags/home 2 -1  img.png"
         },
         {
-            sub: "Travel Elite",
+            
             main: "Airport <br> Transfers",
             desc: "Your premium ride awaits at the gate. Professional & Punctual.",
             car: "imags/home 2 -1  img.png"
@@ -774,19 +782,83 @@ hero section -->
             indicators.forEach((dot, i) => {
                 if(i === current) {
                     dot.classList.replace('w-2', 'w-6');
-                    dot.classList.replace('bg-slate-300', 'bg-[#EA580C]');
-                    dot.classList.replace('dark:bg-slate-700', 'bg-[#EA580C]');
+                    dot.classList.remove('bg-slate-300', 'dark:bg-slate-700');
+                    dot.classList.add('bg-[#EA580C]');
                 } else {
                     dot.classList.replace('w-6', 'w-2');
-                    dot.classList.replace('bg-[#EA580C]', 'bg-slate-300');
-                    if(document.documentElement.classList.contains('dark')) dot.classList.add('dark:bg-slate-700');
+                    dot.classList.remove('bg-[#EA580C]');
+                    dot.classList.add('bg-slate-300');
+                    if(document.documentElement.classList.contains('dark')) {
+                        dot.classList.add('dark:bg-slate-700');
+                    }
                 }
             });
         }, 600);
     }
+    
+    // Initialize indicators
+    indicators.forEach((dot, i) => {
+        if(i === current) {
+            dot.classList.replace('w-2', 'w-6');
+            dot.classList.add('bg-[#EA580C]');
+        } else {
+            dot.classList.add('bg-slate-300');
+            if(document.documentElement.classList.contains('dark')) {
+                dot.classList.add('dark:bg-slate-700');
+            }
+        }
+    });
+    
     setInterval(updateSlider, 5000);
-    if (typeof lucide !== 'undefined') lucide.createIcons();
+    
+    // Initialize Lucide icons
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    });
 </script>
+
+<style>
+/* Custom breakpoint for extra small devices */
+@media (min-width: 360px) {
+    .xs\:block {
+        display: block;
+    }
+}
+
+/* Fix for date inputs */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    cursor: pointer;
+    opacity: 0.6;
+    filter: invert(0.5);
+}
+
+.dark input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+/* Fix for select dropdowns */
+select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0 center;
+    background-size: 12px;
+    padding-right: 16px;
+}
+
+.dark select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+/* Touch-friendly improvements */
+@media (max-width: 640px) {
+    input, select, button {
+        min-height: 44px;
+    }
+}
+</style>
 <!-- 
 destination section -->
 
