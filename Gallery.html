@@ -371,15 +371,13 @@
             <hr class="my-4 border-slate-200 dark:border-slate-800">
 
             <div class="space-y-4 px-2">
-                <div class="flex items-center justify-between text-sm font-bold dark:text-white">
-                    <span>Layout Direction</span>
-                    <button onclick="toggleDirection()" class="px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition dark:text-white">
-                        <span id="mobileDirText">LTR</span>
+                <div class="hidden xl:flex items-center gap-2">
+                    <button onclick="toggleDirection()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-300 dark:bg-slate-800 hover:bg-slate-500 dark:hover:bg-slate-700 transition text-xs font-bold dark:text-white">
+                        
+                        <span id="dirText">LTR</span>
                     </button>
-                </div>
-                <div class="flex items-center justify-between text-sm font-bold dark:text-white">
-                    <span>Dark Mode</span>
-                    <button onclick="toggleTheme()" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+
+                    <button onclick="toggleTheme()" class="p-2 rounded-lg bg-slate-300 dark:bg-slate-800 hover:bg-slate-500 dark:hover:bg-slate-700 transition">
                         <i data-lucide="moon" class="w-4 h-4 dark:hidden"></i>
                         <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-yellow-400"></i>
                     </button>
@@ -561,59 +559,252 @@
     <div class="font-sans antialiased text-gray-900 dark:text-white bg-white dark:bg-darkBg transition-colors duration-300">
 
         <!-- Hero Section - Full Screen with dark mode -->
-<section class="relative h-screen flex items-center justify-center text-center px-6 overflow-hidden bg-black dark:bg-black font-sans">
-    
-    <div class="absolute inset-0 z-0">
-        <img src="imags/services 6.avif" 
-             class="w-full h-full object-cover opacity-40 transform scale-105" alt="Premium Car Fleet">
-        <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/80 dark:from-black/80 dark:via-transparent dark:to-black/90"></div>
+<section class="relative min-h-screen bg-slate-50 dark:bg-slate-950 overflow-hidden flex flex-col justify-center pt-24 sm:pt-20 pb-8">
+    <div class="absolute inset-0 opacity-5 pointer-events-none">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-[#EA580C] rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#EA580C] rounded-full blur-3xl"></div>
     </div>
 
-    <div class="relative z-10 max-w-5xl w-full">
-        
-        
-
-        <h1 class="text-3xl md:text-5xl lg:text-6xl xl:text-6xl font-black text-white uppercase tracking-tighter leading-[0.95] mb-6">
-            Explore the Quality <br>
-            That <span class="text-[#EA580C]">Drives Your Journey</span>
-        </h1>
-
-        <div class="max-w-3xl mx-auto space-y-4">
-            <p class="text-gray-300 dark:text-gray-400 text-sm md:text-base lg:text-lg font-medium leading-relaxed">
-                Welcome to our exclusive fleet collection. Whether you're planning a <span class="text-white font-bold">quick city dash</span>, a professional <span class="text-white font-bold">corporate airport transfer</span>, or looking for a <span class="text-white font-bold">luxury entry</span> for your grand event — we have the perfect set of wheels for every destination.
-            </p>
+    <div class="container mx-auto px-4 sm:px-6 md:px-12 relative z-10">
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-6">
             
+            <div class="w-full lg:w-1/2 text-left space-y-4 lg:space-y-5">
+                <div class="space-y-2">
+                    <p class="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] text-[#EA580C]" id="subHeader">Executive Line</p>
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tighter text-slate-900 dark:text-white" id="mainHeader">
+                        Business-Ready <br class="hidden xs:block"> Rides
+                    </h1>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm sm:text-base max-w-sm font-medium" id="descHeader">
+                        Quiet power. Precision timing. A seamless day, end-to-end.
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-2.5 sm:px-3 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-[8px] sm:text-[9px] font-bold uppercase flex items-center gap-1.5 shadow-sm text-slate-700 dark:text-slate-300">
+                        <span class="w-1 h-1 bg-[#EA580C] rounded-full"></span> Instant Confirmation
+                    </span>
+                    <span class="px-2.5 sm:px-3 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-[8px] sm:text-[9px] font-bold uppercase flex items-center gap-1.5 shadow-sm text-slate-700 dark:text-slate-300">
+                        <span class="w-1 h-1 bg-[#EA580C] rounded-full"></span> Airport Friendly
+                    </span>
+                </div>
+
+                <div class="flex gap-2 pt-2">
+                    <div class="w-6 h-1 bg-[#EA580C] rounded-full transition-all duration-500 indicator"></div>
+                    <div class="w-2 h-1 bg-slate-300 dark:bg-slate-700 rounded-full transition-all duration-500 indicator"></div>
+                    <div class="w-2 h-1 bg-slate-300 dark:bg-slate-700 rounded-full transition-all duration-500 indicator"></div>
+                </div>
+            </div>
+
+            <div class="w-full lg:w-1/2 relative flex justify-center items-center">
+                <div class="relative w-full h-[180px] sm:h-[220px] md:h-[300px] lg:h-[350px] flex items-center justify-center">
+                    <img id="heroCar" src="imags/home 2 -1  img.png" 
+                         class="w-[90%] sm:w-[95%] md:w-[100%] lg:w-[110%] max-w-none object-contain drop-shadow-[0_20px_40px_rgba(234,88,12,0.2)] transition-all duration-700 ease-in-out" alt="Business Car">
+                </div>
+            </div>
         </div>
 
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10 lg:mt-12">
-            <button class="w-full sm:w-auto bg-[#EA580C] text-white font-black py-4 px-10 rounded-2xl shadow-[0_10px_20px_rgba(234,88,12,0.3)] hover:scale-105 active:scale-95 transition-all uppercase tracking-widest text-[11px] lg:text-xs flex items-center justify-center gap-2">
-                <i class="fas fa-car-side"></i> Browse Cars
-            </button>
-            <button class="w-full sm:w-auto border border-white/30 text-white font-black py-4 px-10 rounded-2xl hover:bg-white hover:text-black transition-all uppercase tracking-widest text-[11px] lg:text-xs backdrop-blur-sm">
-                View Maintenance Log
-            </button>
-        </div>
+        <div class="mt-8 sm:mt-10 bg-white dark:bg-slate-900 rounded-2xl sm:rounded-3xl md:rounded-[2.5rem] shadow-2xl p-3 sm:p-4 md:p-5 max-w-6xl mx-auto border border-slate-100 dark:border-slate-800 transition-all duration-300">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
+                
+                <!-- Column 1 -->
+                <div class="space-y-3">
+                    <!-- Phone Input -->
+                    <div class="flex items-center gap-2 p-2.5 sm:p-3 bg-slate-50 dark:bg-slate-800/50 rounded-xl sm:rounded-2xl border border-slate-100 dark:border-slate-700">
+                        <div class="flex items-center gap-1.5 sm:gap-2 pr-1.5 sm:pr-2 border-r border-slate-200 dark:border-slate-600">
+                            <img src="https://flagcdn.com/us.svg" class="w-4 sm:w-5 h-3 sm:h-3.5 object-cover rounded-sm" alt="USA">
+                            <span class="text-[10px] sm:text-[12px] font-black dark:text-white">+1</span>
+                        </div>
+                        <input type="tel" placeholder="Phone Number" class="bg-transparent text-[10px] sm:text-xs font-bold outline-none w-full dark:text-white placeholder:text-slate-400">
+                    </div>
 
-        <div class="mt-12 lg:mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 border-t border-white/10 dark:border-gray-800 pt-8 max-w-4xl mx-auto">
-            <div class="text-center">
-                <p class="text-white font-black text-xl lg:text-2xl leading-none">31,000+</p>
-                <p class="text-gray-500 dark:text-gray-600 text-[9px] lg:text-xs uppercase mt-1">Happy Rides</p>
-            </div>
-            <div class="text-center">
-                <p class="text-white font-black text-xl lg:text-2xl leading-none">100%</p>
-                <p class="text-gray-500 dark:text-gray-600 text-[9px] lg:text-xs uppercase mt-1">Sanitized</p>
-            </div>
-            <div class="text-center border-l border-white/10 dark:border-gray-800">
-                <p class="text-white font-black text-xl lg:text-2xl leading-none">24/7</p>
-                <p class="text-gray-500 dark:text-gray-600 text-[9px] lg:text-xs uppercase mt-1">Roadside Help</p>
-            </div>
-            <div class="text-center">
-                <p class="text-white font-black text-xl lg:text-2xl leading-none">0%</p>
-                <p class="text-gray-500 dark:text-gray-600 text-[9px] lg:text-xs uppercase mt-1">Hidden Fees</p>
+                    <!-- City Select -->
+                    <div class="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-slate-50 dark:bg-slate-800/50 rounded-xl sm:rounded-2xl border border-slate-100 dark:border-slate-700">
+                        <i data-lucide="map-pin" class="w-3.5 sm:w-4 h-3.5 sm:h-4 text-[#EA580C] flex-shrink-0"></i>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-[8px] sm:text-[9px] text-slate-400 font-extrabold uppercase tracking-tighter">City</p>
+                            <select class="bg-transparent text-[10px] sm:text-[11px] font-black outline-none w-full dark:text-white cursor-pointer appearance-none truncate">
+                                <option class="dark:bg-slate-900">New York, NY</option>
+                                <option class="dark:bg-slate-900">Los Angeles, CA</option>
+                                <option class="dark:bg-slate-900">Chicago, IL</option>
+                                <option class="dark:bg-slate-900">Houston, TX</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 2 -->
+                <div class="space-y-3">
+                    <!-- Pick-Up Date -->
+                    <div class="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-slate-50 dark:bg-slate-800/50 rounded-xl sm:rounded-2xl border border-slate-100 dark:border-slate-700">
+                        <i data-lucide="calendar" class="w-3.5 sm:w-4 h-3.5 sm:h-4 text-[#EA580C] flex-shrink-0"></i>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-[8px] sm:text-[9px] text-slate-400 font-extrabold uppercase tracking-tighter">Pick-Up Date</p>
+                            <input type="date" class="bg-transparent text-[10px] sm:text-[11px] font-black outline-none w-full dark:text-white cursor-pointer">
+                        </div>
+                    </div>
+
+                    <!-- Select Hub -->
+                    <div class="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-slate-50 dark:bg-slate-800/50 rounded-xl sm:rounded-2xl border border-slate-100 dark:border-slate-700">
+                        <i data-lucide="map-pinned" class="w-3.5 sm:w-4 h-3.5 sm:h-4 text-[#EA580C] flex-shrink-0"></i>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-[8px] sm:text-[9px] text-slate-400 font-extrabold uppercase tracking-tighter">Select Hub</p>
+                            <select class="bg-transparent text-[10px] sm:text-[11px] font-black outline-none w-full dark:text-white cursor-pointer appearance-none truncate">
+                                <option class="dark:bg-slate-900">JFK Airport</option>
+                                <option class="dark:bg-slate-900">Downtown Center</option>
+                                <option class="dark:bg-slate-900">Westside Terminal</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 3 -->
+                <div class="space-y-3">
+                    <!-- Return Date -->
+                    <div class="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-slate-50 dark:bg-slate-800/50 rounded-xl sm:rounded-2xl border border-slate-100 dark:border-slate-700">
+                        <i data-lucide="calendar-check" class="w-3.5 sm:w-4 h-3.5 sm:h-4 text-[#EA580C] flex-shrink-0"></i>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-[8px] sm:text-[9px] text-slate-400 font-extrabold uppercase tracking-tighter">Return Date</p>
+                            <input type="date" class="bg-transparent text-[10px] sm:text-[11px] font-black outline-none w-full dark:text-white cursor-pointer">
+                        </div>
+                    </div>
+
+                    <!-- Search Button -->
+                    <button class="w-full bg-[#EA580C] hover:bg-[#c2410c] text-white rounded-xl sm:rounded-2xl font-black text-base sm:text-lg md:text-xl uppercase tracking-[0.1em] transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-orange-500/20 active:scale-95 group p-3 sm:p-3.5 md:p-4 h-[52px] sm:h-[58px] md:h-[64px]">
+                        <i data-lucide="search" class="w-4 sm:w-5 h-4 sm:h-5 group-hover:scale-110 transition-transform"></i> 
+                        <span class="truncate">Find Your Car</span>
+                    </button>
+                </div>
+
             </div>
         </div>
     </div>
 </section>
+
+<script>
+    const slides = [
+        {
+            
+            main: "Business-Ready <br> Rides",
+            desc: "Quiet power. Precision timing. A seamless day, end-to-end.",
+            car: "imags/home 2 -1  img.png"
+        },
+        {
+        
+            main: "Elite Status <br> Performance",
+            desc: "Unmatched comfort meet raw speed. Elevate your status.",
+            car: "imags/home 2 -1  img.png"
+        },
+        {
+            sub: "Travel Elite",
+            main: "Airport <br> Transfers",
+            desc: "Your premium ride awaits at the gate. Professional & Punctual.",
+            car: "imags/home 2 -1  img.png"
+        }
+    ];
+
+    let current = 0;
+    const carImg = document.getElementById('heroCar');
+    const mainH = document.getElementById('mainHeader');
+    const subH = document.getElementById('subHeader');
+    const descH = document.getElementById('descHeader');
+    const indicators = document.querySelectorAll('.indicator');
+
+    function updateSlider() {
+        carImg.style.opacity = '0';
+        carImg.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            current = (current + 1) % slides.length;
+            const s = slides[current];
+            
+            carImg.src = s.car;
+            subH.innerText = s.sub;
+            mainH.innerHTML = s.main;
+            descH.innerText = s.desc;
+
+            carImg.style.opacity = '1';
+            carImg.style.transform = 'translateY(0)';
+
+            indicators.forEach((dot, i) => {
+                if(i === current) {
+                    dot.classList.replace('w-2', 'w-6');
+                    dot.classList.remove('bg-slate-300', 'dark:bg-slate-700');
+                    dot.classList.add('bg-[#EA580C]');
+                } else {
+                    dot.classList.replace('w-6', 'w-2');
+                    dot.classList.remove('bg-[#EA580C]');
+                    dot.classList.add('bg-slate-300');
+                    if(document.documentElement.classList.contains('dark')) {
+                        dot.classList.add('dark:bg-slate-700');
+                    }
+                }
+            });
+        }, 600);
+    }
+    
+    // Initialize indicators
+    indicators.forEach((dot, i) => {
+        if(i === current) {
+            dot.classList.replace('w-2', 'w-6');
+            dot.classList.add('bg-[#EA580C]');
+        } else {
+            dot.classList.add('bg-slate-300');
+            if(document.documentElement.classList.contains('dark')) {
+                dot.classList.add('dark:bg-slate-700');
+            }
+        }
+    });
+    
+    setInterval(updateSlider, 5000);
+    
+    // Initialize Lucide icons
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    });
+</script>
+
+<style>
+/* Custom breakpoint for extra small devices */
+@media (min-width: 360px) {
+    .xs\:block {
+        display: block;
+    }
+}
+
+/* Fix for date inputs */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    cursor: pointer;
+    opacity: 0.6;
+    filter: invert(0.5);
+}
+
+.dark input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+/* Fix for select dropdowns */
+select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0 center;
+    background-size: 12px;
+    padding-right: 16px;
+}
+
+.dark select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+/* Touch-friendly improvements */
+@media (max-width: 640px) {
+    input, select, button {
+        min-height: 44px;
+    }
+}
+</style>
 
         <!-- Fleet Gallery Section - Updated with dark mode -->
         <section class="py-16 md:py-20 px-4 md:px-6 container mx-auto max-w-7xl font-sans bg-white dark:bg-darkBg">
@@ -845,8 +1036,8 @@
         </section>
     </div>
 
-    <!-- Footer - Updated with dark mode -->
-    <footer class="bg-[#FDBA74] dark:bg-gray-900 text-white pt-16 pb-8 font-sans overflow-hidden">
+        <!-- Footer - Updated with dark mode -->
+    <footer class="bg-gray-600 dark:bg-gray-900 text-white pt-16 pb-8 font-sans overflow-hidden">
         <div class="container mx-auto px-4 md:px-8 max-w-[1300px]">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
                 
@@ -857,52 +1048,52 @@
                             Groww<span class="text-black dark:text-white">Car</span>
                         </span>
                     </div>
-                    <p class="text-white/80 dark:text-gray-400 text-sm leading-relaxed">
+                    <p class="text-white/70 dark:text-gray-400 text-sm leading-relaxed">
                         Premium self-drive car rental services across major cities in the USA. We provide elite cars for those who demand excellence in performance.
                     </p>
                     <div class="flex gap-4">
-                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-black transition-all dark:hover:bg-white dark:hover:text-black"><i data-lucide="facebook" class="w-5 h-5"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-black transition-all dark:hover:bg-white dark:hover:text-black"><i data-lucide="instagram" class="w-5 h-5"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-black transition-all dark:hover:bg-white dark:hover:text-black"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-all dark:hover:bg-white dark:hover:text-black"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-all dark:hover:bg-white dark:hover:text-black"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-all dark:hover:bg-white dark:hover:text-black"><i data-lucide="twitter" class="w-5 h-5"></i></a>
                     </div>
                 </div>
 
                 <div class="space-y-6">
-                    <h4 class="text-lg font-black uppercase tracking-widest text-black dark:text-white">Company</h4>
-                    <ul class="space-y-3 text-white/80 dark:text-gray-400 text-sm font-bold">
-                        <li><a href="#" class="hover:text-black dark:hover:text-white transition-colors">Home</a></li>
-                        <li><a href="#" class="hover:text-black dark:hover:text-white transition-colors">About</a></li>
-                        <li><a href="#" class="hover:text-black dark:hover:text-white transition-colors">Services</a></li>
-                        <li><a href="#" class="hover:text-black dark:hover:text-white transition-colors">Gallery</a></li>
-                        <li><a href="#" class="hover:text-black dark:hover:text-white transition-colors">Contact</a></li>
+                    <h4 class="text-lg font-black uppercase tracking-widest text-white dark:text-white">Company</h4>
+                    <ul class="space-y-3 text-white/70 dark:text-gray-400 text-sm ">
+                        <li><a href="index.html" class="hover:text-primary dark:hover:text-white transition-colors">Home</a></li>
+                        <li><a href="about.html" class="hover:text-primary dark:hover:text-white transition-colors">About</a></li>
+                        <li><a href="Services.html" class="hover:text-primary dark:hover:text-white transition-colors">Services</a></li>
+                        <li><a href="Gallery.html" class="hover:text-primary dark:hover:text-white transition-colors">Gallery</a></li>
+                        <li><a href="Contact.html" class="hover:text-primary dark:hover:text-white transition-colors">Contact</a></li>
                     </ul>
                 </div>
 
                 <div class="space-y-6">
-                    <h4 class="text-lg font-black uppercase tracking-widest text-black dark:text-white">Locations</h4>
-                    <ul class="space-y-3 text-white/80 dark:text-gray-400 text-sm font-bold">
-                        <li><a href="#" class="hover:text-black dark:hover:text-white transition-colors">New York City</a></li>
-                        <li><a href="#" class="hover:text-black dark:hover:text-white transition-colors">Los Angeles</a></li>
-                        <li><a href="#" class="hover:text-black dark:hover:text-white transition-colors">Chicago, IL</a></li>
-                        <li><a href="#" class="hover:text-black dark:hover:text-white transition-colors">Miami, FL</a></li>
-                        <li><a href="#" class="hover:text-black dark:hover:text-white transition-colors">San Francisco</a></li>
+                    <h4 class="text-lg font-black uppercase tracking-widest text-white dark:text-white">Locations</h4>
+                    <ul class="space-y-3 text-white/70 dark:text-gray-400 text-sm ">
+                        <li><a href="#" class="hover:text-primary dark:hover:text-white transition-colors">New York City</a></li>
+                        <li><a href="#" class="hover:text-primary dark:hover:text-white transition-colors">Los Angeles</a></li>
+                        <li><a href="#" class="hover:text-primary dark:hover:text-white transition-colors">Chicago, IL</a></li>
+                        <li><a href="#" class="hover:text-primary dark:hover:text-white transition-colors">Miami, FL</a></li>
+                        <li><a href="#" class="hover:text-primary dark:hover:text-white transition-colors">San Francisco</a></li>
                     </ul>
                 </div>
 
                 <div class="space-y-6">
-                    <h4 class="text-lg font-black uppercase tracking-widest text-black dark:text-white">Get in Touch</h4>
+                    <h4 class="text-lg font-black uppercase tracking-widest text-white dark:text-white">Get in Touch</h4>
                     <ul class="space-y-4 text-white text-sm">
                         <li class="flex items-start gap-3">
-                            <i data-lucide="map-pin" class="w-5 h-5 text-black dark:text-white"></i>
-                            <span class="font-bold text-white dark:text-gray-400">123 Luxury Drive, <br>Manhattan, NY 10001</span>
+                            <i data-lucide="map-pin" class="w-5 h-5 text-black dark:text-white text-primary"></i>
+                            <span class=" text-white/70 dark:text-gray-400">123 Luxury Drive, <br>Manhattan, NY 10001</span>
                         </li>
                         <li class="flex items-center gap-3">
-                            <i data-lucide="phone" class="w-5 h-5 text-black dark:text-white"></i>
-                            <span class="font-bold text-white dark:text-gray-400">+1 (555) 96552 14888</span>
+                            <i data-lucide="phone" class="w-5 h-5 text-black dark:text-white text-primary"></i>
+                            <span class=" text-white/70 dark:text-gray-400">+1 (555) 96552 14888</span>
                         </li>
                         <li class="flex items-center gap-3">
-                            <i data-lucide="mail" class="w-5 h-5 text-black dark:text-white"></i>
-                            <span class="font-bold text-white dark:text-gray-400">support@growwcar.com</span>
+                            <i data-lucide="mail" class="w-5 h-5 text-black dark:text-white text-primary"></i>
+                            <span class=" text-white/70 dark:text-gray-400">support@growwcar.com</span>
                         </li>
                     </ul>
                 </div>
@@ -911,8 +1102,8 @@
             <div class="pt-8 border-t border-white/20 dark:border-gray-700 flex flex-col md:flex-row justify-between items-center gap-4 text-[12px] font-bold text-white/60 dark:text-gray-500">
                 <p>© 2026 GrowwCar Premium Rentals. All Rights Reserved.</p>
                 <div class="flex gap-6 uppercase tracking-widest">
-                    <a href="#" class="hover:text-black dark:hover:text-white">Sitemap</a>
-                    <a href="#" class="hover:text-black dark:hover:text-white">Refund Policy</a>
+                    <a href="#" class="hover:text-primary dark:hover:text-white">Sitemap</a>
+                    <a href="#" class="hover:text-primary dark:hover:text-white">Refund Policy</a>
                 </div>
             </div>
         </div>

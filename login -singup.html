@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, viewport-fit=cover">
     <title>GrowwCar · Login & Sign Up</title>
-    <link rel="icon" type="image/jpeg" href="assets/growwpark_logo.jpg">
+    <link rel="icon" type="imags/jpg" href="imags/growwpark_logo.jpg">
     <!-- Tailwind + custom config -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -39,7 +39,6 @@
         }
     </script>
     <!-- Fonts + Icons -->
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* ----- FIXED SINGLE PAGE SETUP - NO SCROLLING ----- */
@@ -87,7 +86,7 @@
             width: 100%;
             max-width: 460px;
             height: 100%;
-            max-height: 680px;
+            max-height: 720px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -135,12 +134,12 @@
         .login-card {
             background: white;
             border-radius: 32px;
-            padding: 1.25rem 1.5rem;
+            padding: 1.5rem 1.5rem;
             box-shadow: 0 25px 50px -12px rgba(234, 88, 12, 0.25);
             border: 1px solid rgba(234, 88, 12, 0.1);
             width: 100%;
             height: auto;
-            max-height: 600px;
+            max-height: 680px;
             transition: all 0.3s ease;
         }
         .dark .login-card {
@@ -200,7 +199,6 @@
             border-radius: 14px;
             border: 2px solid #EFEBE9;
             background: white;
-            color: #5D4037;
             font-weight: 500;
             font-size: 0.85rem;
             display: inline-flex;
@@ -213,7 +211,6 @@
         .dark .social-btn {
             background: #3a3a3a;
             border-color: #4b4b4b;
-            color: #e5e5e5;
         }
         .social-btn:hover {
             background: #F9FAFB;
@@ -295,6 +292,29 @@
             display: flex;
             flex-direction: column;
         }
+        
+        /* welcome text styling */
+        .welcome-text {
+            font-size: 1.1rem;
+            color: #5D4037;
+        }
+        .dark .welcome-text {
+            color: #e0e0e0;
+        }
+        
+        /* Original brand colors */
+        .fa-google {
+            color: #DB4437 !important;
+        }
+        .fa-apple {
+            color: #000000 !important;
+        }
+        .dark .fa-apple {
+            color: #FFFFFF !important;
+        }
+        .fa-facebook-f {
+            color: #4267B2 !important;
+        }
     </style>
 </head>
 <body>
@@ -306,17 +326,24 @@
             <!-- LOGIN CARD - COMPACT SIZE -->
             <div class="login-card one-page">
                 
-                <!-- ===== LOGO - COMPACT ===== -->
-                <div class="flex items-center gap-1 sm:gap-2">
-                <span class="text-xl sm:text-2xl md:text-3xl font-black tracking-tighter flex items-center gap-1 sm:gap-2 text-primary">
-                    <a href="index.html">
-                    <i data-lucide="car-front" class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8"></i>
-                     <span class="text-orange-600 ">Groww </span><span class="text-black dark:text-white">Car</span>
-                     </a>
-                </span>
-            </div>
+                <!-- ===== LOGO WITH CENTERED TEXT ===== -->
+                <div class="text-center mb-3">
+                    <div class="flex items-center justify-center gap-1 sm:gap-2">
+                        <span class="text-xl sm:text-2xl md:text-3xl font-black tracking-tighter flex items-center gap-1 sm:gap-2">
+                            <a href="index.html" class="flex items-center gap-2">
+                                <i class="fas fa-car text-primary-orange text-2xl sm:text-3xl"></i>
+                                <span class="text-orange-600">Groww</span>
+                                <span class="text-black dark:text-white">Car</span>
+                            </a>
+                        </span>
+                    </div>
+                    
+                </div>
 
-                
+                <!-- ===== WELCOME BACK / REGISTER TEXT (Changes with Tab) ===== -->
+                <div class="text-center mb-2">
+                    <h2 id="welcome-message" class="text-xl font-bold text-primary-orange">Welcome Back! </h2>
+                    
 
                 <!-- ===== LOGIN / SIGNUP TABS ===== -->
                 <div class="flex gap-1.5 bg-gray-100 dark:bg-gray-800 p-1 rounded-xl mb-3">
@@ -362,7 +389,7 @@
                     <!-- login button -->
                     <button type="submit" class="car-btn">
                         <i class="fas fa-arrow-right-to-bracket"></i>
-                        Login to Drive
+                        Login 
                     </button>
                 </form>
 
@@ -439,19 +466,19 @@
                         </div>
                     </div>
 
-                    <!-- social buttons row -->
+                    <!-- social buttons row with original colors -->
                     <div class="flex gap-2">
                         <button class="social-btn" onclick="handleSocialLogin('google')">
-                            <i class="fab fa-google text-primary-orange"></i>
-                            <span class="hidden sm:inline">Google</span>
+                            <i class="fab fa-google text-red-500 text-lg"></i>
+                            
                         </button>
                         <button class="social-btn" onclick="handleSocialLogin('apple')">
-                            <i class="fab fa-apple text-primary-orange"></i>
-                            <span class="hidden sm:inline">Apple</span>
+                            <i class="fab fa-apple text-black text-lg"></i>
+                            
                         </button>
                         <button class="social-btn" onclick="handleSocialLogin('facebook')">
-                            <i class="fab fa-facebook-f text-primary-orange"></i>
-                            <span class="hidden sm:inline">FB</span>
+                            <i class="fab fa-facebook text-blue-600 text-lg"></i>
+                            
                         </button>
                     </div>
                 </div>
@@ -465,7 +492,6 @@
                     <button id="rtl-toggle" class="toggle-btn" title="RTL / LTR">
                         <i class="fas fa-exchange-alt"></i>
                     </button>
-                    
                 </div>
 
                 <!-- app download -->
@@ -474,40 +500,34 @@
                     Download the GrowwCar App
                 </div>
             </div>
-
-            <!-- trust badges -->
-            <div class="flex justify-center gap-3 mt-1 text-[0.6rem] text-neutral-dark/50 dark:text-gray-500">
-                <span><i class="fas fa-shield-alt text-primary-orange mr-1"></i> Secure</span>
-                <span><i class="fas fa-headset text-primary-orange mr-1"></i> 24/7 Support</span>
-                <span><i class="fas fa-car text-primary-orange mr-1"></i> 300+ Cars</span>
-            </div>
         </div>
-    </div>
-
-    <!-- footer - part of same page -->
-    <div class="fixed bottom-0 left-0 right-0 text-center text-[0.55rem] text-neutral-dark/30 dark:text-gray-600 py-0.5 bg-transparent pointer-events-none">
-        © 2026 GrowwCar · All rights reserved
     </div>
 
     <script>
         (function() {
-            // ===== TAB SWITCHING =====
+            // ===== TAB SWITCHING WITH WELCOME/REGISTER TEXT CHANGE =====
             window.switchTab = function(tab) {
                 const loginForm = document.getElementById('login-form');
                 const signupForm = document.getElementById('signup-form');
                 const tabLogin = document.getElementById('tab-login');
                 const tabSignup = document.getElementById('tab-signup');
+                const welcomeMessage = document.getElementById('welcome-message');
+                const subMessage = document.getElementById('sub-message');
 
                 if (tab === 'login') {
                     loginForm.classList.remove('hidden-form');
                     signupForm.classList.add('hidden-form');
                     tabLogin.classList.add('active');
                     tabSignup.classList.remove('active');
+                    welcomeMessage.textContent = 'Welcome Back! ';
+                    subMessage.textContent = 'Login to continue your journey with GrowwCar';
                 } else {
                     loginForm.classList.add('hidden-form');
                     signupForm.classList.remove('hidden-form');
                     tabSignup.classList.add('active');
                     tabLogin.classList.remove('active');
+                    welcomeMessage.textContent = 'Create Account ';
+                    subMessage.textContent = 'Register to start your journey with GrowwCar';
                 }
             };
 
@@ -540,12 +560,22 @@
                     if (themeIconSun) themeIconSun.classList.remove('hidden');
                     themeToggle?.classList.add('active');
                     localStorage.setItem('theme', 'dark');
+                    
+                    // Update Apple icon color for dark mode
+                    document.querySelectorAll('.fa-apple').forEach(icon => {
+                        icon.style.color = '#FFFFFF';
+                    });
                 } else {
                     document.documentElement.classList.remove('dark');
                     if (themeIconMoon) themeIconMoon.classList.remove('hidden');
                     if (themeIconSun) themeIconSun.classList.add('hidden');
                     themeToggle?.classList.remove('active');
                     localStorage.setItem('theme', 'light');
+                    
+                    // Update Apple icon color for light mode
+                    document.querySelectorAll('.fa-apple').forEach(icon => {
+                        icon.style.color = '#000000';
+                    });
                 }
             }
 
